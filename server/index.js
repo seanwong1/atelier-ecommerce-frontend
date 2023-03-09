@@ -36,10 +36,9 @@ app.get('/questions', async (req, res) => {
       'Authorization': api.TOKEN
     }
   }
-  // res.send('working')
+
   try {
     let questions = await axios.request(options);
-    console.log(questions.data.results);
     res.send(questions.data.results)
   } catch(err) {
     console.log(err);

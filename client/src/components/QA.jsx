@@ -8,7 +8,6 @@ const [questions, setQuestions] = useState([]);
 async function fetchQuestions() {
   try {
     let result = await axios.get('/questions');
-    console.log(result.data)
     setQuestions(result.data);
   } catch(err) {
     console.log(err);
