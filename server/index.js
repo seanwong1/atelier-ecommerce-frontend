@@ -25,6 +25,25 @@ app.get('/product', (req, res, next) => {
   })
 });
 
+app.get('/reviews', (req, res, next) => {
+  console.log(req.query.q);
+  let options = {
+    'url': api.REVIEWSURL + '/?product_id=' + req.query.q,
+    'method': 'get',
+    'headers': {
+      'Authorization': api.TOKEN
+    }
+  }
+
+  axios.request(options).then((data) => {
+    console.log(data.data);
+    res.send(data.data);
+  }).catch((err) => {
+    console.log(err);
+    res.sendStatus(404);
+  })
+});
+
 app.listen(port, () => {
   console.log(`Listening on ${port}`)
 });
