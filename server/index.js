@@ -30,7 +30,7 @@ app.get('/questions', async (req, res) => {
     'method': 'get',
     'url': api.QUESTIONS,
     'params': {
-      'product_id': 71697
+      'product_id': 71701
     },
     'headers': {
       'Authorization': api.TOKEN
