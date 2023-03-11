@@ -28,9 +28,7 @@ app.get('/product', (req, res, next) => {
 app.get('/reviews', (req, res, next) => {
   let options = {
     'url': api.REVIEWSURL,
-    'params': {
-      'product_id': req.query.id
-    },
+    'params': req.query,
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
@@ -38,7 +36,6 @@ app.get('/reviews', (req, res, next) => {
   }
 
   axios.request(options).then((data) => {
-    console.log(data.data);
     res.send(data.data);
   }).catch((err) => {
     console.log(err);

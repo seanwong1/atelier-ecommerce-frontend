@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import ReviewTile from './ReviewTile.jsx';
 
 const ReviewsList = (props) => {
+  const addReviews = () => {
+    props.moreFunc();
+  }
   return (
     <div className="reviewsList">
       {props.reviews.results ?
@@ -11,7 +14,7 @@ const ReviewsList = (props) => {
           })}
         </div>)
         : ''}
-      <button>
+      <button onClick={addReviews}>
         More Reviews
       </button>
     </div>

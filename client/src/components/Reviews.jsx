@@ -8,6 +8,7 @@ import axios from 'axios';
 const Reviews = (props) => {
 
   const [reviews, setReviews] = useState([]);
+  const [count, setCount] = useState(2);
 
   const getReviews = (params) => {
 
@@ -26,18 +27,24 @@ const Reviews = (props) => {
 
   };
 
+  const add2Review = () => {
+    //Need to add functionality to stop adding to count and remove the button once count
+    // gets to max value which can be obtained in meta data
+    setCount(count + 2);
+  };
+
   useEffect(() => {
     if (props.id) {
-      getReviews({id: props.id});
+      getReviews({product_id: props.id, count});
     }
-  }, [props.id])
+  }, [props.id, count]);
 
 
   return (
     <div className="reviews">
       {/* {JSON.stringify(reviews)} */}
       <ReviewsOverview />
-      <ReviewsList reviews={reviews}/>
+      <ReviewsList reviews={reviews} moreFunc={add2Review}/>
       <button>
         Add a Review +
       </button>
