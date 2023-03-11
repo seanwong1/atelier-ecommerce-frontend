@@ -26,12 +26,9 @@ const Reviews = (props) => {
 
   return (
     <div className="reviews">
-      {JSON.stringify(reviews)}
+      {/* {JSON.stringify(reviews)} */}
       <ReviewsOverview />
-      <ReviewsList />
-      <button>
-        More Reviews
-      </button>
+      <ReviewsList reviews={reviews}/>
       <button>
         Add a Review +
       </button>
