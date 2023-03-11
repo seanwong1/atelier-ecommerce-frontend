@@ -9,6 +9,8 @@ const Reviews = (props) => {
 
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(2);
+  const [meta, setMeta] = useState({});
+  const [total, setTotal] = useState(0);
 
   const getReviews = (params) => {
 
@@ -27,6 +29,15 @@ const Reviews = (props) => {
 
   };
 
+  const getMeta = () => {
+    axios.get(`/reviewsMeta/?product_id=${props.id}`).then((result) => {
+      setMeta(result.data);
+      setTotal(Object.keys(result.data.ratings).reduce((acc, rating) => {
+        return acc + Number(result.data.ratings[rating]);
+      }, 0));
+    });
+  }
+
   const add2Review = () => {
     //Need to add functionality to stop adding to count and remove the button once count
     // gets to max value which can be obtained in meta data
@@ -36,14 +47,17 @@ const Reviews = (props) => {
   useEffect(() => {
     if (props.id) {
       getReviews({product_id: props.id, count});
+      getMeta();
     }
   }, [props.id, count]);
 
 
   return (
     <div className="reviews">
-      {/* {JSON.stringify(reviews)} */}
-      <ReviewsOverview />
+      {total + ' total reviews'}
+      <aside>
+        <ReviewsOverview data={meta} total={total}/>
+      </aside>
       <ReviewsList reviews={reviews} moreFunc={add2Review}/>
       <button>
         Add a Review +
