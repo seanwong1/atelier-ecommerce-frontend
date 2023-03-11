@@ -26,11 +26,10 @@ app.get('/product', (req, res, next) => {
 });
 
 app.get('/reviews', (req, res, next) => {
-  console.log(req.query.q);
   let options = {
     'url': api.REVIEWSURL,
     'params': {
-      'product_id': req.query.q
+      'product_id': req.query.id
     },
     'method': 'get',
     'headers': {

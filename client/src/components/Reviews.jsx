@@ -9,17 +9,26 @@ const Reviews = (props) => {
 
   const [reviews, setReviews] = useState([]);
 
-  const getReviews = () => {
+  const getReviews = (params) => {
 
-    axios.get(`/reviews?q=${props.id}`).then((result) => {
+    let options = {
+      'url': '/reviews',
+      'params': params,
+      'method': 'get'
+    }
+
+    axios.request(options).then((result) => {
       setReviews(result.data);
+    })
+    .catch(err => {
+      console.log('error getting reviews: ', err);
     });
 
   };
 
   useEffect(() => {
     if (props.id) {
-      getReviews();
+      getReviews({id: props.id});
     }
   }, [props.id])
 
