@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
+
+// comment out when config not hardcoded
+const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/'
 const api = require('../../../config.js');
 
 const RelatedProducts = (props) => {
@@ -20,16 +22,30 @@ const RelatedProducts = (props) => {
     })
   };
 
+  const getRelatedProduct = (productID) => {
+    let options = {
+      'url': apiURL + productID,
+      'method': 'get',
+      'headers': {
+        'Authorization': api.TOKEN
+      }
+    }
+
+    axios.request(options).then((data) => {
+      props.setProduct(data.data);
+    })
+  };
+
   useEffect(() => {
     getRelatedProducts();
   }, [])
 
   return (
     <div className='related-products'>
-      {relatedProducts.map((relatedProduct) => {
+      {relatedProducts.map((relatedProductID) => {
         return (
-          <div onClick={() => {console.log(relatedProduct)}}>
-            {relatedProduct}
+          <div onClick={() => {getRelatedProduct(relatedProductID)}}>
+            {relatedProductID}
           </div>
         )
       })}
