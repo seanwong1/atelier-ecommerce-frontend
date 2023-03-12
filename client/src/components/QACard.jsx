@@ -1,20 +1,27 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
+import Answer from './Answer.jsx';
 
 const QACard = ({ id, question, helpfulness, reported, answers }) => {
-  const answer_component = useMemo(() =>
-    Object.values(answers).forEach((answer) => {
+  const [seeMore, setSeeMore] = useState(false);
+
+  const answerComponent = useMemo(() =>
+    Object.values(answers).map((answer) => {
       return (
-        <div className='Answer' key={answer.id}>
-          <p>A: {answer.body}</p>
-          <span className='Answer-NameDate'>By {answer.name}, {answer.date}</span>
-          <span className='Answer-helpful'> Helpful? </span>
-          <span> Yes {answer.helpfulness} </span>
-          <span className='Answer-report'> Report/Reported </span>
-        </div>
+        <Answer
+          key={answer.id}
+          id={answer.id}
+          body={answer.body}
+          name={name.name}
+          date={answer.date}
+          count={answer.helpfulness}
+          reported={answer.reported}
+        />
       )
-    })
-  , [answers]);
-  console.log(answer_component)
+    }), [answers]);
+
+  const toggleSeeMore = (e) => {
+    setSeeMore(!seeMore);
+  };
 
   return (
     <div className='QACard'>
@@ -22,7 +29,13 @@ const QACard = ({ id, question, helpfulness, reported, answers }) => {
       QACard id={id}
       <div  className='Question'>Q: {question}</div>
       <div className='Question-add'>Add answer</div>
-      {answer_component}
+      {/* {answerComponent} */}
+      {!seeMore ? answerComponent[0] : answerComponent}
+      {!seeMore && answerComponent[1]}
+      {!seeMore && answerComponent.length > 2
+      && <div className='QA-more' onClick={toggleSeeMore}>See more answers</div>}
+      {seeMore && <div className='QA-more' onClick={toggleSeeMore}>Collapse answers</div>}
+
     </div>
   );
 }
