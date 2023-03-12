@@ -54,11 +54,15 @@ const Reviews = (props) => {
 
   return (
     <div className="reviews">
-      {total + ' total reviews'}
-      <aside>
-        <ReviewsOverview data={meta} total={total}/>
+      <aside className="reviewsOver">
+        {total ? <ReviewsOverview data={meta} total={total}/>
+        : ''}
       </aside>
-      <ReviewsList reviews={reviews} moreFunc={add2Review}/>
+      <div className="reviewsList">
+        {total + ' reviews'}
+        {reviews.results ? <ReviewsList reviews={reviews} moreFunc={add2Review}/>
+        : ''}
+      </div>
       <button>
         Add a Review +
       </button>

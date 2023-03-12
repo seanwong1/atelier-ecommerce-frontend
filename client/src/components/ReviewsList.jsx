@@ -6,14 +6,12 @@ const ReviewsList = (props) => {
     props.moreFunc();
   }
   return (
-    <div className="reviewsList">
-      {props.reviews.results ?
-        (<div>
-          {props.reviews.results.map((review) => {
-            return (<ReviewTile review={review} key={review.review_id}/>);
-          })}
-        </div>)
-        : ''}
+    <div>
+      <div>
+        {props.reviews.results.map((review) => {
+          return (<ReviewTile review={review} key={review.review_id}/>);
+        })}
+      </div>
       <button onClick={addReviews}>
         More Reviews
       </button>
