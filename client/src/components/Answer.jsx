@@ -4,7 +4,7 @@ const Answer = ({ id, body, name, date, helpfulness, reported }) => {
 
   return (
     <div className='Answer' key={id}>
-      <p>A: {body}</p>
+      <p>{body}</p>
       <span className='Answer-NameDate'>By {name}, {date}</span>
       <span className='Answer-helpful'> Helpful? </span>
       <span> Yes {helpfulness} </span>

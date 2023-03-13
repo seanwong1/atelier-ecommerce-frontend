@@ -29,7 +29,7 @@ const QACard = ({ id, question, helpfulness, reported, answers }) => {
       QACard id={id}
       <div  className='Question'>Q: {question}</div>
       <div className='Question-add'>Add answer</div>
-      {/* {answerComponent} */}
+      A:
       {!seeMore ? answerComponent[0] : answerComponent}
       {!seeMore && answerComponent[1]}
       {!seeMore && answerComponent.length > 2
