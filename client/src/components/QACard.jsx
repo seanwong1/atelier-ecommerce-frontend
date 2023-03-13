@@ -11,7 +11,7 @@ const QACard = ({ id, question, helpfulness, reported, answers }) => {
           key={answer.id}
           id={answer.id}
           body={answer.body}
-          name={name.name}
+          name={answer.answerer_name}
           date={answer.date}
           count={answer.helpfulness}
           reported={answer.reported}
