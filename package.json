@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx jest",
+    "test": "jest --detectOpenHandles",
     "server-dev": "npx nodemon server/index.js",
     "client-dev": "webpack --mode development --watch"
   },
@@ -12,16 +12,16 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
+    "axios": "^0.21.4",
     "babel-loader": "^8.2.1",
     "express": "^4.15.0",
     "jquery": "^3.1.1",
-    "axios": "^0.21.4",
     "react": "^16.8.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^16.8.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^4.2.0"
-    },
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RPP2210-FEC-SCAMP/FEC.git"
@@ -31,5 +31,8 @@
   "bugs": {
     "url": "https://github.com/RPP2210-FEC-SCAMP/FEC/issues"
   },
-  "homepage": "https://github.com/RPP2210-FEC-SCAMP/FEC#readme"
+  "homepage": "https://github.com/RPP2210-FEC-SCAMP/FEC#readme",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
 }
