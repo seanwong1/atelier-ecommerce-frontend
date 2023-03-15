@@ -26,6 +26,28 @@ app.get('/product', (req, res, next) => {
 });
 
 
+app.get('/styles', (req, res, next) => {
+  let options = {
+    'url': api.URL + '/styles',
+    'method': 'get',
+    'headers': {
+      'Authorization': api.TOKEN
+    }
+
+  };
+
+  axios.request(options)
+  .then((styleData) => {
+    console.log(styleData.data);
+    res.send(styleData.data.results);
+  })
+  .catch((err) => {
+    res.sendStatus(400, err)
+  })
+});
+
+
+
 app.get('/questions', async (req, res) => {
   let options = {
     'method': 'get',
