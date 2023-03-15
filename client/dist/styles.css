@@ -15,4 +15,9 @@
   display: flex;
 }
 
+.reviewsByStar {
+  display: flex;
+  flex-direction: column;
+}
+
 
