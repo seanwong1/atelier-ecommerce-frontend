@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import ShadedStar from './ShadedStar.jsx';
 
-const ReviewsOver = ({data, total}) => {
-  const [average, setAverage] = useState(0);
+const ReviewsOver = ({data, total, average}) => {
   const [stars, setStars] = useState(0);
 
   useEffect(() => {
-    setAverage(Object.keys(data.ratings).reduce((acc, rating) => {
-      return (acc + Number(rating) * Number(data.ratings[rating]));
-    }, 0)/total);
-  }, [data.ratings, total]);
-
-  useEffect(() => {
     setStars(((Math.round(average * 4) / 4).toFixed(2)));
+    console.log('stars2', stars, average);
 
   }, [average]);
 
@@ -23,6 +17,7 @@ const ReviewsOver = ({data, total}) => {
         <div>
           {Math.round(average * 100)/100}
         </div>
+        {console.log('stars', stars, average)}
         <div>
           {'★'.repeat(Math.floor(stars))}
         </div>

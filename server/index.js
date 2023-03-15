@@ -59,7 +59,7 @@ app.get('/questions', async (req, res) => {
       'Authorization': api.TOKEN
     }
   }
-    
+
   try {
     let questions = await axios.request(options);
     res.send(questions.data.results)
@@ -77,7 +77,7 @@ app.get('/reviews', (req, res, next) => {
       'Authorization': api.TOKEN
     }
   }
-    
+
   axios.request(options).then((data) => {
     res.send(data.data);
   }).catch((err) => {
