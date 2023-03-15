@@ -25,7 +25,6 @@ app.get('/product', (req, res, next) => {
   })
 });
 
-
 app.get('/styles', (req, res, next) => {
   let options = {
     'url': api.URL + '/styles',
@@ -33,7 +32,6 @@ app.get('/styles', (req, res, next) => {
     'headers': {
       'Authorization': api.TOKEN
     }
-
   };
 
   axios.request(options)
@@ -46,8 +44,6 @@ app.get('/styles', (req, res, next) => {
   })
 });
 
-
-
 app.get('/questions', async (req, res) => {
   let options = {
     'method': 'get',
@@ -59,7 +55,7 @@ app.get('/questions', async (req, res) => {
       'Authorization': api.TOKEN
     }
   }
-    
+
   try {
     let questions = await axios.request(options);
     res.send(questions.data.results)
@@ -77,7 +73,7 @@ app.get('/reviews', (req, res, next) => {
       'Authorization': api.TOKEN
     }
   }
-    
+
   axios.request(options).then((data) => {
     res.send(data.data);
   }).catch((err) => {
@@ -102,6 +98,42 @@ app.get('/reviewsMeta', (req, res, next) => {
     console.log(err);
     res.sendStatus(404);
   })
+});
+
+app.get('/related', (req, res, next) => {
+  let options = {
+    'url': api.URL + req.query['productID'] + '/related',
+    'method': 'get',
+    'headers': {
+      'Authorization': api.TOKEN
+    }
+  }
+
+  axios.request(options).then((data) => {
+    res.send(data.data);
+  }).catch((err) => {
+    console.log(err);
+    res.sendStatus(404);
+  })
+});
+
+app.get('/relatedProduct', (req, res, next) => {
+  let options = {
+    'url': api.URL + req.query['productID'],
+    'method': 'get',
+    'headers': {
+      'Authorization': api.TOKEN
+    }
+  }
+
+  axios.request(options)
+    .then((data) => {
+      res.send(data.data);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(404);
+    })
 });
 
 const port = process.env.PORT;
