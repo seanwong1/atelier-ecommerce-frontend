@@ -28,6 +28,7 @@ const QACard = ({ id, question, helpfulness, reported, answers }) => {
       Yes
       QACard id={id}
       <div  className='Question'>Q: {question}</div>
+      {/* Add Answer button below */}
       <div className='Question-add'>Add answer</div>
       A:
       {!seeMore ? answerComponent[0] : answerComponent}
