@@ -1,0 +1,23 @@
+.reviews {
+  display: flex;
+}
+
+.reviewsOver {
+  width: 25%;
+  margin-left: 2%;
+}
+
+.reviewsList {
+  flex-grow: 1;
+}
+
+.averageStars {
+  display: flex;
+}
+
+.reviewsByStar {
+  display: flex;
+  flex-direction: column;
+}
+
+
