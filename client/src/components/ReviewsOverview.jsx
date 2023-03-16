@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ShadedStar from './ShadedStar.jsx';
+import percentHelper from '../lib/percentHelper.jsx';
 
 const ReviewsOver = ({data, total, average}) => {
   const [stars, setStars] = useState(0);
@@ -17,7 +18,6 @@ const ReviewsOver = ({data, total, average}) => {
         <div>
           {Math.round(average * 100)/100}
         </div>
-        {console.log('stars', stars, average)}
         <div>
           {'★'.repeat(Math.floor(stars))}
         </div>
@@ -34,12 +34,17 @@ const ReviewsOver = ({data, total, average}) => {
       <div className='reviewsByStar'>
         {Object.keys(data.ratings).map((rating) => {
           return (
-            <div key={rating}>
-              <aside style={{}}>
+            <div key={rating} style={{display: 'flex', paddingBottom: 10}}>
+              <aside style={{flex: '0 0 auto', paddingRight: 5}}>
                 {rating + ' stars'}
               </aside>
-              <div style={{}}>
+              <div style={{flex: '1 1 auto', backgroundColor: 'green', height: '15px', width: `${percentHelper(data.ratings[rating], total)}%`}}>
+
               </div>
+              <div style={{flex: '1 1 auto', backgroundColor: 'grey', height: '15px', width: `${percentHelper(data.ratings[rating], total, 1)}%`}}>
+
+              </div>
+
             </div>
           );
         })}

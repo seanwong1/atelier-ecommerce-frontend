@@ -7,7 +7,7 @@ const ProductImages = ({images, image}) => {
         return images.map((img) => {
             // console.log(img.thumbnail_url);
             return (
-            <div><img id='indThumnails' src={img.thumbnail_url}></img></div>
+            <div key={Math.random()*10000}><img id='indThumnails' src={img.thumbnail_url}></img></div>
             )
         })
     }
