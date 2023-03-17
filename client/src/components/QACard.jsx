@@ -4,9 +4,8 @@ import Answer from './Answer.jsx';
 const QACard = ({ id, question, helpfulness, reported, answers }) => {
   const [seeMore, setSeeMore] = useState(false);
 
-  const answerComponent = useMemo(() =>
-    Object.values(answers).map((answer) => {
-      return (
+  const answerComponent = Object.values(answers).map((answer) => {
+    return (
         <Answer
           key={answer.id}
           id={answer.id}
@@ -17,7 +16,7 @@ const QACard = ({ id, question, helpfulness, reported, answers }) => {
           reported={answer.reported}
         />
       )
-    }), [answers]);
+  });
 
   const toggleSeeMore = (e) => {
     setSeeMore(!seeMore);

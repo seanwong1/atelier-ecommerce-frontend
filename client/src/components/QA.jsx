@@ -4,7 +4,7 @@ import axios from 'axios';
 import QACard from './QACard.jsx';
 import AddQuestion from './AddQuestion.jsx';
 
-const QA = ({ id }) => {
+const QA = ({ id, product_name }) => {
   const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
@@ -13,17 +13,11 @@ const QA = ({ id }) => {
   const [showQuestionModal, setShowQuestionModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
 
-  const sortQuestions = (arrayToSort) => {
-    let copy = [...arrayToSort];
-    copy.sort((a, b) => {
-      return a['question_helpfulness'] - b['question_helpfulness']
-    });
+  const sortedQuestions = [...questions].sort((a, b) => {
+    return a['question_helpfulness'] - b['question_helpfulness'];
+  });
 
-    return copy
-  };
-
-  const helpfulQuestions = useMemo(() => {
-    return sortQuestions(questions).map((question) =>
+  const helpfulQuestions = sortedQuestions.map((question) =>
       <QACard
         key={question.question_id}
         id={question.question_id}
@@ -34,9 +28,9 @@ const QA = ({ id }) => {
         reported={question.reported}
         answers={question.answers}
       />
-    )
-  }, [questions]);
+  );
 
+  console.log(typeof helpfulQuestions);
 
   useEffect((() => {
     async function fetchQuestions() {
@@ -119,6 +113,7 @@ const QA = ({ id }) => {
         {showQuestionModal && createPortal(
           <AddQuestion
             product_id={id}
+            product_name={product_name}
             onChangeQuestion={onChangeQuestion}
             onChangeUsername={onChangeUsername}
             onChangeEmail={onChangeEmail}
