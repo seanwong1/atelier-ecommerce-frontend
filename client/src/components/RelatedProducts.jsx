@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import RelatedProduct from './RelatedProduct.jsx';
 
 // comment out when config not hardcoded
 const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/'
@@ -17,7 +18,6 @@ const RelatedProducts = (props) => {
 
     axios.request(options).then((data) => {
       setRelatedProducts(data.data);
-      console.log(relatedProducts);
     });
   };
 
@@ -36,13 +36,12 @@ const RelatedProducts = (props) => {
     getRelatedProducts();
   }, [])
 
-  console.log(relatedProducts);
   return (
     <div className='related-products'>
-      {relatedProducts.map((relatedProductID) => {
+      {relatedProducts.map((relatedProduct) => {
         return (
-          <div key={relatedProductID} onClick={() => {getRelatedProduct(relatedProductID)}}>
-            {relatedProductID}
+          <div key={relatedProduct} onClick={() => {getRelatedProduct(relatedProduct)}}>
+            <RelatedProduct relatedProduct={relatedProduct} />
           </div>
         )
       })}

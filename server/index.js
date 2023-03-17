@@ -102,7 +102,9 @@ app.get('/reviewsMeta', (req, res, next) => {
 
 app.get('/related', (req, res, next) => {
   let options = {
-    'url': api.URL + req.query['productID'] + '/related',
+    //TODO: change this back when api.URL no longer hardcoded
+    // 'url': api.URL + req.query['productID'] + '/related',
+    'url': api.URL + '/related',
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
@@ -119,7 +121,7 @@ app.get('/related', (req, res, next) => {
 
 app.get('/relatedProduct', (req, res, next) => {
   let options = {
-    'url': api.URL + req.query['productID'],
+    'url': api.testURL + req.query['productID'],
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
