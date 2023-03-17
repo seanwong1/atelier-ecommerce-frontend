@@ -11,6 +11,7 @@ const Reviews = (props) => {
   const [count, setCount] = useState(2);
   const [meta, setMeta] = useState({});
   const [total, setTotal] = useState(0);
+  const [average, setAverage] = useState(0);
 
   const getReviews = (params) => {
 
@@ -46,16 +47,25 @@ const Reviews = (props) => {
 
   useEffect(() => {
     if (props.id) {
-      getReviews({product_id: props.id, count});
+      console.log('---------------------')
       getMeta();
+      getReviews({product_id: props.id, count});
     }
   }, [props.id, count]);
+
+  useEffect(() => {
+    if (props.id) {
+      setAverage(Object.keys(meta.ratings).reduce((acc, rating) => {
+        return (acc + Number(rating) * Number(meta.ratings[rating]));
+      }, 0)/total);
+    }
+  }, [total]);
 
 
   return (
     <div className="reviews">
       <aside className="reviewsOver">
-        {total ? <ReviewsOverview data={meta} total={total}/>
+        {total > 0 ? <ReviewsOverview data={meta} total={total} average={average}/>
         : ''}
       </aside>
       <div className="reviewsList">
