@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')))
 
 app.get('/product', (req, res, next) => {
   let options = {
-    'url': api.URL,
+    'url': api.DEFAULTURL,
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
@@ -27,7 +27,7 @@ app.get('/product', (req, res, next) => {
 
 app.get('/styles', (req, res, next) => {
   let options = {
-    'url': api.URL + '/styles',
+    'url': api.DEFAULTURL + '/styles',
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
@@ -102,7 +102,7 @@ app.get('/reviewsMeta', (req, res, next) => {
 
 app.get('/related', (req, res, next) => {
   let options = {
-    'url': api.URL + req.query['productID'] + '/related',
+    'url': api.DEFAULTURL + '/related',
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN

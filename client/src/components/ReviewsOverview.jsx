@@ -2,6 +2,15 @@ import React, { useState, useEffect } from 'react';
 import ShadedStar from './ShadedStar.jsx';
 import percentHelper from '../lib/percentHelper.jsx';
 
+const descripts = {
+  'Fit': ['Too tight', 'Perfect', 'Too baggy'],
+  'Comfort': ['Uncomfortable', 'Ok', 'Perfect'],
+  'Size': ['Too small', 'Perfect', 'Too large'],
+  'Width': ['Too narrow', 'Perfect', 'Too wide'],
+  'Length': ['Too short', 'Perfect', 'Too long'],
+  'Quality': ['Poor', 'Perfect']
+}
+
 const ReviewsOver = ({data, total, average}) => {
   const [stars, setStars] = useState(0);
 
@@ -49,23 +58,68 @@ const ReviewsOver = ({data, total, average}) => {
           );
         })}
       </div>
-      <div className='sizeRating'>
+      <div className='ratingDescript'>
+        {Object.keys(data.characteristics).map((cName) => {
+          return (
+            <div key={data.characteristics[cName].id}>
+              <div>
+                {'' + cName}
+              </div>
+              {/* <div>
+                {'' + data.characteristics[cName].value}
+              </div> */}
+              <div className='descriptors'>
+                {descripts[cName].map((desc) => {
+                  // if (descripts[cName].length === 3 && desc === descripts[cName][1]) {
+                  //   console.log(desc);
+                  //   return (
+                  //     <div id='centered' key={Math.random()}>
+                  //       {desc}
+                  //     </div>
+                  //   );
+                  // }
+                  // return (
+                  //   <div key={Math.random()}>
+                  //     {desc}
+                  //   </div>
+                  // );
+                  if (descripts[cName].length === 2) {
+                    return (
+                      <div key={Math.random()}>
+                        <div className='flexrow'>
+                          <div style={{marginRight: '2px'}}className='descriptorBox1'>
 
-      </div>
-      <div className='comfortRating'>
+                          </div>
+                          <div className='descriptorBox1'>
 
-      </div>
-      <div className='fitRating'>
+                          </div>
+                        </div>
 
-      </div>
-      <div className='qualityRating'>
+                        <div className='descriptorText'>
+                          {desc}
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div key={Math.random()}>
+                        <div>
+                          <div className='descriptorBox'>
 
-      </div>
-      <div className='lengthRating'>
+                          </div>
 
-      </div>
-      <div className='widthRating'>
-
+                        </div>
+                        <div className='descriptorText'>
+                          {desc}
+                        </div>
+                      </div>
+                    )
+                  }
+                })}
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

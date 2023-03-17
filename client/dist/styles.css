@@ -4,10 +4,11 @@
 
 .reviews {
   display: flex;
+  width: 750px;
 }
 
 .reviewsOver {
-  width: 25%;
+  width: 33%;
   margin-left: 2%;
   margin-right: 40px;
 }
@@ -21,9 +22,44 @@
 }
 
 .reviewsByStar {
+
   display: flex;
   flex-direction: column-reverse;
 
 }
+
+.ratingDescript {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.descriptors {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.descriptorText {
+  font-size: x-small;
+}
+.descriptorBox {
+  background-color: rgb(232, 231, 231);
+  height: 5px;
+  width: 60px;
+  justify-content: space-between;
+}
+.flexrow {
+  display: flex;
+  flex-direction: row;
+}
+.descriptorBox1 {
+  background-color: rgb(232, 231, 231);
+  height: 5px;
+  width: 44.5px;
+
+
+}
+
+
 
 
