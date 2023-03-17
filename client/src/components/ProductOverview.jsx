@@ -34,4 +34,5 @@ const ProductOverview = ({product}) => {
 }
 export default ProductOverview;
 
+//help me please
 //need to get this to a state where I can push and merge so we can have all of our stuff in working order
