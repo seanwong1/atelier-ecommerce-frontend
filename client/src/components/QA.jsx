@@ -71,6 +71,7 @@ const QA = ({ id, product_name }) => {
 
   const toggleShowAnswerModal = (e, question) => {
     setShowAnswerModal(!showAnswerModal);
+    console.log(question);
     setQuestion(question);
   };
 

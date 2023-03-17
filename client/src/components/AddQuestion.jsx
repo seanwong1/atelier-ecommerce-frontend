@@ -13,16 +13,16 @@ const AddQuestion = ({ product_id, onChangeQuestion, onChangeUsername, onChangeE
         <input
         className='QA-Question-Input'
         placeholder='Example: jackson11!'
-        maxLength='60'>
-        </input>
+        maxLength='60'
+        ></input>
         {/* Might change span to div or p */}
         <span>For privacy reasons, do not use your full name or email address</span>
         <h3>*Your email</h3>
         <input
         className='QA-Question-Input'
         placeholder='Example: exampleemail@email.com'
-        maxLength='60'>
-        </input>
+        maxLength='60'
+        ></input>
         {/* Might change span to div or p */}
         <span>For authentication reasons, you will not be emailed</span>
         <button>Submit Your Question</button>
