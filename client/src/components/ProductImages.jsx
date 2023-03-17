@@ -5,9 +5,8 @@ const ProductImages = ({images, image}) => {
 
     const thumbnails = () => {
         return images.map((img) => {
-            console.log(img.thumbnail_url);
             return (
-            <div><img id='indThumnails' src={img.thumbnail_url}></img></div>
+            <div><img className='indThumnails' src={img.thumbnail_url}></img></div>
             )
         })
     }
@@ -17,9 +16,9 @@ const ProductImages = ({images, image}) => {
 
 
         return (
-            <div id='styleImages'>
-                <img id='currImg' src={image.url}></img>
-                <div id="imgThumbs">{thumbnails()}</div>
+            <div className='styleImages'>
+                <img className='currImg' src={image.url}></img>
+                <div className="imgThumbs">{thumbnails()}</div>
             </div>
 
         )
