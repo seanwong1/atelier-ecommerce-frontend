@@ -43,7 +43,7 @@ const QA = ({ id, product_name }) => {
     };
 
     fetchQuestions();
-  }), []);
+  }), [id]);
 
   const onSubmitQuestion = (e) => {
     e.preventDefault();
