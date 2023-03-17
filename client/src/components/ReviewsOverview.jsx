@@ -70,24 +70,12 @@ const ReviewsOver = ({data, total, average}) => {
               </div> */}
               <div className='descriptors'>
                 {descripts[cName].map((desc) => {
-                  // if (descripts[cName].length === 3 && desc === descripts[cName][1]) {
-                  //   console.log(desc);
-                  //   return (
-                  //     <div id='centered' key={Math.random()}>
-                  //       {desc}
-                  //     </div>
-                  //   );
-                  // }
-                  // return (
-                  //   <div key={Math.random()}>
-                  //     {desc}
-                  //   </div>
-                  // );
+
                   if (descripts[cName].length === 2) {
                     return (
                       <div key={Math.random()}>
                         <div className='flexrow'>
-                          <div style={{marginRight: '2px'}}className='descriptorBox1'>
+                          <div style={{margin: '0 2px 10px 0'}} className='descriptorBox1'>
 
                           </div>
                           <div className='descriptorBox1'>
@@ -103,7 +91,7 @@ const ReviewsOver = ({data, total, average}) => {
                   } else {
                     return (
                       <div key={Math.random()}>
-                        <div>
+                        <div style={{margin: '0 0 10px 0'}}>
                           <div className='descriptorBox'>
 
                           </div>
@@ -116,6 +104,10 @@ const ReviewsOver = ({data, total, average}) => {
                     )
                   }
                 })}
+                <div className='triangle' style={{left: `${percentHelper(data.characteristics[cName].value, 5)/100*220}px`}}>
+
+                </div>
+
               </div>
             </div>
           )
