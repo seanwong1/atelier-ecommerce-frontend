@@ -3,34 +3,18 @@ import { createPortal } from 'react-dom';
 import axios from 'axios';
 import QACard from './QACard.jsx';
 import AddQuestion from './AddQuestion.jsx';
+import AddAnswer from './AddAnswer.jsx';
 
 const QA = ({ id, product_name }) => {
   const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState('');
+  const [questionText, setQuestionText] = useState('');
+  const [answerText, setAnswerText] = useState('');
   const [nickname, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [showQuestionModal, setShowQuestionModal] = useState(false);
+  const [showAnswerModal, setShowAnswerModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
-
-  const sortedQuestions = [...questions].sort((a, b) => {
-    return a['question_helpfulness'] - b['question_helpfulness'];
-  });
-
-  const helpfulQuestions = sortedQuestions.map((question) =>
-      <QACard
-        key={question.question_id}
-        id={question.question_id}
-        question={question.question_body}
-        // date={question['question_date']}
-        // name={question['asker_name']}
-        helpfulness={question.question_helpfulness}
-        reported={question.reported}
-        answers={question.answers}
-      />
-  );
-
-  console.log(typeof helpfulQuestions);
 
   useEffect((() => {
     async function fetchQuestions() {
@@ -66,11 +50,11 @@ const QA = ({ id, product_name }) => {
   };
 
   const onChangeQuestion = (e) => {
-    setQuestion(e.target.value);
+    setQuestionText(e.target.value);
   };
 
   const onChangeAnswer = (e) => {
-    setAnswer(e.target.value);
+    setAnswerText(e.target.value);
   };
 
   const onChangeUsername = (e) => {
@@ -85,10 +69,32 @@ const QA = ({ id, product_name }) => {
     setShowQuestionModal(!showQuestionModal);
   };
 
+  const toggleShowAnswerModal = (e, question) => {
+    setShowAnswerModal(!showAnswerModal);
+    setQuestion(question);
+  };
+
   const toggleShowMore = (e) => {
     setShowMore(!showMore);
   };
 
+  const sortedQuestions = [...questions].sort((a, b) => {
+    return a['question_helpfulness'] - b['question_helpfulness'];
+  });
+
+  const helpfulQuestions = sortedQuestions.map((question) =>
+      <QACard
+        key={question.question_id}
+        id={question.question_id}
+        question={question.question_body}
+        // date={question['question_date']}
+        // name={question['asker_name']}
+        helpfulness={question.question_helpfulness}
+        reported={question.reported}
+        answers={question.answers}
+        toggleShowAnswerModal={toggleShowAnswerModal}
+      />
+  );
 
   return (
     <>
@@ -120,6 +126,18 @@ const QA = ({ id, product_name }) => {
             onSubmitQuestion={onSubmitQuestion}
           />
           ,document.body
+        )}
+        {/* Do I need product_id in Answer Modal */}
+        {showAnswerModal && createPortal(
+          <AddAnswer
+            product_name={product_name}
+            question_body={question}
+            onChangeAnswer={onChangeAnswer}
+            onChangeUsername={onChangeUsername}
+            onChangeEmail={onChangeEmail}
+            onSubmitAnswer={onSubmitAnswer}
+         />
+         , document.body
         )}
       </div>
     </>
