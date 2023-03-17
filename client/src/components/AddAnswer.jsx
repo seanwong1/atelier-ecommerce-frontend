@@ -5,7 +5,7 @@ const AddAnswer = ({ product_name, question_body, onChangeAnswer, onChangeUserna
   return (
     <div className='QA-AddAnswer'>
       <h1>Submit your Answer</h1>
-      <h2>Product_name: Question_body</h2>
+      <h2>{product_name}: {question_body}</h2>
       <form className='QA-AddAnswerModal'>
         <h3>Your Answer*</h3>
         <textarea
