@@ -25,7 +25,6 @@
 .reviewsByStar {
   display: flex;
   flex-direction: column-reverse;
-
 }
 
 .ratingDescript {
@@ -68,4 +67,6 @@
   border-top: 7px solid black;
 }
 
-
+.reviewStarRating {
+  display: flex;
+}
