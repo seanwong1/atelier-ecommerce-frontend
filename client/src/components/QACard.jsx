@@ -1,12 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import Answer from './Answer.jsx';
 
-const QACard = ({ id, question, helpfulness, reported, answers }) => {
+const QACard = ({ id, question, helpfulness, reported, answers, toggleShowAnswerModal }) => {
   const [seeMore, setSeeMore] = useState(false);
 
-  const answerComponent = useMemo(() =>
-    Object.values(answers).map((answer) => {
-      return (
+  const answerComponent = Object.values(answers).map((answer) => {
+    return (
         <Answer
           key={answer.id}
           id={answer.id}
@@ -17,7 +16,7 @@ const QACard = ({ id, question, helpfulness, reported, answers }) => {
           reported={answer.reported}
         />
       )
-    }), [answers]);
+  });
 
   const toggleSeeMore = (e) => {
     setSeeMore(!seeMore);
@@ -25,11 +24,10 @@ const QACard = ({ id, question, helpfulness, reported, answers }) => {
 
   return (
     <div className='QACard'>
-      Yes
       QACard id={id}
       <div  className='Question'>Q: {question}</div>
       {/* Add Answer button below */}
-      <div className='Question-add'>Add answer</div>
+      <div className='Question-add' onClick={(e) => toggleShowAnswerModal(e, question)}>Add answer</div>
       A:
       {!seeMore ? answerComponent[0] : answerComponent}
       {!seeMore && answerComponent[1]}

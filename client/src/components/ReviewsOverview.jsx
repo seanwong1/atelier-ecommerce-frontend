@@ -2,6 +2,15 @@ import React, { useState, useEffect } from 'react';
 import ShadedStar from './ShadedStar.jsx';
 import percentHelper from '../lib/percentHelper.jsx';
 
+const descripts = {
+  'Fit': ['Too tight', 'Perfect', 'Too baggy'],
+  'Comfort': ['Uncomfortable', 'Ok', 'Perfect'],
+  'Size': ['Too small', 'Perfect', 'Too large'],
+  'Width': ['Too narrow', 'Perfect', 'Too wide'],
+  'Length': ['Too short', 'Perfect', 'Too long'],
+  'Quality': ['Poor', 'Perfect']
+}
+
 const ReviewsOver = ({data, total, average}) => {
   const [stars, setStars] = useState(0);
 
@@ -49,23 +58,60 @@ const ReviewsOver = ({data, total, average}) => {
           );
         })}
       </div>
-      <div className='sizeRating'>
+      <div className='ratingDescript'>
+        {Object.keys(data.characteristics).map((cName) => {
+          return (
+            <div key={data.characteristics[cName].id}>
+              <div>
+                {'' + cName}
+              </div>
+              {/* <div>
+                {'' + data.characteristics[cName].value}
+              </div> */}
+              <div className='descriptors'>
+                {descripts[cName].map((desc) => {
 
-      </div>
-      <div className='comfortRating'>
+                  if (descripts[cName].length === 2) {
+                    return (
+                      <div key={Math.random()}>
+                        <div className='flexrow'>
+                          <div style={{margin: '0 2px 10px 0'}} className='descriptorBox1'>
 
-      </div>
-      <div className='fitRating'>
+                          </div>
+                          <div className='descriptorBox1'>
 
-      </div>
-      <div className='qualityRating'>
+                          </div>
+                        </div>
 
-      </div>
-      <div className='lengthRating'>
+                        <div className='descriptorText'>
+                          {desc}
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div key={Math.random()}>
+                        <div style={{margin: '0 0 10px 0'}}>
+                          <div className='descriptorBox'>
 
-      </div>
-      <div className='widthRating'>
+                          </div>
 
+                        </div>
+                        <div className='descriptorText'>
+                          {desc}
+                        </div>
+                      </div>
+                    )
+                  }
+                })}
+                <div className='triangle' style={{left: `${percentHelper(data.characteristics[cName].value, 5)/100*220}px`}}>
+
+                </div>
+
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )

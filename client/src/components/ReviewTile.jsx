@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { format, parseISO } from "date-fns";
-
+import ShadedStar from './ShadedStar.jsx'
 
 const ReviewTile = ({review}) => {
   return (
     <div className='reviewTile'>
       <div className='reviewStarRating'>
-        {review.rating + ' stars'}
+        <div>
+          {'★'.repeat(Math.floor(review.rating))}
+        </div>
+        <ShadedStar shade={review.rating % 1}/>
+        <div>
+          {'☆'.repeat(5-Math.floor(review.rating))}
+        </div>
       </div>
       <div className='reviewSummary'>
         {review.summary}
