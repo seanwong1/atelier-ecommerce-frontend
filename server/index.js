@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')))
 
 app.get('/product', (req, res, next) => {
   let options = {
-    'url': api.DEFAULTURL,
+    'url': req.query ? api.testURL + req.query['productID'] : api.URL,
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
@@ -103,7 +103,7 @@ app.get('/reviewsMeta', (req, res, next) => {
 app.get('/related', (req, res, next) => {
   let options = {
     //TODO: change this back when api.URL no longer hardcoded
-    // 'url': api.URL + req.query['productID'] + '/related',
+    // 'url': req.query ? api.testURL + req.query['productID'] + '/related' : api.URL + '/related',
     'url': api.URL + '/related',
     'method': 'get',
     'headers': {
@@ -119,24 +119,24 @@ app.get('/related', (req, res, next) => {
   })
 });
 
-app.get('/relatedProduct', (req, res, next) => {
-  let options = {
-    'url': api.testURL + req.query['productID'],
-    'method': 'get',
-    'headers': {
-      'Authorization': api.TOKEN
-    }
-  }
+// app.get('/relatedProduct', (req, res, next) => {
+//   let options = {
+//     'url': api.testURL + req.query['productID'],
+//     'method': 'get',
+//     'headers': {
+//       'Authorization': api.TOKEN
+//     }
+//   }
 
-  axios.request(options)
-    .then((data) => {
-      res.send(data.data);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(404);
-    })
-});
+//   axios.request(options)
+//     .then((data) => {
+//       res.send(data.data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.sendStatus(404);
+//     })
+// });
 
 const port = process.env.PORT;
 

@@ -55,8 +55,6 @@ const Reviews = (props) => {
     }
   }, [props.id, count]);
 
-
-
   useEffect(() => {
     if (props.id) {
       setAverage(calculateAverage(total, meta));

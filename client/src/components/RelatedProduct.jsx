@@ -10,7 +10,7 @@ const RelatedProduct = (props) => {
 
   const getRelatedProduct = () => {
     let options = {
-      'url': '/relatedProduct',
+      'url': '/product',
       'params': {'productID': props.relatedProduct},
       'method': 'get'
     }
