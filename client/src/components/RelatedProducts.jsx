@@ -40,8 +40,8 @@ const RelatedProducts = (props) => {
     <div className='related-products'>
       {relatedProducts.map((relatedProduct) => {
         return (
-          <div key={relatedProduct} onClick={() => {getRelatedProduct(relatedProduct)}}>
-            <RelatedProduct relatedProduct={relatedProduct} />
+          <div key={relatedProduct}>
+            <RelatedProduct relatedProduct={relatedProduct} getRelatedProduct={getRelatedProduct} />
           </div>
         )
       })}
