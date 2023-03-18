@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')))
 
 app.get('/product', (req, res, next) => {
   let options = {
-    'url': api.URL,
+    'url': api.DEFAULTURL,
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
