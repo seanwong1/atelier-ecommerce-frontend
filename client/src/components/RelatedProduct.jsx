@@ -2,24 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from './Modal.jsx';
 import getProduct from '../lib/getProduct.js';
+import getImages from '../lib/getImages.js';
 
 const RelatedProduct = ({originalProduct, relatedProductID}) => {
   const [relatedProduct, setRelatedProduct] = useState({});
   const [productImages, setProductImages] = useState([{thumbnail_url: 'blah'}]);
   const [modalState, setModalState] = useState(false);
   const [featureSet, setFeatureSet] = useState([]);
-
-  const getImages = (productID) => {
-    let options = {
-      'url': '/styles',
-      'params': {productID},
-      'method': 'get'
-    }
-
-    axios.request(options).then((result) => {
-      setProductImages(result.data[0].photos);
-    });
-  }
 
   const showModal = () => {
     setModalState(true);
@@ -46,6 +35,7 @@ const RelatedProduct = ({originalProduct, relatedProductID}) => {
 
   useEffect(() => {
     getProduct(relatedProductID, setRelatedProduct);
+    getImages(relatedProductID, setProductImages);
   }, []);
 
   //console.log(props.originalProduct.features);
