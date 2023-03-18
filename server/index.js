@@ -27,7 +27,7 @@ app.get('/product', (req, res, next) => {
 
 app.get('/styles', (req, res, next) => {
   let options = {
-    'url': api.URL + '/styles',
+    'url': api.testURL + req.query['productID'] + '/styles',
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
