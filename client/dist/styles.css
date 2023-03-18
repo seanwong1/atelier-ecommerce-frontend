@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 html {
     background-color: white;
@@ -32,18 +33,25 @@ html {
     border-radius: 10%;
 
 }
+=======
+/* #app {
+  can we reference process.env here?
+} */
+>>>>>>> a6ad12432da0cb5eb90eaa72f950006dba8b1bc1
 
 .reviews {
   display: flex;
+  width: 750px;
 }
 
 .reviewsOver {
-  width: 25%;
+  width: 225px;
   margin-left: 2%;
   margin-right: 40px;
 }
 
 .reviewsList {
+  width: 500px;
   flex-grow: 1;
 }
 
@@ -54,5 +62,51 @@ html {
 .reviewsByStar {
   display: flex;
   flex-direction: column-reverse;
+<<<<<<< HEAD
+=======
+
+}
+
+.ratingDescript {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.descriptors {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.descriptorText {
+  margin-bottom: 2px;
+  font-size: x-small;
+}
+.descriptorBox {
+  background-color: rgb(232, 231, 231);
+  height: 5px;
+  width: 60px;
+  justify-content: space-between;
+}
+.flexrow {
+  display: flex;
+  flex-direction: row;
+}
+.descriptorBox1 {
+  background-color: rgb(232, 231, 231);
+  height: 5px;
+  width: 44.5px;
+}
+
+.triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 3.5px solid transparent;
+  border-right: 3.5px solid transparent;
+  border-top: 7px solid black;
+}
+
+>>>>>>> a6ad12432da0cb5eb90eaa72f950006dba8b1bc1
 
 }
