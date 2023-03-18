@@ -8,29 +8,18 @@ import getRelatedProducts from '../lib/getRelatedProducts.js';
 // const api = require('../../../config.js');
 
 const RelatedProducts = (props) => {
-  const [relatedProducts, setRelatedProducts] = useState([]);
-
-  const getRelatedProduct = (productID) => {
-    let options = {
-      'url': '/product',
-      'params': {productID},
-      'method': 'get'
-    }
-    axios.request(options).then((data) => {
-      props.setProduct(data.data);
-    });
-  };
+  const [relatedProductsID, setRelatedProductsID] = useState([]);
 
   useEffect(() => {
-    getRelatedProducts(props.id, setRelatedProducts);
+    getRelatedProducts(props.id, setRelatedProductsID);
   }, [])
 
   return (
     <div className='related-products'>
-      {relatedProducts.map((relatedProduct) => {
+      {relatedProductsID.map((relatedProductID) => {
         return (
-          <div key={relatedProduct}>
-            <RelatedProduct originalProduct={props.product} relatedProduct={relatedProduct} getRelatedProduct={getRelatedProduct} />
+          <div key={relatedProductID}>
+            <RelatedProduct originalProduct={props.product} relatedProductID={relatedProductID} />
           </div>
         )
       })}

@@ -1,27 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Modal from './Modal.jsx';
+import getProduct from '../lib/getProduct.js';
 
-const RelatedProduct = (props) => {
+const RelatedProduct = ({originalProduct, relatedProductID}) => {
   const [relatedProduct, setRelatedProduct] = useState({});
   const [productImages, setProductImages] = useState([{thumbnail_url: 'blah'}]);
   const [modalState, setModalState] = useState(false);
   const [featureSet, setFeatureSet] = useState([]);
-
-  const getRelatedProduct = () => {
-    let options = {
-      'url': '/product',
-      'params': {'productID': props.relatedProduct},
-      'method': 'get'
-    }
-
-    axios.request(options)
-      .then((data) => {
-        setRelatedProduct(data.data);
-        getImages(data.data.id);
-        createFeatureSet();
-      });
-  };
 
   const getImages = (productID) => {
     let options = {
@@ -43,23 +29,23 @@ const RelatedProduct = (props) => {
     setModalState(false);
   };
 
-  const createFeatureSet = () => {
-    var newFeatureSet = new Set();
-    newFeatureSet.add(props.originalProduct.features.map(
-        (originalProductFeatures) => {
-          console.log(originalProductFeatures)
-          return originalProductFeatures['features'];
-        }))
-      .add(relatedProduct.features.map(
-        (relatedProductFeatures) => {
-          console.log(relatedProductFeatures)
-          return relatedProductFeatures['features'];
-        }))
-    setFeatureSet([...newFeatureSet]);
-  };
+  // const createFeatureSet = () => {
+  //   var newFeatureSet = new Set();
+  //   newFeatureSet.add(props.originalProduct.features.map(
+  //       (originalProductFeatures) => {
+  //         console.log(originalProductFeatures)
+  //         return originalProductFeatures['features'];
+  //       }))
+  //     .add(relatedProduct.features.map(
+  //       (relatedProductFeatures) => {
+  //         console.log(relatedProductFeatures)
+  //         return relatedProductFeatures['features'];
+  //       }))
+  //   setFeatureSet([...newFeatureSet]);
+  // };
 
   useEffect(() => {
-    getRelatedProduct();
+    getProduct(relatedProductID, setRelatedProduct);
   }, []);
 
   //console.log(props.originalProduct.features);
@@ -73,7 +59,7 @@ const RelatedProduct = (props) => {
         <table>
           <thead>
             <tr>
-              <th>{props.originalProduct.name}</th>
+              <th>{originalProduct.name}</th>
               <th></th>
               <th>{relatedProduct.name}</th>
             </tr>
@@ -92,7 +78,7 @@ const RelatedProduct = (props) => {
           </tbody>
         </table>
       </Modal>
-      <div className='preview-image' onClick={() => {props.getRelatedProduct(relatedProduct.id)}}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
+      <div className='preview-image' onClick={() => {getProduct(relatedProductID)}}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
       <div className='product-category' >Category: {relatedProduct.category}</div>
       <div className='product-name' >Name: {relatedProduct.name}</div>
       <div className='product-price' >Price: {relatedProduct.default_price}</div>
