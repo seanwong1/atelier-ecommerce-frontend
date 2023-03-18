@@ -3,6 +3,11 @@ const webpack = require('webpack');
 var SRC_DIR = path.join(__dirname, "/client/src");
 var DIST_DIR = path.join(__dirname, "/client/dist");
 const dotenv = require('dotenv').config();
+var path = require("path");
+const webpack = require('webpack');
+var SRC_DIR = path.join(__dirname, "/client/src");
+var DIST_DIR = path.join(__dirname, "/client/dist");
+const dotenv = require('dotenv').config();
 
 module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
@@ -20,10 +25,10 @@ module.exports = {
         },
       },
     ],
-    // plugins: [
-    //   new webpack.DefinePlugin( {
-    //     "process.env": dotenv.parsed
-    //   } )
-    // ]
+    plugins: [
+      new webpack.DefinePlugin( {
+        "process.env": dotenv.parsed
+      } )
+    ]
   },
 };

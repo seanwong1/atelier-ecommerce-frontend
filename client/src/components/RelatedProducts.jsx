@@ -10,41 +10,38 @@ const RelatedProducts = (props) => {
 
   const getRelatedProducts = () => {
     let options = {
-      'url': api.URL + '/related',
-      'method': 'get',
-      'headers': {
-        'Authorization': api.TOKEN
-      }
+      'url': '/related',
+      'params': {'productID': props.id},
+      'method': 'get'
     }
 
     axios.request(options).then((data) => {
       setRelatedProducts(data.data);
-    })
+      console.log(relatedProducts);
+    });
   };
 
   const getRelatedProduct = (productID) => {
     let options = {
-      'url': apiURL + productID,
-      'method': 'get',
-      'headers': {
-        'Authorization': api.TOKEN
-      }
+      'url': '/relatedProduct',
+      'params': {productID},
+      'method': 'get'
     }
-
     axios.request(options).then((data) => {
       props.setProduct(data.data);
-    })
+    });
   };
 
   useEffect(() => {
     getRelatedProducts();
   }, [])
 
+  console.log(relatedProducts);
   return (
     <div className='related-products'>
       {relatedProducts.map((relatedProductID) => {
         return (
-          <div onClick={() => {getRelatedProduct(relatedProductID)}}>
+          <div key={relatedProductID} onClick={() => {getRelatedProduct(relatedProductID)}}>
             {relatedProductID}
           </div>
         )
