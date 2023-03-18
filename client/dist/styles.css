@@ -25,7 +25,6 @@
 .reviewsByStar {
   display: flex;
   flex-direction: column-reverse;
-
 }
 
 .ratingDescript {
@@ -68,6 +67,10 @@
   border-top: 7px solid black;
 }
 
+.reviewStarRating {
+  display: flex;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -93,4 +96,8 @@
 
 .display-none {
   display: none;
+}
+
+.reviewStarRating {
+  display: flex;
 }
