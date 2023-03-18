@@ -37,7 +37,7 @@ const ShadedStarHelper = ({shade}) => {
         </div>
       </div>);
   } else {
-    return '';
+    return <div style={{position: 'absolute', zIndex: 100}}></div>;
   }
 }
 

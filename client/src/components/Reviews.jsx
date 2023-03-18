@@ -3,6 +3,8 @@ import ReviewsList from './ReviewsList.jsx'
 import ReviewsOverview from './ReviewsOverview.jsx'
 import ReviewsNew from './ReviewsNew.jsx'
 import axios from 'axios';
+import calculateAverage from '../lib/averageCalc.jsx';
+import calcTotal from '../lib/totalCalc.jsx';
 
 
 const Reviews = (props) => {
@@ -12,6 +14,7 @@ const Reviews = (props) => {
   const [meta, setMeta] = useState({});
   const [total, setTotal] = useState(0);
   const [average, setAverage] = useState(0);
+  const [sort, setSort] = useState('relevance');
 
   const getReviews = (params) => {
 
@@ -30,12 +33,12 @@ const Reviews = (props) => {
 
   };
 
+
+
   const getMeta = () => {
     axios.get(`/reviewsMeta/?product_id=${props.id}`).then((result) => {
       setMeta(result.data);
-      setTotal(Object.keys(result.data.ratings).reduce((acc, rating) => {
-        return acc + Number(result.data.ratings[rating]);
-      }, 0));
+      setTotal(calcTotal(result));
     });
   }
 
@@ -47,17 +50,16 @@ const Reviews = (props) => {
 
   useEffect(() => {
     if (props.id) {
-      console.log('---------------------')
-      getMeta();
+      getMeta(props.id);
       getReviews({product_id: props.id, count});
     }
   }, [props.id, count]);
 
+
+
   useEffect(() => {
     if (props.id) {
-      setAverage(Object.keys(meta.ratings).reduce((acc, rating) => {
-        return (acc + Number(rating) * Number(meta.ratings[rating]));
-      }, 0)/total);
+      setAverage(calculateAverage(total, meta));
     }
   }, [total]);
 
@@ -73,7 +75,7 @@ const Reviews = (props) => {
         : ''}
       </aside>
       <div className="reviewsList">
-        {total + ' reviews'}
+        {total + ' reviews, sorted by' + sort}
         {reviews.results ? <ReviewsList reviews={reviews} moreFunc={add2Review}/>
         : ''}
       </div>
