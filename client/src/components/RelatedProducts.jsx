@@ -41,7 +41,7 @@ const RelatedProducts = (props) => {
       {relatedProducts.map((relatedProduct) => {
         return (
           <div key={relatedProduct}>
-            <RelatedProduct relatedProduct={relatedProduct} getRelatedProduct={getRelatedProduct} />
+            <RelatedProduct originalProduct={props.product} relatedProduct={relatedProduct} getRelatedProduct={getRelatedProduct} />
           </div>
         )
       })}

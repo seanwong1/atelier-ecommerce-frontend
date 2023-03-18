@@ -61,6 +61,9 @@ const Reviews = (props) => {
     }
   }, [total]);
 
+  useEffect(() => {
+    props.setAv(average);
+  }, [average]);
 
   return (
     <div className="reviews">

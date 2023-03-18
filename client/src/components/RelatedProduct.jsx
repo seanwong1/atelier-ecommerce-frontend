@@ -6,6 +6,7 @@ const RelatedProduct = (props) => {
   const [relatedProduct, setRelatedProduct] = useState({});
   const [productImages, setProductImages] = useState([{thumbnail_url: 'blah'}]);
   const [modalState, setModalState] = useState(false);
+  const [featureSet, setFeatureSet] = useState([]);
 
   const getRelatedProduct = () => {
     let options = {
@@ -18,6 +19,7 @@ const RelatedProduct = (props) => {
       .then((data) => {
         setRelatedProduct(data.data);
         getImages(data.data.id);
+        createFeatureSet();
       });
   };
 
@@ -41,15 +43,54 @@ const RelatedProduct = (props) => {
     setModalState(false);
   };
 
+  const createFeatureSet = () => {
+    var newFeatureSet = new Set();
+    newFeatureSet.add(props.originalProduct.features.map(
+        (originalProductFeatures) => {
+          console.log(originalProductFeatures)
+          return originalProductFeatures['features'];
+        }))
+      .add(relatedProduct.features.map(
+        (relatedProductFeatures) => {
+          console.log(relatedProductFeatures)
+          return relatedProductFeatures['features'];
+        }))
+    setFeatureSet([...newFeatureSet]);
+  };
+
   useEffect(() => {
     getRelatedProduct();
   }, []);
+
+  //console.log(props.originalProduct.features);
+  //console.log(relatedProduct.features);
 
   return (
     <div className='related-product'>
       <button className='related-product-action-button' onClick={() => {showModal()}}>⭐</button>
       <Modal className='related-product-comparison-modal' show={modalState} handleClose={() => {hideModal()}} >
         <div className='related-product-comparison-modal-title'>Comparison</div>
+        <table>
+          <thead>
+            <tr>
+              <th>{props.originalProduct.name}</th>
+              <th></th>
+              <th>{relatedProduct.name}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Emil</td>
+              <td>Tobias</td>
+              <td>Linus</td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td>14</td>
+              <td>10</td>
+            </tr>
+          </tbody>
+        </table>
       </Modal>
       <div className='preview-image' onClick={() => {props.getRelatedProduct(relatedProduct.id)}}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
       <div className='product-category' >Category: {relatedProduct.category}</div>
