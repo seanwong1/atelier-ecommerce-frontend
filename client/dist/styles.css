@@ -16,6 +16,8 @@
 .reviewsList {
   width: 500px;
   flex-grow: 1;
+  size: fixed;
+  background-color: lightgreen;
 }
 
 .averageStars {
@@ -67,6 +69,39 @@
   border-top: 7px solid black;
 }
 
+.reviewTile {
+  margin-top: 10px;
+}
+
 .reviewStarRating {
   display: flex;
+}
+
+.tileTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.reviewNameDate {
+  font-size: x-small;
+}
+
+.reviewBody {
+  overflow-wrap: anywhere;
+  font-size: smaller;
+}
+
+.reviewSummary {
+  overflow-wrap: anywhere;
+}
+
+.reviewHelpfulness {
+  display: flex;
+  flex-direction: row;
+  font-size: smaller;
+}
+
+.yesBtn {
+  margin-right: 3px;
 }

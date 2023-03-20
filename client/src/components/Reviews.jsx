@@ -5,7 +5,8 @@ import ReviewsNew from './ReviewsNew.jsx'
 import axios from 'axios';
 import calculateAverage from '../lib/averageCalc.jsx';
 import calcTotal from '../lib/totalCalc.jsx';
-
+import calcRel from '../lib/relevanceCalc.jsx';
+import {differenceInSeconds} from 'date-fns';
 
 const Reviews = (props) => {
 
@@ -16,6 +17,14 @@ const Reviews = (props) => {
   const [average, setAverage] = useState(0);
   const [sort, setSort] = useState('relevance');
 
+  const currentDate = new Date();
+
+  const options = [
+    { value: 'relevance', label: 'relevance' },
+    { value: 'helpfulness', label: 'helpfulness' },
+    { value: 'newest', label: 'newest' }
+  ]
+
   const getReviews = (params) => {
 
     let options = {
@@ -25,14 +34,13 @@ const Reviews = (props) => {
     }
 
     axios.request(options).then((result) => {
-      setReviews(result.data);
+      setReviews(result.data.results);
     })
     .catch(err => {
       console.log('error getting reviews: ', err);
     });
 
   };
-
 
 
   const getMeta = () => {
@@ -42,30 +50,80 @@ const Reviews = (props) => {
     });
   }
 
-  const add2Review = () => {
+  const addReviews = () => {
     //Need to add functionality to stop adding to count and remove the button once count
     // gets to max value which can be obtained in meta data
-    setCount(count + 2);
+    setCount(total);
+    sortReviews(sort);
+  };
+
+  const addHelpful = (id) => {
+    axios.put(`/reviewsHelpful?reviewID=${id}`).then((result) => {
+      getReviews({product_id: props.id, count, sort});
+    });
+  }
+
+  const changeSort = (event) => {
+    setSort(event.target.value);
+    sortReviews(event.target.value);
   };
 
   useEffect(() => {
     if (props.id) {
       getMeta(props.id);
-      getReviews({product_id: props.id, count});
     }
-  }, [props.id, count]);
+  }, [props.id]);
 
 
 
   useEffect(() => {
     if (props.id) {
       setAverage(calculateAverage(total, meta));
+      getReviews({product_id: props.id, count: total});
     }
-  }, [total]);
+  }, [total, count]);
 
   useEffect(() => {
     props.setAv(average);
   }, [average]);
+
+  const sortReviews = (s) => {
+
+    if (s === 'relevance') {
+      setReviews(reviews.sort((a, b) => {
+        const [aVal, bVal] = calcRel(a, b);
+        if (aVal < bVal) {
+          return 1;
+        } else if (aVal > bVal) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }));
+    } else if (s === 'newest') {
+      setReviews(reviews.sort((a, b) => {
+        var first = differenceInSeconds(currentDate, new Date(a.date));
+        var second = differenceInSeconds(currentDate, new Date(b.date));
+        if (first > second) {
+          return 1;
+        } else if (first < second) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }));
+    } else if (s === 'helpfulness') {
+      setReviews(reviews.sort((a, b) => {
+        if (a.helpfulness < b.helpfulness) {
+          return 1;
+        } else if (a.helpfulness > b.helpfulness) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }));
+    }
+  }
 
 
   return (
@@ -75,8 +133,18 @@ const Reviews = (props) => {
         : ''}
       </aside>
       <div className="reviewsList">
-        {total + ' reviews, sorted by' + sort}
-        {reviews.results ? <ReviewsList reviews={reviews} moreFunc={add2Review}/>
+        <div className='flexrow'>
+          <div>
+            {total + ' reviews, sorted by '}
+          </div>
+          <select value={sort} onChange={changeSort}>
+            <option value='relevance'>relevance</option>
+            <option value='newest'>newest</option>
+            <option value='helpfulness'>helpfulness</option>
+          </select>
+        </div>
+
+        {reviews ? <ReviewsList reviews={reviews.slice(0, count)} moreFunc={addReviews} addHelpful={addHelpful}/>
         : ''}
       </div>
       <button>
