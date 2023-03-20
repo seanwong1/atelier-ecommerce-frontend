@@ -11,12 +11,14 @@ const descripts = {
   'Quality': ['Poor', 'Perfect']
 }
 
-const ReviewsOver = ({data, total, average}) => {
+const ReviewsOver = ({data, total, average, filterFunc}) => {
   const [stars, setStars] = useState(0);
+
+  const [hov, setHov] = useState({1: false, 2: false, 3: false, 4: false, 5: false});
+
 
   useEffect(() => {
     setStars(((Math.round(average * 4) / 4).toFixed(2)));
-    console.log('stars2', stars, average);
 
   }, [average]);
 
@@ -24,7 +26,7 @@ const ReviewsOver = ({data, total, average}) => {
     <div>
       {/* {JSON.stringify(data)} */}
       <div className='averageStars'>
-        <div>
+        <div className='averageStarText'>
           {Math.round(average * 100)/100}
         </div>
         <div>
@@ -38,15 +40,20 @@ const ReviewsOver = ({data, total, average}) => {
       <div className='percentRecommended'>
         {Math.floor(Number(data.recommended[true])
           /(Number(data.recommended[true]) + Number(data.recommended[false]))
-          * 100) + '% recommended'}
+          * 100) + '% of reviews recommend this product'}
       </div>
       <div className='reviewsByStar'>
         {Object.keys(data.ratings).map((rating) => {
           return (
             <div key={rating} style={{display: 'flex', paddingBottom: 10}}>
-              <aside style={{flex: '0 0 auto', paddingRight: 5}}>
+              <button
+                className='starsTextBtn'
+                style={hov[rating] ? {cursor: 'pointer'} : { textDecoration: 'underline' }}
+                onMouseEnter={() => {setHov({...hov, [rating]: true})}}
+                onMouseLeave={() => {setHov({...hov, [rating]: false})}}
+                onClick={() => {filterFunc(rating)}}>
                 {rating + ' stars'}
-              </aside>
+              </button>
               <div style={{flex: '1 1 auto', backgroundColor: 'green', height: '15px', width: `${percentHelper(data.ratings[rating], total)}%`}}>
 
               </div>
@@ -69,13 +76,13 @@ const ReviewsOver = ({data, total, average}) => {
                 {'' + data.characteristics[cName].value}
               </div> */}
               <div className='descriptors'>
-                {descripts[cName].map((desc) => {
+                {descripts[cName].map((desc, index) => {
 
                   if (descripts[cName].length === 2) {
                     return (
                       <div key={Math.random()}>
                         <div className='flexrow'>
-                          <div style={{margin: '0 2px 10px 0'}} className='descriptorBox1'>
+                          <div style={{margin: '0 4px 10px 0'}} className='descriptorBox1'>
 
                           </div>
                           <div className='descriptorBox1'>
@@ -83,7 +90,7 @@ const ReviewsOver = ({data, total, average}) => {
                           </div>
                         </div>
 
-                        <div className='descriptorText'>
+                        <div className='descriptorText' id={'descriptor1' + index}>
                           {desc}
                         </div>
                       </div>
@@ -97,7 +104,7 @@ const ReviewsOver = ({data, total, average}) => {
                           </div>
 
                         </div>
-                        <div className='descriptorText'>
+                        <div className='descriptorText' id={'descriptor' + index}>
                           {desc}
                         </div>
                       </div>

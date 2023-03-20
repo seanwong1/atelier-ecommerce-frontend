@@ -16,6 +16,7 @@ const Reviews = (props) => {
   const [total, setTotal] = useState(0);
   const [average, setAverage] = useState(0);
   const [sort, setSort] = useState('relevance');
+  const [filters, setFilters] = useState([]);
 
   const currentDate = new Date();
 
@@ -58,7 +59,7 @@ const Reviews = (props) => {
   };
 
   const addHelpful = (id) => {
-    axios.put(`/reviewsHelpful?reviewID=${id}`).then((result) => {
+    axios.put(`/reviewsHelpful?reviewID=${id}`).then(() => {
       getReviews({product_id: props.id, count, sort});
     });
   }
@@ -67,6 +68,23 @@ const Reviews = (props) => {
     setSort(event.target.value);
     sortReviews(event.target.value);
   };
+
+  const filterByStar = (star) => {
+    addReviews();
+    if (filters.includes(Number(star))) {
+      setFilters((prevFilters) => {
+        var newFilters = [...prevFilters];
+        newFilters.splice(newFilters.indexOf(Number(star)), 1);
+        return newFilters;
+      });
+    } else {
+      setFilters((prevFilters) => {
+        var newFilters = [...prevFilters];
+        newFilters.push(Number(star));
+        return newFilters;
+      });
+    }
+  }
 
   useEffect(() => {
     if (props.id) {
@@ -129,27 +147,24 @@ const Reviews = (props) => {
   return (
     <div className="reviews">
       <aside className="reviewsOver">
-        {total > 0 ? <ReviewsOverview data={meta} total={total} average={average}/>
+        {total > 0 ? <ReviewsOverview data={meta} total={total} average={average} filterFunc={filterByStar}/>
         : ''}
       </aside>
       <div className="reviewsList">
         <div className='flexrow'>
-          <div>
+          <div className='totalDescript'>
             {total + ' reviews, sorted by '}
           </div>
-          <select value={sort} onChange={changeSort}>
+          <select value={sort} onChange={changeSort} className='sortDrop'>
             <option value='relevance'>relevance</option>
             <option value='newest'>newest</option>
             <option value='helpfulness'>helpfulness</option>
           </select>
         </div>
 
-        {reviews ? <ReviewsList reviews={reviews.slice(0, count)} moreFunc={addReviews} addHelpful={addHelpful}/>
+        {reviews ? <ReviewsList reviews={reviews.slice(0, count)} moreFunc={addReviews} addHelpful={addHelpful} filters={filters}/>
         : ''}
       </div>
-      <button>
-        Add a Review +
-      </button>
     </div>
   )
 }
