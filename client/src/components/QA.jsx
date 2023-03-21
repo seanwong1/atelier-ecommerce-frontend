@@ -5,12 +5,7 @@ import QACard from './QACard.jsx';
 import AddQuestion from './AddQuestion.jsx';
 import AddAnswer from './AddAnswer.jsx';
 
-<<<<<<< HEAD
-
-const QA = ({ id }) => {
-=======
 const QA = ({ id, product_name }) => {
->>>>>>> a6ad12432da0cb5eb90eaa72f950006dba8b1bc1
   const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState('');
   const [questionText, setQuestionText] = useState('');

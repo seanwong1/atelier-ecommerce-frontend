@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import ShadedStar from './ShadedStar.jsx';
 import percentHelper from '../lib/percentHelper.jsx';
 
-<<<<<<< HEAD
-=======
 const descripts = {
   'Fit': ['Too tight', 'Perfect', 'Too baggy'],
   'Comfort': ['Uncomfortable', 'Ok', 'Perfect'],
@@ -13,7 +11,6 @@ const descripts = {
   'Quality': ['Poor', 'Perfect']
 }
 
->>>>>>> a6ad12432da0cb5eb90eaa72f950006dba8b1bc1
 const ReviewsOver = ({data, total, average}) => {
   const [stars, setStars] = useState(0);
 

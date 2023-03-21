@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductImages from './ProductImages.jsx';
+import Styles from './ProductStyles.jsx';
 
 const ProductOverview = ({ product }) => {
     const [styles, setStyles] = useState([]);
@@ -34,11 +35,29 @@ const ProductOverview = ({ product }) => {
     const showFeatures = () => {
         if(product.features) {
             return product.features.map(ftr => {
-                console.log(ftr)
                 return `${ftr.feature}: ${ftr.value},  `
             })
         }
+    }
 
+    const styleClick = (e) => {
+        e.preventDefault();
+        styles.forEach((indStyle) => {
+            if(indStyle.style_id.toString() === e.target.id) {
+                console.log(indStyle.style_id.toString() + ' = ' + e.target.id);
+                setStyle(indStyle);
+                setImage(indStyle.photos[0]);
+                setImages(indStyle.photos)
+            }
+            else {
+                console.log('no');
+            }
+        })
+        
+    }
+
+    const imageChange = (e) => {
+        e.preventDefault();
 
     }
 
@@ -48,7 +67,6 @@ const ProductOverview = ({ product }) => {
     useEffect(() => {
         getStyles()
     }, [])
-    console.log(product);
     return (
         <div className="productOverview">
 
@@ -64,7 +82,7 @@ const ProductOverview = ({ product }) => {
                 <p>category:{product.category}</p>
                 <p>features: {showFeatures()}</p>
 
-                <h3>Style Selector Here</h3>
+                <Styles styles={styles} styleClick={styleClick}/>
                 <h3>Add to Cart Here</h3>
             </div>
             <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
