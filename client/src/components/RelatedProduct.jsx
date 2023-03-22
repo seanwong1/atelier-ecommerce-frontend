@@ -3,12 +3,17 @@ import axios from 'axios';
 import Modal from './Modal.jsx';
 import getProduct from '../lib/getProduct.js';
 import getImages from '../lib/getImages.js';
+import getProductReviewMetadata from '../lib/getProductReviewMetadata.js';
+import calculateAverage from '../lib/averageCalc.jsx';
+import calcTotal from '../lib/totalCalc.jsx';
 
 const RelatedProduct = ({originalProduct, relatedProductID}) => {
   const [relatedProduct, setRelatedProduct] = useState({});
   const [productImages, setProductImages] = useState([{thumbnail_url: 'blah'}]);
   const [modalState, setModalState] = useState(false);
   const [featureSet, setFeatureSet] = useState([]);
+  const [averageRating, setAverageRating] = useState(0);
+  const [totalRating, setTotalRating] = useState(0);
 
   const showModal = () => {
     setModalState(true);
@@ -36,6 +41,7 @@ const RelatedProduct = ({originalProduct, relatedProductID}) => {
   useEffect(() => {
     getProduct(relatedProductID, setRelatedProduct);
     getImages(relatedProductID, setProductImages);
+    getProductReviewMetadata(relatedProductID, console.log)
   }, []);
 
   //console.log(props.originalProduct.features);

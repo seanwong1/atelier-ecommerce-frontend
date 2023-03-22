@@ -14,7 +14,7 @@ const getImages = (id, callback) => {
       //callback(result.data);
     })
     .catch((err) => {
-      console.log('getProductErr', err);
+      console.log('getImagesErr', err);
     });
 };
 
