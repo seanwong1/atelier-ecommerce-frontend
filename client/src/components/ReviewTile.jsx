@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { format, parseISO } from "date-fns";
 import ShadedStar from './ShadedStar.jsx'
 
-const ReviewTile = ({ review, addHelpful }) => {
+const ReviewTile = ({ review, addHelpful, helpfulness }) => {
   const [hov, setHov] = useState(false);
   const [helped, setHelped] = useState(false);
+  const [helpful, setHelpful] = useState(helpfulness);
 
   const changeHelp = () => {
     if (!helped) {
       addHelpful(review.review_id);
       setHelped(true);
+      setHelpful(helpful + 1);
     }
   }
 
@@ -33,6 +35,9 @@ const ReviewTile = ({ review, addHelpful }) => {
       <h4 className='reviewSummary'>
         {review.summary}
       </h4>
+      <div className='reviewRecommended'>
+        {review.recommend ? '✓ I recomment this product' : ''}
+      </div>
       <p className='reviewBody'>
         {review.body}
       </p>
@@ -49,16 +54,14 @@ const ReviewTile = ({ review, addHelpful }) => {
           Yes
         </div>
         <div>
-          {`(${review.helpfulness})`}
+          {`(${helpful})`}
         </div>
-      </div>
-      <div className='reviewRecommended'>
-        {'Recommended? ' + review.recommend}
       </div>
       <div className='reviewResponses'>
         {review.response}
       </div>
-      ___________________________________________
+      <div className='line'>
+      </div>
     </div>
   )
 }
