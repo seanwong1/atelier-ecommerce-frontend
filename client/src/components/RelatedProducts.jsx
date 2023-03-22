@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import RelatedProduct from './RelatedProduct.jsx';
-import getRelatedProducts from '../lib/getRelatedProducts.js';
+
+import getHandler from '../lib/getHandler.js';
 
 // comment out when config not hardcoded
 // const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/'
@@ -11,7 +13,7 @@ const RelatedProducts = (props) => {
   const [relatedProductsID, setRelatedProductsID] = useState([]);
 
   useEffect(() => {
-    getRelatedProducts(props.id, setRelatedProductsID);
+    getHandler('/related', 71697, setRelatedProductsID);
   }, [])
 
   return (

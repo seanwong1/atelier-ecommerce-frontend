@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import Modal from './Modal.jsx';
-import getProduct from '../lib/getProduct.js';
-import getImages from '../lib/getImages.js';
-import getProductReviewMetadata from '../lib/getProductReviewMetadata.js';
+
+import getHandler from '../lib/getHandler.js';
 import calculateAverage from '../lib/averageCalc.jsx';
 import calcTotal from '../lib/totalCalc.jsx';
 
@@ -39,9 +39,9 @@ const RelatedProduct = ({originalProduct, relatedProductID}) => {
   // };
 
   useEffect(() => {
-    getProduct(relatedProductID, setRelatedProduct);
-    getImages(relatedProductID, setProductImages);
-    getProductReviewMetadata(relatedProductID, console.log)
+    getHandler('/product', relatedProductID, setRelatedProduct);
+    getHandler('/styles', relatedProductID, setProductImages);
+    getHandler('reviewsMeta', relatedProductID, console.log)
   }, []);
 
   //console.log(props.originalProduct.features);
