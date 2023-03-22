@@ -1,47 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import RelatedProduct from './RelatedProduct.jsx';
+import getRelatedProducts from '../lib/getRelatedProducts.js';
 
 // comment out when config not hardcoded
-const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/'
-const api = require('../../../config.js');
+// const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/'
+// const api = require('../../../config.js');
 
 const RelatedProducts = (props) => {
-  const [relatedProducts, setRelatedProducts] = useState([]);
-
-  const getRelatedProducts = () => {
-    let options = {
-      'url': '/related',
-      'params': {'productID': props.id},
-      'method': 'get'
-    }
-
-    axios.request(options).then((data) => {
-      setRelatedProducts(data.data);
-    });
-  };
-
-  const getRelatedProduct = (productID) => {
-    let options = {
-      'url': '/relatedProduct',
-      'params': {productID},
-      'method': 'get'
-    }
-    axios.request(options).then((data) => {
-      props.setProduct(data.data);
-    });
-  };
+  const [relatedProductsID, setRelatedProductsID] = useState([]);
 
   useEffect(() => {
-    getRelatedProducts();
+    getRelatedProducts(props.id, setRelatedProductsID);
   }, [])
 
   return (
     <div className='related-products'>
-      {relatedProducts.map((relatedProduct) => {
+      {relatedProductsID.map((relatedProductID) => {
         return (
-          <div key={relatedProduct} onClick={() => {getRelatedProduct(relatedProduct)}}>
-            <RelatedProduct relatedProduct={relatedProduct} />
+          <div key={relatedProductID}>
+            <RelatedProduct originalProduct={props.product} relatedProductID={relatedProductID} />
           </div>
         )
       })}
