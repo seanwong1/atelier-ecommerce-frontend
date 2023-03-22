@@ -26,10 +26,10 @@ const App = () => {
   return (
     <div>
       {/* {JSON.stringify(product)} */}
-      <ProductOverview product={product}/>
-      <RelatedProducts setProduct={setProduct} id={product.id ? product.id : 0} />
+      {/* <ProductOverview product={product}/>
+      <RelatedProducts setProduct={setProduct} id={product.id ? product.id : 0} /> */}
       <QA id={product.id ? product.id : 0}/>
-      <Reviews id={product.id ? product.id : 0} />
+      {/* <Reviews id={product.id ? product.id : 0} /> */}
     </div>
   );
 }
