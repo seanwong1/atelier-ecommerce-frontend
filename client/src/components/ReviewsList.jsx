@@ -8,8 +8,8 @@ const ReviewsList = (props) => {
   return (
     <div>
       <div>
-        {props.reviews.results.map((review) => {
-          return (<ReviewTile review={review} key={review.review_id}/>);
+        {props.reviews.map((review) => {
+          return (<ReviewTile review={review} key={review.review_id} addHelpful={props.addHelpful}/>);
         })}
       </div>
       <button onClick={addReviews}>

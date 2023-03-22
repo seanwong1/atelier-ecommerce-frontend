@@ -2,32 +2,55 @@ import React, { useState, useEffect } from 'react';
 import { format, parseISO } from "date-fns";
 import ShadedStar from './ShadedStar.jsx'
 
-const ReviewTile = ({review}) => {
+const ReviewTile = ({ review, addHelpful }) => {
+  const [hov, setHov] = useState(false);
+  const [helped, setHelped] = useState(false);
+
+  const changeHelp = () => {
+    if (!helped) {
+      addHelpful(review.review_id);
+      setHelped(true);
+    }
+  }
+
   return (
     <div className='reviewTile'>
-      <div className='reviewStarRating'>
-        <div>
-          {'★'.repeat(Math.floor(review.rating))}
+      <div className='tileTop'>
+        <div className='reviewStarRating'>
+          <div>
+            {'★'.repeat(Math.floor(review.rating))}
+          </div>
+          <ShadedStar shade={review.rating % 1}/>
+          <div>
+            {'☆'.repeat(5-Math.floor(review.rating))}
+          </div>
         </div>
-        <ShadedStar shade={review.rating % 1}/>
-        <div>
-          {'☆'.repeat(5-Math.floor(review.rating))}
+        <div className='reviewNameDate'>
+          {review.reviewer_name ? '☑' + review.reviewer_name + ', ' : 'Cognito, '}
+          {format(parseISO(review.date), 'MMMM dd, yyyy')}
         </div>
       </div>
-      <div className='reviewSummary'>
+      <h4 className='reviewSummary'>
         {review.summary}
-      </div>
-      <div className='reviewDate'>
-        {format(parseISO(review.date), 'MMMM dd, yyyy')}
-      </div>
-      <div className='reviewBody'>
+      </h4>
+      <p className='reviewBody'>
         {review.body}
-      </div>
+      </p>
       <div className='reviewHelpfulness'>
-        {'Helpfulness: ' + review.helpfulness}
-      </div>
-      <div className='reviewName'>
-        {review.reviewer_name}
+        <div style={{marginRight: '3px'}}>
+          Helpful?
+        </div>
+        <div
+          style={hov ? {cursor: 'pointer'} : { textDecoration: 'underline' }}
+          className='yesBtn'
+          onMouseEnter={() => {if (!helped) {setHov(true)}}}
+          onMouseLeave={() => {setHov(false)}}
+          onClick={changeHelp}>
+          Yes
+        </div>
+        <div>
+          {`(${review.helpfulness})`}
+        </div>
       </div>
       <div className='reviewRecommended'>
         {'Recommended? ' + review.recommend}
