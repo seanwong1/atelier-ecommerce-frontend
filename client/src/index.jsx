@@ -22,7 +22,7 @@ const App = () => {
 
   useEffect(() => {
     getProduct();
-  }, [])
+  }, []);
 
   return (
     <div>

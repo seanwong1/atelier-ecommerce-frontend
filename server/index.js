@@ -103,6 +103,10 @@ app.get('/reviewsMeta', (req, res, next) => {
 
 app.get('/related', (req, res, next) => {
   let options = {
+
+    //'url': api.URL + req.query['productID'] + '/related',
+    'url': api.DEFAULTURL + '/related',
+
     //TODO: change this back when api.URL no longer hardcoded
     // 'url': req.query ? api.testURL + req.query['productID'] + '/related' : api.URL + '/related',
     // 'url': api.URL + req.query['productID'] + '/related',
