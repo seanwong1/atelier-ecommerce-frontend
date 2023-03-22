@@ -7,14 +7,14 @@ import ProductOverview from './components/ProductOverview.jsx'
 import Reviews from './components/Reviews.jsx';
 import RelatedProducts from './components/RelatedProducts.jsx';
 
-import getProduct from './lib/getProduct.js';
+import getHandler from './lib/getHandler.js';
 
 const App = () => {
   const [product, setProduct] = useState({});
   const [average, setAverage] = useState(0);
 
   useEffect(() => {
-    getProduct(71697, setProduct);
+    getHandler('product', 71697, setProduct);
   }, []);
 
   return (
