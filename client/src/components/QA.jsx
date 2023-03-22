@@ -10,7 +10,7 @@ const QA = ({ id, product_name }) => {
   const [question, setQuestion] = useState('');
   const [questionText, setQuestionText] = useState('');
   const [answerText, setAnswerText] = useState('');
-  const [nickname, setUsername] = useState('');
+  const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
   const [showQuestionModal, setShowQuestionModal] = useState(false);
   const [showAnswerModal, setShowAnswerModal] = useState(false);
@@ -19,7 +19,12 @@ const QA = ({ id, product_name }) => {
   useEffect((() => {
     async function fetchQuestions() {
       try {
-        let result = await axios.get('/questions');
+        let options = {
+          'url': '/questions',
+          'params': {product_id: 71701}, //place the id prop here,
+          'method': 'get'
+        }
+        let result = await axios.request(options);
         setQuestions(result.data);
       } catch(err) {
         console.log(err);
@@ -29,21 +34,36 @@ const QA = ({ id, product_name }) => {
     fetchQuestions();
   }), [id]);
 
-  const onSubmitQuestion = (e) => {
+  const onSubmitQuestion = async (e) => {
     e.preventDefault();
     let body = {
-      'body': question,
-      'name': username,
+      'question': questionText,
+      'nickname': nickname,
       'email': email,
       'product_id': id
     }
+
+    try {
+      if (questionText === '' || nickname === '' || email === '') {
+        let missing = Object.keys(body)
+          .filter(field => body[`${field}`] === '')
+          .join(', ');
+        alert(`You must enter the following: ${missing}`);
+      } else {
+        await axios.post('/questions/add', body);
+        alert(`Thank you for submitting your question: ${body.question}`);
+      }
+    } catch (err) {
+      alert('Your question was not submitted due to some internal error. Please try again shortly');
+    }
   };
+
 
   const onSubmitAnswer = (e) => {
     e.preventDefault();
     let body = {
-      'body': answer,
-      'name': username,
+      'answer': answer,
+      'nickname': nickname,
       'email': email,
       'product_id': id
     }
@@ -57,8 +77,8 @@ const QA = ({ id, product_name }) => {
     setAnswerText(e.target.value);
   };
 
-  const onChangeUsername = (e) => {
-    setUsername(e.target.value);
+  const onChangeNickname = (e) => {
+    setNickname(e.target.value);
   };
 
   const onChangeEmail = (e) => {
@@ -71,7 +91,6 @@ const QA = ({ id, product_name }) => {
 
   const toggleShowAnswerModal = (e, question) => {
     setShowAnswerModal(!showAnswerModal);
-    console.log(question);
     setQuestion(question);
   };
 
@@ -122,7 +141,7 @@ const QA = ({ id, product_name }) => {
             product_id={id}
             product_name={product_name}
             onChangeQuestion={onChangeQuestion}
-            onChangeUsername={onChangeUsername}
+            onChangeNickname={onChangeNickname}
             onChangeEmail={onChangeEmail}
             onSubmitQuestion={onSubmitQuestion}
           />
@@ -134,7 +153,7 @@ const QA = ({ id, product_name }) => {
             product_name={product_name}
             question_body={question}
             onChangeAnswer={onChangeAnswer}
-            onChangeUsername={onChangeUsername}
+            onChangeNickname={onChangeNickname}
             onChangeEmail={onChangeEmail}
             onSubmitAnswer={onSubmitAnswer}
          />

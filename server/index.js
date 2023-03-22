@@ -6,7 +6,7 @@ require('dotenv').config();
 const api = require('../config.js');
 
 app.use(express.static(path.join(__dirname, '../client/dist')))
-
+app.use(express.json());
 app.get('/product', (req, res, next) => {
   let options = {
     //'url': req.query ? api.testURL + req.query['productID'] : api.URL,
@@ -44,13 +44,13 @@ app.get('/styles', (req, res, next) => {
     res.sendStatus(400, err)
   })
 });
-
+//retrieve list of questions
 app.get('/questions', async (req, res) => {
   let options = {
     'method': 'get',
     'url': api.QUESTIONS,
     'params': {
-      'product_id': 71701
+      'product_id': req.query.product_id
     },
     'headers': {
       'Authorization': api.TOKEN
@@ -62,6 +62,21 @@ app.get('/questions', async (req, res) => {
     res.send(questions.data.results)
   } catch(err) {
     console.log(err);
+  }
+});
+//post question
+app.post('/questions/add', async (req, res) => {
+  let question = {
+    'body': req.body.question,
+    'name': req.body.nickname,
+    'email': req.body.email,
+    'product_id': req.body.product_id
+  };
+
+  try {
+    res.send('Working');
+  } catch (err){
+    res.status(404).send('err');
   }
 });
 

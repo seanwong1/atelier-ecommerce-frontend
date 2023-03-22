@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddAnswer = ({ product_name, question_body, onChangeAnswer, onChangeUsername, onChangeEmail,  onSubmitAnswer }) => {
+const AddAnswer = ({ product_name, question_body, onChangeAnswer, onChangeNickname, onChangeEmail,  onSubmitAnswer }) => {
 
   return (
     <div className='QA-AddAnswer'>
@@ -11,12 +11,14 @@ const AddAnswer = ({ product_name, question_body, onChangeAnswer, onChangeUserna
         <textarea
         className='QA-AddAnswer-Text'
         maxLength='1000'
+        onChange={onChangeAnswer}
         />
         <h3>What is your nickname</h3>
         <input
         className='QA-Answer-Input'
         maxLength='60'
         placeholder='Example: jack543!'
+        onChange={onChangeNickname}
         ></input>
         <span>For privacy reasons, do not use your full name or email address</span>
         <h3>You Email*</h3>
@@ -24,6 +26,7 @@ const AddAnswer = ({ product_name, question_body, onChangeAnswer, onChangeUserna
         className='QA-Answer-Input'
         maxLength='60'
         placeholder='Example: jack@email.com'
+        onChange={onChangeEmail}
         ></input>
         <span>For authentication reasons, you will not be emailed</span>
         <button></button>
