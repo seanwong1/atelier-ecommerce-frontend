@@ -1,14 +1,14 @@
-/* #app {
-  can we reference process.env here?
-} */
+
 
 .reviews {
   display: flex;
-  width: 750px;
+  justify-content: center;
+  width: 800px;
+  font-family: 'Verdana';
 }
 
 .reviewsOver {
-  width: 225px;
+  width: 200px;
   margin-left: 2%;
   margin-right: 40px;
 }
@@ -16,16 +16,38 @@
 .reviewsList {
   width: 500px;
   flex-grow: 1;
+  size: fixed;
+  font-size: 12px;
+  padding-left: 5px;
 }
 
 .averageStars {
   display: flex;
 }
 
+.averageStarText {
+  font-weight: bold;
+  font-size: xx-large;
+  margin-right: 10px;
+}
+
 .reviewsByStar {
   display: flex;
   flex-direction: column-reverse;
+  font-size: xx-small;
+}
 
+.starsTextBtn {
+  flex: '0 0 auto';
+  width: 25%;
+  border: none;
+  background-color: white;
+  font-size: xx-small;
+}
+
+.percentRecommended {
+  font-size: 9.75px;
+  margin-bottom: 5px;
 }
 
 .ratingDescript {
@@ -37,16 +59,34 @@
 .descriptors {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 200px;
 }
+
 .descriptorText {
+  display: flex;
   margin-bottom: 2px;
-  font-size: x-small;
+  font-size: 8px;
 }
+
+#descriptor1 {
+  display: flex;
+  justify-content: center;
+}
+
+#descriptor11 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#descriptor2 {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .descriptorBox {
   background-color: rgb(232, 231, 231);
   height: 5px;
-  width: 60px;
+  width: 63px;
   justify-content: space-between;
 }
 .flexrow {
@@ -56,7 +96,7 @@
 .descriptorBox1 {
   background-color: rgb(232, 231, 231);
   height: 5px;
-  width: 44.5px;
+  width: 47px;
 }
 
 .triangle {
@@ -68,4 +108,56 @@
   border-top: 7px solid black;
 }
 
+.reviewTile {
+  margin-top: 10px;
+}
 
+.reviewStarRating {
+  display: flex;
+}
+
+.tileTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.reviewNameDate {
+  font-size: x-small;
+}
+
+.reviewBody {
+  overflow-wrap: anywhere;
+  font-size: smaller;
+}
+
+.reviewSummary {
+  overflow-wrap: anywhere;
+}
+
+.reviewHelpfulness {
+  display: flex;
+  flex-direction: row;
+  font-size: smaller;
+}
+
+.yesBtn {
+  margin-right: 3px;
+}
+
+.line {
+  height: 2px;
+  background-color: black;
+  width: 100%;
+}
+
+.sortDrop {
+  font-size: 11px;
+  text-decoration: underline;
+  font-weight: bold;
+  border: none;
+}
+
+.totalDescript {
+  font-weight: bold;
+}
