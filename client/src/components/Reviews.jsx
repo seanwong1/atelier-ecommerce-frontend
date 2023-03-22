@@ -92,8 +92,6 @@ const Reviews = (props) => {
     }
   }, [props.id]);
 
-
-
   useEffect(() => {
     if (props.id) {
       setAverage(calculateAverage(total, meta));
@@ -104,6 +102,7 @@ const Reviews = (props) => {
   useEffect(() => {
     props.setAv(average);
   }, [average]);
+
 
   const sortReviews = (s) => {
 
