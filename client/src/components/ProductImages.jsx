@@ -12,10 +12,6 @@ const ProductImages = ({images, image}) => {
         })
     }
 
-
-
-
-
         return (
             <div className='styleImages'>
                 <img className='currImg' src={image.url}></img>
@@ -23,6 +19,7 @@ const ProductImages = ({images, image}) => {
             </div>
 
         )
+    )
 }
 
 export default ProductImages;

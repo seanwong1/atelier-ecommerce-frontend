@@ -8,6 +8,7 @@ import RelatedProducts from './components/RelatedProducts.jsx';
 
 const App = () => {
   const [product, setProduct] = useState({});
+  const [average, setAverage] = useState(0);
 
   const getProduct = () => {
     // const result = await axios.get('/products');
@@ -29,7 +30,8 @@ const App = () => {
       <ProductOverview product={product}/>
       <RelatedProducts setProduct={setProduct} id={product.id ? product.id : 0} />
       <QA id={product.id ? product.id : 0}/>
-      <Reviews id={product.id ? product.id : 0} />
+      <Reviews id={product.id ? product.id : 0} setAv={setAverage}/>
+
     </div>
   );
 }

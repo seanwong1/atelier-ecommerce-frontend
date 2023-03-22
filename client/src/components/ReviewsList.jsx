@@ -8,12 +8,21 @@ const ReviewsList = (props) => {
   return (
     <div>
       <div>
-        {props.reviews.results.map((review) => {
-          return (<ReviewTile review={review} key={review.review_id}/>);
+        {props.reviews.map((review) => {
+          if (props.filters.length) {
+            console.log(props.filters);
+            if (!props.filters.includes(review.rating)) {
+              return;
+            }
+          }
+          return (<ReviewTile review={review} key={review.review_id} addHelpful={props.addHelpful} helpfulness={review.helpfulness}/>);
         })}
       </div>
       <button onClick={addReviews}>
         More Reviews
+      </button>
+      <button>
+        Add a Review +
       </button>
     </div>
   )
