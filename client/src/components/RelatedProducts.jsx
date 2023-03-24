@@ -9,8 +9,10 @@ const RelatedProducts = (props) => {
   const [relatedProductsID, setRelatedProductsID] = useState([]);
 
   useEffect(() => {
-    getHandler('/related', props.id, setRelatedProductsID);
-  }, [])
+    if (props.id) {
+      getHandler('/related', props.id, setRelatedProductsID);
+    }
+  }, [props.id]);
 
   return (
     <div className='related-products'>
