@@ -99,8 +99,9 @@ app.get('/reviews', (req, res, next) => {
 });
 
 app.get('/reviewsMeta', (req, res, next) => {
+  console.log(req.query);
   let options = {
-    'url': api.REVIEWSURL + req.query['productID'] + '/meta',
+    'url': api.REVIEWSURL + 'meta',
     'params': req.query,
     'method': 'get',
     'headers': {
