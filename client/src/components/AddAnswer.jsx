@@ -13,7 +13,7 @@ const AddAnswer = ({ product_name, question_body, onChangeAnswer, onChangeNickna
         maxLength='1000'
         onChange={onChangeAnswer}
         />
-        <h3>What is your nickname</h3>
+        <h3>What is your nickname*</h3>
         <input
         className='QA-Answer-Input'
         maxLength='60'
@@ -21,15 +21,16 @@ const AddAnswer = ({ product_name, question_body, onChangeAnswer, onChangeNickna
         onChange={onChangeNickname}
         ></input>
         <span>For privacy reasons, do not use your full name or email address</span>
-        <h3>You Email*</h3>
+        <h3>Your Email*</h3>
         <input
         className='QA-Answer-Input'
+        type='email'
         maxLength='60'
         placeholder='Example: jack@email.com'
         onChange={onChangeEmail}
         ></input>
         <span>For authentication reasons, you will not be emailed</span>
-        <button></button>
+        <button>Submit Your Answer</button>
       </form>
     </div>
   );

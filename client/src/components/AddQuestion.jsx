@@ -22,6 +22,7 @@ const AddQuestion = ({ product_id, onChangeQuestion, onChangeNickname, onChangeE
         <input
         className='QA-Question-Input'
         placeholder='Example: exampleemail@email.com'
+        type='email'
         maxLength='60'
         onChange={onChangeEmail}
         ></input>
