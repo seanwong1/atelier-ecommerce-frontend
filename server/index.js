@@ -10,8 +10,8 @@ app.use(express.json());
 
 app.get('/product', (req, res, next) => {
   let options = {
-    // 'url': req.query ? api.testURL + req.query['product_id'] : api.URL,
-    'url': api.URL,
+    'url': req.query ? api.testURL + req.query['product_id'] : api.URL,
+    // 'url': api.URL,
     // 'params': req.query,
     'method': 'get',
     'headers': {
@@ -30,7 +30,8 @@ app.get('/product', (req, res, next) => {
 
 app.get('/styles', (req, res, next) => {
   let options = {
-    'url': api.URL + '/styles',
+    'url': req.query ? api.testURL + req.query['product_id'] + '/styles' : api.URL,
+    // 'url': api.URL + '/styles',
     'params': req.query,
     'method': 'get',
     'headers': {
