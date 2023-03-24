@@ -14,14 +14,14 @@ const App = () => {
   const [average, setAverage] = useState(0);
 
   useEffect(() => {
-    getHandler('product', 71697, setProduct);
+    getHandler('/product', 71697, setProduct);
   }, []);
 
   return (
     <div>
       {/* {JSON.stringify(product)} */}
       <ProductOverview product={product}/>
-      <RelatedProducts setProduct={setProduct} product={product} id={product.id ? product.id : 0} />
+      <RelatedProducts setProduct={setProduct} product={product} id={product.id ? product.id : 71697} />
       <QA id={product.id ? product.id : 0}/>
       <Reviews id={product.id ? product.id : 0} setAv={setAverage}/>
     </div>

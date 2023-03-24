@@ -5,15 +5,11 @@ import RelatedProduct from './RelatedProduct.jsx';
 
 import getHandler from '../lib/getHandler.js';
 
-// comment out when config not hardcoded
-// const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/'
-// const api = require('../../../config.js');
-
 const RelatedProducts = (props) => {
   const [relatedProductsID, setRelatedProductsID] = useState([]);
 
   useEffect(() => {
-    getHandler('/related', 71697, setRelatedProductsID);
+    getHandler('/related', props.id, setRelatedProductsID);
   }, [])
 
   return (
@@ -21,7 +17,7 @@ const RelatedProducts = (props) => {
       {relatedProductsID.map((relatedProductID) => {
         return (
           <div key={relatedProductID}>
-            <RelatedProduct originalProduct={props.product} relatedProductID={relatedProductID} />
+            <RelatedProduct originalProduct={props.product} relatedProductID={relatedProductID} setProduct={props.setProduct} />
           </div>
         )
       })}

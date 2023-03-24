@@ -7,7 +7,7 @@ import getHandler from '../lib/getHandler.js';
 import calculateAverage from '../lib/averageCalc.jsx';
 import calcTotal from '../lib/totalCalc.jsx';
 
-const RelatedProduct = ({originalProduct, relatedProductID}) => {
+const RelatedProduct = ({originalProduct, relatedProductID, setProduct}) => {
   const [relatedProduct, setRelatedProduct] = useState({});
   const [productImages, setProductImages] = useState([{thumbnail_url: 'blah'}]);
   const [modalState, setModalState] = useState(false);
@@ -40,7 +40,7 @@ const RelatedProduct = ({originalProduct, relatedProductID}) => {
 
   useEffect(() => {
     getHandler('/product', relatedProductID, setRelatedProduct);
-    getHandler('/styles', relatedProductID, setProductImages);
+    getHandler('/styles', relatedProductID, (data) => {setProductImages(data[0].photos)});
     getHandler('reviewsMeta', relatedProductID, console.log)
   }, []);
 
@@ -74,7 +74,7 @@ const RelatedProduct = ({originalProduct, relatedProductID}) => {
           </tbody>
         </table>
       </Modal>
-      <div className='preview-image' onClick={() => {getProduct(relatedProductID)}}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
+      <div className='preview-image' onClick={() => {setProduct(relatedProductID)}}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
       <div className='product-category' >Category: {relatedProduct.category}</div>
       <div className='product-name' >Name: {relatedProduct.name}</div>
       <div className='product-price' >Price: {relatedProduct.default_price}</div>
