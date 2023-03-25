@@ -18,7 +18,6 @@ app.get('/product', (req, res, next) => {
   }
 
   axios.request(options).then((data) => {
-    // console.log(data.data);
     res.send(data.data);
   }).catch((err) => {
     console.log(err);
@@ -27,6 +26,7 @@ app.get('/product', (req, res, next) => {
 });
 
 app.get('/styles', (req, res, next) => {
+  console.log('=========********',req.query['productID'])
   let options = {
     'url': api.URL + req.query['productID'] + '/styles',
     'method': 'get',
