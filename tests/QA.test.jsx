@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom'
 import QA from '../client/src/components/QA.jsx';
 import QACard from '../client/src/components/QACard.jsx';
 import Answer from '../client/src/components/Answer.jsx';
@@ -20,6 +19,6 @@ describe('QA', () => {
   it('renders QA components', () => {
     render(<QA />);
 
-    expect(screen.getByText('Ask a question')).toBeInTheDocument();
+    expect(screen.getByText('QACard')).toBeInTheDocument();
   });
 });

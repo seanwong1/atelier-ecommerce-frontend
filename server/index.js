@@ -7,7 +7,6 @@ const api = require('../config.js');
 
 app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
 app.get('/product', (req, res, next) => {
   let options = {
     //'url': req.query ? api.testURL + req.query['productID'] : api.URL,
@@ -67,46 +66,19 @@ app.get('/questions', async (req, res) => {
 });
 //post question
 app.post('/questions/add', async (req, res) => {
-
-  let options = {
-    'method': 'post',
-    'url': api.QUESTIONS,
-    'headers': {
-      'Authorization': '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'
-    },
-    'data': {
-      'body': req.body.question,
-      'name': req.body.nickname,
-      'email': req.body.email,
-      'product_id': req.body.product_id
-    }
+  let question = {
+    'body': req.body.question,
+    'name': req.body.nickname,
+    'email': req.body.email,
+    'product_id': req.body.product_id
   };
 
   try {
-    console.log(options.data);
-    let result = await axios.request(options);
-    res.status(201).send('Working');
+    res.send('Working');
   } catch (err){
-    console.log(err);
-    res.status(404).send(err);
+    res.status(404).send('err');
   }
 });
-//post answer
-// app.post('/answer/add', async (req, res) => {
-//   let options = {
-//     'method': 'post',
-//     'url': api.QUESTIONS,
-//     'headers': {
-//       'Authorization': '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'
-//     },
-//     'data': {
-//       'body': req.body.question,
-//       'name': req.body.nickname,
-//       'email': req.body.email,
-//       'product_id': req.body.product_id
-//     }
-//   };
-// });
 
 app.get('/reviews', (req, res, next) => {
   let options = {
@@ -128,7 +100,7 @@ app.get('/reviews', (req, res, next) => {
 
 app.get('/reviewsMeta', (req, res, next) => {
   let options = {
-    'url': api.REVIEWSURL + 'meta',
+    'url': api.REVIEWSURL + req.query['productID'] + '/meta',
     'params': req.query,
     'method': 'get',
     'headers': {
