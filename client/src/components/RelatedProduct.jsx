@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Modal from './Modal.jsx';
+import ShadedStar from './ShadedStar.jsx';
 
 import getHandler from '../lib/getHandler.js';
 import calculateAverage from '../lib/averageCalc.jsx';
@@ -13,6 +14,7 @@ const RelatedProduct = (props) => {
   const [modalState, setModalState] = useState(false);
   const [featureSet, setFeatureSet] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
+  const [stars, setStars] = useState(0);
   // const [totalRating, setTotalRating] = useState(0);
 
   const showModal = () => {
@@ -44,7 +46,8 @@ const RelatedProduct = (props) => {
     getHandler('reviewsMeta', props.relatedProductID, (response) => {
       setAverageRating(calculateAverage(calculateTotal(response), response.data));
     });
-  }, [props.relatedProductID]);
+    setStars(((Math.round(averageRating * 4) / 4).toFixed(2)));
+  }, [props.relatedProductID, averageRating]);
 
   return (
     <div className='related-product'>
@@ -77,7 +80,17 @@ const RelatedProduct = (props) => {
       <div className='product-category' >Category: {relatedProduct.category}</div>
       <div className='product-name' >Name: {relatedProduct.name}</div>
       <div className='product-price' >Price: {relatedProduct.default_price}</div>
-      <div className='product-rating' >Star Rating: {averageRating}</div>
+      <div className='product-rating' >Rating:
+        <div className='averageStars'>
+          <div>
+            {'★'.repeat(Math.floor(stars))}
+          </div>
+          <ShadedStar shade={stars % 1}/>
+          <div>
+            {'☆'.repeat(5-Math.floor(stars))}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
