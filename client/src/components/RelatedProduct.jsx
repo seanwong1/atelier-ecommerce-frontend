@@ -5,7 +5,7 @@ import Modal from './Modal.jsx';
 
 import getHandler from '../lib/getHandler.js';
 import calculateAverage from '../lib/averageCalc.jsx';
-import calcTotal from '../lib/totalCalc.jsx';
+import calculateTotal from '../lib/totalCalc.jsx';
 
 const RelatedProduct = (props) => {
   const [relatedProduct, setRelatedProduct] = useState({});
@@ -39,9 +39,9 @@ const RelatedProduct = (props) => {
   // };
 
   useEffect(() => {
-    getHandler('/product', props.relatedProductID, setRelatedProduct);
-    getHandler('/styles', props.relatedProductID, (data) => {setProductImages(data[0].photos)});
-    getHandler('reviewsMeta', props.relatedProductID, console.log);
+    getHandler('/product', props.relatedProductID, (response) => {setRelatedProduct(response.data)});
+    getHandler('/styles', props.relatedProductID, (response) => {setProductImages(response.data[0].photos)});
+    getHandler('reviewsMeta', props.relatedProductID, (response) => {setAverageRating(response.data)});
   }, [props.relatedProductID]);
 
   return (

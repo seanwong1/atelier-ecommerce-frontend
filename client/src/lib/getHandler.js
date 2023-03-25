@@ -9,7 +9,7 @@ const getHandler = async (url, id, callback) => {
 
   try {
     const response = await axios.request(options);
-    callback(response.data);
+    callback(response);
   } catch (err) {
     console.log('get' + url + 'Err', err);
   }

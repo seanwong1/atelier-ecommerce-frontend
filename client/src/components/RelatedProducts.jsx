@@ -10,7 +10,7 @@ const RelatedProducts = (props) => {
 
   useEffect(() => {
     if (props.id) {
-      getHandler('/related', props.id, setRelatedProductsID);
+      getHandler('/related', props.id, (response) => {setRelatedProductsID(response.data)});
     }
   }, [props.id]);
 
