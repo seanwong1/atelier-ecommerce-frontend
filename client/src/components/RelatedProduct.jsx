@@ -5,6 +5,7 @@ import Modal from './Modal.jsx';
 import ShadedStar from './ShadedStar.jsx';
 
 import getHandler from '../lib/getHandler.js';
+import createFeatureSet from '../lib/createFeatureSet.js';
 import calculateAverage from '../lib/averageCalc.jsx';
 import calculateTotal from '../lib/totalCalc.jsx';
 
@@ -14,6 +15,7 @@ const RelatedProduct = (props) => {
   const [modalState, setModalState] = useState(false);
   const [featureSet, setFeatureSet] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
+  const [salePrice, setSalePrice] = useState(null);
   const [stars, setStars] = useState(0);
   // const [totalRating, setTotalRating] = useState(0);
 
@@ -25,33 +27,29 @@ const RelatedProduct = (props) => {
     setModalState(false);
   };
 
-  // const createFeatureSet = () => {
-  //   var newFeatureSet = new Set();
-  //   newFeatureSet.add(props.originalProduct.features.map(
-  //       (originalProductFeatures) => {
-  //         console.log(originalProductFeatures)
-  //         return originalProductFeatures['features'];
-  //       }))
-  //     .add(relatedProduct.features.map(
-  //       (relatedProductFeatures) => {
-  //         console.log(relatedProductFeatures)
-  //         return relatedProductFeatures['features'];
-  //       }))
-  //   setFeatureSet([...newFeatureSet]);
-  // };
-
   useEffect(() => {
-    getHandler('/product', props.relatedProductID, (response) => {setRelatedProduct(response.data)});
-    getHandler('/styles', props.relatedProductID, (response) => {setProductImages(response.data[0].photos)});
+    // setFeatureSet(createFeatureS)
+    getHandler('/product', props.relatedProductID, (response) => {
+      setRelatedProduct(response.data);
+    });
+    getHandler('/styles', props.relatedProductID, (response) => {
+      for (var i = 0; i < response.data.length; i++) {
+        if (response.data[i]['default?']) {
+          setProductImages(response.data[i].photos);
+          setSalePrice(response.data[i].sale_price);
+          break;
+        }
+      }
+    });
     getHandler('reviewsMeta', props.relatedProductID, (response) => {
       setAverageRating(calculateAverage(calculateTotal(response), response.data));
+      setStars(((Math.round(averageRating * 4) / 4).toFixed(2)));
     });
-    setStars(((Math.round(averageRating * 4) / 4).toFixed(2)));
-  }, [props.relatedProductID, averageRating]);
+  }, [props.relatedProductID]);
 
   return (
     <div className='related-product'>
-      <button className='related-product-action-button' onClick={() => {showModal()}}>⭐</button>
+      <button className='related-product-action-button' onClick={() => {showModal(); setFeatureSet(createFeatureSet(props.originalProduct, relatedProduct))}}>⭐</button>
       <Modal className='related-product-comparison-modal' show={modalState} handleClose={() => {hideModal()}} >
         <div className='related-product-comparison-modal-title'>Comparison</div>
         <table>
@@ -79,7 +77,10 @@ const RelatedProduct = (props) => {
       <div className='preview-image' onClick={() => {props.setProduct(relatedProduct.id)}}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
       <div className='product-category' >Category: {relatedProduct.category}</div>
       <div className='product-name' >Name: {relatedProduct.name}</div>
-      <div className='product-price' >Price: {relatedProduct.default_price}</div>
+      <div className='product-price' >Price: {
+        salePrice ? <div><s>relatedProduct.default_price</s><p style="color:red;">salePrice</p></div> : relatedProduct.default_price
+        }
+      </div>
       <div className='product-rating' >Rating:
         <div className='averageStars'>
           <div>
