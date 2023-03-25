@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 import Modal from './Modal.jsx';
-import getProduct from '../lib/getProduct.js';
-import getImages from '../lib/getImages.js';
-import getProductReviewMetadata from '../lib/getProductReviewMetadata.js';
+
+import getHandler from '../lib/getHandler.js';
 import calculateAverage from '../lib/averageCalc.jsx';
 import calcTotal from '../lib/totalCalc.jsx';
 
-const RelatedProduct = ({originalProduct, relatedProductID}) => {
+const RelatedProduct = (props) => {
   const [relatedProduct, setRelatedProduct] = useState({});
   const [productImages, setProductImages] = useState([{thumbnail_url: 'blah'}]);
   const [modalState, setModalState] = useState(false);
@@ -39,13 +39,10 @@ const RelatedProduct = ({originalProduct, relatedProductID}) => {
   // };
 
   useEffect(() => {
-    getProduct(relatedProductID, setRelatedProduct);
-    getImages(relatedProductID, setProductImages);
-    getProductReviewMetadata(relatedProductID, console.log)
-  }, []);
-
-  //console.log(props.originalProduct.features);
-  //console.log(relatedProduct.features);
+    getHandler('/product', props.relatedProductID, setRelatedProduct);
+    getHandler('/styles', props.relatedProductID, (data) => {setProductImages(data[0].photos)});
+    getHandler('reviewsMeta', props.relatedProductID, console.log);
+  }, [props.relatedProductID]);
 
   return (
     <div className='related-product'>
@@ -55,9 +52,9 @@ const RelatedProduct = ({originalProduct, relatedProductID}) => {
         <table>
           <thead>
             <tr>
-              <th>{originalProduct.name}</th>
               <th></th>
-              <th>{relatedProduct.name}</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -74,11 +71,11 @@ const RelatedProduct = ({originalProduct, relatedProductID}) => {
           </tbody>
         </table>
       </Modal>
-      <div className='preview-image' onClick={() => {getProduct(relatedProductID)}}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
+      <div className='preview-image' onClick={() => {props.setProduct(relatedProduct.id)}}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
       <div className='product-category' >Category: {relatedProduct.category}</div>
       <div className='product-name' >Name: {relatedProduct.name}</div>
       <div className='product-price' >Price: {relatedProduct.default_price}</div>
-      <div className='product-rating' >Star Rating: {/* {relatedProduct.} */}</div>
+      <div className='product-rating' >Star Rating: {/* {props.relatedProduct.} */}</div>
     </div>
   )
 }

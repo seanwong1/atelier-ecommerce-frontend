@@ -7,16 +7,18 @@ const api = require('../config.js');
 
 app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use(express.json());
+
 app.get('/product', (req, res, next) => {
   let options = {
-    //'url': req.query ? api.testURL + req.query['productID'] : api.URL,
-    'url': api.testURL,
+    'url': req.query ? api.testURL + req.query['product_id'] : api.URL,
+    // 'url': api.URL,
+    // 'params': req.query,
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
     }
   }
-
+  console.log(options);
   axios.request(options).then((data) => {
     res.send(data.data);
   }).catch((err) => {
@@ -28,7 +30,9 @@ app.get('/product', (req, res, next) => {
 app.get('/styles', (req, res, next) => {
   console.log('=========********',req.query['productID'])
   let options = {
-    'url': api.URL + req.query['productID'] + '/styles',
+    'url': req.query ? api.testURL + req.query['product_id'] + '/styles' : api.URL,
+    // 'url': api.URL + '/styles',
+    'params': req.query,
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
@@ -44,6 +48,7 @@ app.get('/styles', (req, res, next) => {
     res.sendStatus(400, err)
   })
 });
+
 //retrieve list of questions
 app.get('/questions', async (req, res) => {
   let options = {
@@ -64,6 +69,7 @@ app.get('/questions', async (req, res) => {
     console.log(err);
   }
 });
+
 //post question
 app.post('/questions/add', async (req, res) => {
   let question = {
@@ -100,7 +106,7 @@ app.get('/reviews', (req, res, next) => {
 
 app.get('/reviewsMeta', (req, res, next) => {
   let options = {
-    'url': api.REVIEWSURL + req.query['productID'] + '/meta',
+    'url': api.REVIEWSURL + 'meta',
     'params': req.query,
     'method': 'get',
     'headers': {
@@ -118,15 +124,10 @@ app.get('/reviewsMeta', (req, res, next) => {
 
 app.get('/related', (req, res, next) => {
   let options = {
-
-    //'url': api.URL + req.query['productID'] + '/related',
-    'url': api.DEFAULTURL + '/related',
-
     //TODO: change this back when api.URL no longer hardcoded
-    // 'url': req.query ? api.testURL + req.query['productID'] + '/related' : api.URL + '/related',
-    // 'url': api.URL + req.query['productID'] + '/related',
-    'url': api.testURL + '/related',
-
+    // 'url': req.query ? api.testURL + req.query['product_id'] + '/related' : api.URL + '/related',
+    // 'url': api.URL + req.query['product_id'] + '/related',
+    'url': api.testURL + req.query['product_id'] + '/related',
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
@@ -140,7 +141,6 @@ app.get('/related', (req, res, next) => {
     res.sendStatus(404);
   })
 });
-
 
 // app.get('/relatedProduct', (req, res, next) => {
 //   let options = {
@@ -161,24 +161,24 @@ app.get('/related', (req, res, next) => {
 //     })
 // });
 
-app.get('/relatedProduct', (req, res, next) => {
-  let options = {
-    'url': api.URL + req.query['productID'],
-    'method': 'get',
-    'headers': {
-      'Authorization': api.TOKEN
-    }
-  }
+// app.get('/relatedProduct', (req, res, next) => {
+//   let options = {
+//     'url': api.URL + req.query['product_id'],
+//     'method': 'get',
+//     'headers': {
+//       'Authorization': api.TOKEN
+//     }
+//   }
 
-  axios.request(options)
-    .then((data) => {
-      res.send(data.data);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(404);
-    })
-});
+//   axios.request(options)
+//     .then((data) => {
+//       res.send(data.data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.sendStatus(404);
+//     })
+// });
 
 
 app.put('/reviewsHelpful', (req, res, next) => {

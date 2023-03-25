@@ -1,28 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import reactDOM from 'react-dom';
 import axios from 'axios';
+
 import QA from './components/QA.jsx';
 import ProductOverview from './components/ProductOverview.jsx'
 import Reviews from './components/Reviews.jsx';
 import RelatedProducts from './components/RelatedProducts.jsx';
+
+import getHandler from './lib/getHandler.js';
 
 const App = () => {
   const [product, setProduct] = useState({});
   const [average, setAverage] = useState(0);
   const [productID, setProductID] = useState(71697)
 
-  const getProduct = () => {
-    // const result = await axios.get('/products');
-    // setProduct(result);
-
-    axios.get('/product').then((result) => {
-      setProduct(result.data);
-    });
-
-  };
-
   useEffect(() => {
-    getProduct();
+    getHandler('/product', 71697, setProduct);
   }, []);
 
   return (
