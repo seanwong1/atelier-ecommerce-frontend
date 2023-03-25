@@ -12,6 +12,8 @@ const QA = ({ id, product_name }) => {
   const [answerText, setAnswerText] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [thumbnail, setThumbnail] = ('');
+  const [photos, setPhotos] = useState([]);
   const [showQuestionModal, setShowQuestionModal] = useState(false);
   const [showAnswerModal, setShowAnswerModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -25,6 +27,7 @@ const QA = ({ id, product_name }) => {
           'method': 'get'
         }
         let result = await axios.request(options);
+        console.log(result.data)
         setQuestions(result.data);
       } catch(err) {
         console.log(err);
@@ -40,20 +43,22 @@ const QA = ({ id, product_name }) => {
       'question': questionText,
       'nickname': nickname,
       'email': email,
-      'product_id': id
+      'product_id': 71697
+    }
+
+    if (questionText === '' || nickname === '' || email === '') {
+      let missing = Object.keys(body)
+        .filter(field => body[`${field}`] === '')
+        .join(', ');
+      alert(`You must enter the following: ${missing}`);
+      return;
     }
 
     try {
-      if (questionText === '' || nickname === '' || email === '') {
-        let missing = Object.keys(body)
-          .filter(field => body[`${field}`] === '')
-          .join(', ');
-        alert(`You must enter the following: ${missing}`);
-      } else {
-        await axios.post('/questions/add', body);
-        alert(`Thank you for submitting your question: ${body.question}`);
-      }
+      await axios.post('/questions/add', body);
+      alert(`Thank you for submitting your question: ${body.question}`);
     } catch (err) {
+      console.log(err);
       alert('Your question was not submitted due to some internal error. Please try again shortly');
     }
   };
@@ -65,7 +70,8 @@ const QA = ({ id, product_name }) => {
       'answer': answer,
       'nickname': nickname,
       'email': email,
-      'product_id': id
+      'product_id': id,
+      'photos': photos
     }
   };
 
@@ -85,6 +91,14 @@ const QA = ({ id, product_name }) => {
     setEmail(e.target.value);
   };
 
+  const onChangePhotos = async (e) => {
+    console.log(e.target.files[0]);
+    let photo = await getPhotoPath(e.target.files[0]);
+    if (thumbnail === '') {setThumbnail(photo)};
+    console.log('PATH', photo);
+    setPhotos([...photos, photo]);
+  };
+
   const toggleShowQuestionModal =  (e) => {
     setShowQuestionModal(!showQuestionModal);
   };
@@ -96,6 +110,13 @@ const QA = ({ id, product_name }) => {
 
   const toggleShowMore = (e) => {
     setShowMore(!showMore);
+  };
+
+  const getPhotoPath = (file) => {
+    let read = FileReader();
+    read.readAsDataURL(file);
+
+    return read.result;
   };
 
   const sortedQuestions = [...questions].sort((a, b) => {
@@ -152,10 +173,12 @@ const QA = ({ id, product_name }) => {
           <AddAnswer
             product_name={product_name}
             question_body={question}
+            photos={photos}
             onChangeAnswer={onChangeAnswer}
             onChangeNickname={onChangeNickname}
             onChangeEmail={onChangeEmail}
             onSubmitAnswer={onSubmitAnswer}
+            onChangePhotos={onChangePhotos}
          />
          , document.body
         )}

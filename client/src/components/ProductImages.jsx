@@ -19,7 +19,7 @@ const ProductImages = ({images, image}) => {
             </div>
 
         )
-    )
+
 }
 
 export default ProductImages;
