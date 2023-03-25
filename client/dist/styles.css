@@ -252,3 +252,22 @@ html {
   margin-top: 10px;
 }
 
+.reviewsNew {
+  width: 500px;
+  height: 500px;
+  overflow: scroll;
+}
+
+.charButtonsRow {
+  width: 500px;
+  justify-content: space-between;
+}
+
+.charButtons {
+  justify-self: center;
+}
+.charText {
+  font-size: xx-small;
+  display: flex;
+  justify-content: center;
+}

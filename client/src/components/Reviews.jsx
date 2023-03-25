@@ -18,6 +18,7 @@ const Reviews = (props) => {
   const [sort, setSort] = useState('relevance');
   const [filters, setFilters] = useState([]);
   const [showMore, setMore] = useState(true);
+  const [adding, setAdding] = useState(false);
 
   const currentDate = new Date();
 
@@ -144,6 +145,11 @@ const Reviews = (props) => {
     }
   }
 
+  const addReview = () => {
+    console.log('add');
+    setAdding(true);
+  }
+
 
   return (
     <div className="reviews">
@@ -151,26 +157,35 @@ const Reviews = (props) => {
         {total > 0 ? <ReviewsOverview data={meta} total={total} average={average} filterFunc={filterByStar}/>
         : ''}
       </aside>
-      <div className='flexcolumn'>
-        <div className='totalDescript'>
-          <div className='flexrow'>
-            {total + ' reviews, sorted by '}
-            <select value={sort} onChange={changeSort} className='sortDrop'>
-              <option value='relevance'>relevance</option>
-              <option value='newest'>newest</option>
-              <option value='helpfulness'>helpfulness</option>
-            </select>
-          </div>
-        </div>
-        <div className="reviewsList">
+      {!adding ?
+        <div>
+          <div className='flexcolumn'>
+            <div className='totalDescript'>
+              <div className='flexrow'>
+                {total + ' reviews, sorted by '}
+                <select value={sort} onChange={changeSort} className='sortDrop'>
+                  <option value='relevance'>relevance</option>
+                  <option value='newest'>newest</option>
+                  <option value='helpfulness'>helpfulness</option>
+                </select>
+              </div>
+            </div>
+            <div className="reviewsList">
 
-          {reviews ? <ReviewsList reviews={reviews.slice(0, count)} moreFunc={addReviews} addHelpful={addHelpful} filters={filters} showMore={showMore}/>
-          : ''}
+              {reviews ? <ReviewsList reviews={reviews.slice(0, count)} moreFunc={addReviews} addHelpful={addHelpful} filters={filters} showMore={showMore}/>
+              : ''}
+            </div>
+          </div>
+
         </div>
-      </div>
-      <button className='addReviewBtn'>
-        Add a Review +
-      </button>
+
+        : <ReviewsNew name='Comfy Pants'/>}
+        {!adding ?
+          <button className='addReviewBtn' onClick={addReview}>
+            Add a Review +
+          </button>
+          : <></>}
+
     </div>
   )
 }
