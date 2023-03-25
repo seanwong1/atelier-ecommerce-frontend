@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddAnswer = ({ product_name, question_body, onChangeAnswer, onChangeNickname, onChangeEmail,  onSubmitAnswer }) => {
+const AddAnswer = ({ product_name, question_body, onChangeAnswer, onChangeNickname, onChangeEmail, onSubmitAnswer, onInputPhoto, length, thumbnail }) => {
 
   return (
     <div className='QA-Modal'>
@@ -30,6 +30,17 @@ const AddAnswer = ({ product_name, question_body, onChangeAnswer, onChangeNickna
         onChange={onChangeEmail}
         ></input>
         <span>For authentication reasons, you will not be emailed</span>
+        <img src={thumbnail} alt='Select a photo/image'/>
+        {
+          length < 5 &&
+          <input
+            className='QA-Modal-Input'
+            type='file'
+            accept='image/*'
+            multiple
+            onChange={onInputPhoto}
+          ></input>
+        }
         <button>Submit Your Answer</button>
       </form>
     </div>

@@ -4,6 +4,7 @@ import axios from 'axios';
 import QACard from './QACard.jsx';
 import AddQuestion from './AddQuestion.jsx';
 import AddAnswer from './AddAnswer.jsx';
+import getImagePath from '../lib/fileReader.js';
 
 const QA = ({ id, product_name }) => {
   const [questions, setQuestions] = useState([]);
@@ -12,6 +13,8 @@ const QA = ({ id, product_name }) => {
   const [answerText, setAnswerText] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [thumbnail, setThumbnail] = useState('');
+  const [photos, setPhotos] = useState([]);
   const [showQuestionModal, setShowQuestionModal] = useState(false);
   const [showAnswerModal, setShowAnswerModal] = useState(false);
   const [showMore, setShowMore] = useState(false);
@@ -44,7 +47,7 @@ const QA = ({ id, product_name }) => {
     }
 
     try {
-      if (questionText === '' || nickname === '' || email === '') {
+      if (questionText === '' || nickname === '' || email === 'a') {
         let missing = Object.keys(body)
           .filter(field => body[`${field}`] === '')
           .join(', ');
@@ -83,6 +86,14 @@ const QA = ({ id, product_name }) => {
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
+  };
+
+  const onInputPhoto = async (e) => {
+    let photo = await getImagePath(e.target.files[0]);
+
+    if (thumbnail === '') {setThumbnail(photo)};
+    setPhotos([...photos, photo]);
+
   };
 
   const toggleShowQuestionModal =  (e) => {
@@ -152,9 +163,12 @@ const QA = ({ id, product_name }) => {
           <AddAnswer
             product_name={product_name}
             question_body={question}
+            thumbnail={thumbnail}
+            length={photos.length}
             onChangeAnswer={onChangeAnswer}
             onChangeNickname={onChangeNickname}
             onChangeEmail={onChangeEmail}
+            onInputPhoto={onInputPhoto}
             onSubmitAnswer={onSubmitAnswer}
          />
          , document.body
