@@ -13,7 +13,7 @@ const RelatedProduct = (props) => {
   const [modalState, setModalState] = useState(false);
   const [featureSet, setFeatureSet] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
-  const [totalRating, setTotalRating] = useState(0);
+  // const [totalRating, setTotalRating] = useState(0);
 
   const showModal = () => {
     setModalState(true);
@@ -41,7 +41,9 @@ const RelatedProduct = (props) => {
   useEffect(() => {
     getHandler('/product', props.relatedProductID, (response) => {setRelatedProduct(response.data)});
     getHandler('/styles', props.relatedProductID, (response) => {setProductImages(response.data[0].photos)});
-    getHandler('reviewsMeta', props.relatedProductID, (response) => {setAverageRating(response.data)});
+    getHandler('reviewsMeta', props.relatedProductID, (response) => {
+      setAverageRating(calculateAverage(calculateTotal(response), response.data));
+    });
   }, [props.relatedProductID]);
 
   return (
@@ -75,7 +77,7 @@ const RelatedProduct = (props) => {
       <div className='product-category' >Category: {relatedProduct.category}</div>
       <div className='product-name' >Name: {relatedProduct.name}</div>
       <div className='product-price' >Price: {relatedProduct.default_price}</div>
-      <div className='product-rating' >Star Rating: {/* {props.relatedProduct.} */}</div>
+      <div className='product-rating' >Star Rating: {averageRating}</div>
     </div>
   )
 }
