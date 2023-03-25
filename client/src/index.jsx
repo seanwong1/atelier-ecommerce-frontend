@@ -9,6 +9,7 @@ import RelatedProducts from './components/RelatedProducts.jsx';
 const App = () => {
   const [product, setProduct] = useState({});
   const [average, setAverage] = useState(0);
+  const [productID, setProductID] = useState(71697)
 
   const getProduct = () => {
     // const result = await axios.get('/products');
@@ -27,10 +28,10 @@ const App = () => {
   return (
     <div>
       {/* {JSON.stringify(product)} */}
-      <ProductOverview product={product}/>
-      <RelatedProducts setProduct={setProduct} product={product} id={product.id ? product.id : 0} />
+      <ProductOverview product={product} productID={productID}/>
+      {/* <RelatedProducts setProduct={setProduct} product={product} id={product.id ? product.id : 0} />
       <QA id={product.id ? product.id : 0}/>
-      <Reviews id={product.id ? product.id : 0} setAv={setAverage}/>
+      <Reviews id={product.id ? product.id : 0} setAv={setAverage}/> */}
     </div>
   );
 }

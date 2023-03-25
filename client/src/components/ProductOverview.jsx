@@ -3,19 +3,29 @@ import axios from 'axios';
 import ProductImages from './ProductImages.jsx';
 import Styles from './ProductStyles.jsx';
 
-const ProductOverview = ({ product }) => {
+const ProductOverview = ({ product, productID }) => {
     const [styles, setStyles] = useState([]);
     const [style, setStyle] = useState({});
     const [images, setImages] = useState([]);
     const [image, setImage] = useState([]);
     const getStyles = () => {
-        axios.get('/styles').then((result) => {
-            console.log(result);
-            setStyles(result.data);
-            setStyle(result.data[0]);
-            setImages(result.data[0].photos)
-            setImage(result.data[0].photos[0])
-        });
+        let options = {
+            'url': '/styles',
+            'params': {'productID': productID},
+            'method': 'get'
+          }
+        
+          axios.request(options)
+            .then((result) => {
+                console.log(result);
+                setStyles(result.data);
+                setStyle(result.data[0]);
+                setImages(result.data[0].photos)
+                setImage(result.data[0].photos[0])
+            })
+            .catch((err) => {
+              console.log('ErrgettingStyles', err);
+            });
     }
 
     //will return sale info if item is on sale
@@ -44,13 +54,9 @@ const ProductOverview = ({ product }) => {
         e.preventDefault();
         styles.forEach((indStyle) => {
             if(indStyle.style_id.toString() === e.target.id) {
-                console.log(indStyle.style_id.toString() + ' = ' + e.target.id);
                 setStyle(indStyle);
                 setImage(indStyle.photos[0]);
                 setImages(indStyle.photos)
-            }
-            else {
-                console.log('no');
             }
         })
         
@@ -67,6 +73,8 @@ const ProductOverview = ({ product }) => {
     useEffect(() => {
         getStyles()
     }, [])
+
+
     return (
         <div className="productOverview">
 
@@ -74,7 +82,9 @@ const ProductOverview = ({ product }) => {
             <div className="productImages">
                 <ProductImages images={images} image={image} />
             </div>
-            <div className='styles'></div>
+            <div className='styles'>
+                <Styles styles={styles} styleClick={styleClick} />
+            </div>
             <div className='productDetails'>
                 <h2>{product.name}</h2>
                 <p>{product.description}</p>
@@ -82,7 +92,7 @@ const ProductOverview = ({ product }) => {
                 <p>category:{product.category}</p>
                 <p>features: {showFeatures()}</p>
 
-                <Styles styles={styles} styleClick={styleClick}/>
+
                 <h3>Add to Cart Here</h3>
             </div>
             <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
