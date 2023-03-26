@@ -3,7 +3,7 @@ import React from 'react';
 const AddQuestion = ({ product_id, onChangeQuestion, onChangeNickname, onChangeEmail, onSubmitQuestion, product_name }) => {
 
   return (
-    <div className='QA-Modal' onSubmit={(e) => onSubmitQuestion(e)}>
+    <div className='QA-Modal'>
       <h1>Ask Your Question</h1>
       <h2>About the {product_name}</h2>
       <form className='QA-Modal-Form' onSubmit={onSubmitQuestion}>
