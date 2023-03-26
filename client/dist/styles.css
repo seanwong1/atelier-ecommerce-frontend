@@ -271,3 +271,21 @@ html {
   display: flex;
   justify-content: center;
 }
+
+.rBodBox {
+  height: 200px;
+  text-align: left;
+  overflow-y: scroll;
+  resize: none;
+  display: block;
+
+}
+
+.starSelect {
+  font-size: 15px;
+}
+
+.reviewThumbnail {
+  height: 50px;
+  width: 50px;
+}

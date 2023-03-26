@@ -4,9 +4,39 @@ const path = require('path')
 const axios = require('axios');
 require('dotenv').config();
 const api = require('../config.js');
+const fs = require('fs');
+const multer = require('multer');
 
 app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use(express.json());
+
+// Set up multer to handle file uploads
+// Set up multer to handle file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, '../client/dist/images'));
+  },
+  filename: function (req, file, cb) {
+    const originalName = path.parse(file.originalname).name;
+    cb(null, `${originalName}.png`);
+  }
+});
+
+const upload = multer({ storage });
+
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+app.post('/uploadReviewPic', upload.single('file'), (req, res) => {
+  const file = req.file;
+  const fileName = file.originalname;
+
+  // Return a response to the client
+  res.json({
+    fileName: fileName,
+    filePath: `/images/${fileName}`
+  });
+});
+
 app.get('/product', (req, res, next) => {
   let options = {
     //'url': req.query ? api.testURL + req.query['productID'] : api.URL,
