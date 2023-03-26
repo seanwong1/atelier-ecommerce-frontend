@@ -27,7 +27,7 @@ const QACard = ({ id, question, helpfulness, reported, answers, toggleShowAnswer
       QACard id={id}
       <div  className='Question'>Q: {question}</div>
       {/* Add Answer button below */}
-      <div className='Question-add' onClick={(e) => toggleShowAnswerModal(e, question)}>Add answer</div>
+      <div className='Question-add' onClick={(e) => toggleShowAnswerModal(e, question, id)}>Add answer</div>
       A:
       {!seeMore ? answerComponent[0] : answerComponent}
       {!seeMore && answerComponent[1]}

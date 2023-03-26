@@ -66,17 +66,50 @@ app.get('/questions', async (req, res) => {
 });
 //post question
 app.post('/questions/add', async (req, res) => {
-  let question = {
-    'body': req.body.question,
-    'name': req.body.nickname,
-    'email': req.body.email,
-    'product_id': req.body.product_id
-  };
+  let options = {
+    'url': api.QUESTIONS,
+    'method': 'post',
+    'headers': {
+      'Authorization': api.TOKEN
+    },
+    'data': {
+      'body': req.body.question,
+      'name': req.body.nickname,
+      'email': req.body.email,
+      'product_id': req.body.product_id
+    }
+  }
 
   try {
+    axios.request(options);
     res.send('Working');
   } catch (err){
-    res.status(404).send('err');
+    res.status(404).send(err);
+  }
+});
+
+//post answer
+app.post('/answer/add', async (req, res) => {
+  let options = {
+    'url': api.QUESTIONS + `/?0=${req.body.question_id}/answers`,
+    // 'params': req.body.question_id,
+    'method': 'post',
+    'headers': {
+      'Authorization': api.TOKEN
+    },
+    'data': {
+      'body': req.body.answer,
+      'name': req.body.nickname,
+      'email': req.body.email,
+      'photos': req.body.photos
+    }
+  }
+
+  try {
+    axios.request(options);
+    res.send('Working');
+  } catch(err) {
+    res.status(404).send(err)
   }
 });
 

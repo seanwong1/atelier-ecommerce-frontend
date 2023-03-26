@@ -5,10 +5,11 @@ import QACard from './QACard.jsx';
 import AddQuestion from './AddQuestion.jsx';
 import AddAnswer from './AddAnswer.jsx';
 import getImagePath from '../lib/fileReader.js';
+import missing from '../lib/filterMissing.js';
 
 const QA = ({ id, product_name }) => {
   const [questions, setQuestions] = useState([]);
-  const [question, setQuestion] = useState('');
+  const [question, setQuestion] = useState({});
   const [questionText, setQuestionText] = useState('');
   const [answerText, setAnswerText] = useState('');
   const [nickname, setNickname] = useState('');
@@ -46,29 +47,40 @@ const QA = ({ id, product_name }) => {
       'product_id': id
     }
 
+    if (questionText === '' || nickname === '' || email === '') {
+      alert(`You must enter the following: ${missing(body)}`);
+      return;
+    }
+
     try {
-      if (questionText === '' || nickname === '' || email === 'a') {
-        let missing = Object.keys(body)
-          .filter(field => body[`${field}`] === '')
-          .join(', ');
-        alert(`You must enter the following: ${missing}`);
-      } else {
-        await axios.post('/questions/add', body);
-        alert(`Thank you for submitting your question: ${body.question}`);
-      }
+      await axios.post('/questions/add', body);
+      alert(`Thank you for submitting your question: ${body.question}`);
     } catch (err) {
       alert('Your question was not submitted due to some internal error. Please try again shortly');
     }
   };
 
 
-  const onSubmitAnswer = (e) => {
+  const onSubmitAnswer = async (e) => {
     e.preventDefault();
     let body = {
-      'answer': answer,
+      'answer': answerText,
       'nickname': nickname,
       'email': email,
-      'product_id': id
+      'photos': photos,
+      'question_id': question.question_id
+    }
+
+    if (answerText === '' || nickname === '' || email === '') {
+      alert(`You must enter the following: ${missing(body)}`);
+      return;
+    }
+
+    try {
+      await axios.post('/answer/add', body);
+      alert(`Thank you for submitting your answer: ${body.answer}`);
+    } catch (err) {
+      alert('Your answer was not submitted due to some internal error. Please try again shortly');
     }
   };
 
@@ -100,9 +112,9 @@ const QA = ({ id, product_name }) => {
     setShowQuestionModal(!showQuestionModal);
   };
 
-  const toggleShowAnswerModal = (e, question) => {
+  const toggleShowAnswerModal = (e, question, id) => {
     setShowAnswerModal(!showAnswerModal);
-    setQuestion(question);
+    setQuestion({'question_id': id, 'question': question});
   };
 
   const toggleShowMore = (e) => {
@@ -118,8 +130,6 @@ const QA = ({ id, product_name }) => {
         key={question.question_id}
         id={question.question_id}
         question={question.question_body}
-        // date={question['question_date']}
-        // name={question['asker_name']}
         helpfulness={question.question_helpfulness}
         reported={question.reported}
         answers={question.answers}
@@ -162,7 +172,8 @@ const QA = ({ id, product_name }) => {
         {showAnswerModal && createPortal(
           <AddAnswer
             product_name={product_name}
-            question_body={question}
+            question_body={question.question}
+            id={question.question_id}
             thumbnail={thumbnail}
             length={photos.length}
             onChangeAnswer={onChangeAnswer}
