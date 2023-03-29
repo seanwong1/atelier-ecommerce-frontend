@@ -51,7 +51,6 @@ const RelatedProduct = (props) => {
 
   useEffect(() => {
     setFeatureSet(createFeatureSet(props.originalProduct, relatedProduct));
-    console.log(featureSet);
   }, [relatedProduct]);
 
   return (
