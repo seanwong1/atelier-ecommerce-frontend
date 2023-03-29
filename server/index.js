@@ -39,8 +39,10 @@ app.post('/uploadReviewPic', upload.single('file'), (req, res) => {
 
 app.get('/storeReviewPic', (req, res) => {
   const filePath = req.query.filePath;
-  storeImage('' + filePath);
-  res.sendStatus(202);
+  storeImage(filePath, (file) => {
+    res.send('' + file.url);
+  });
+
 })
 
 app.post('/addReview', (req, res, next) => {

@@ -146,7 +146,7 @@ const Reviews = (props) => {
   }
 
   const addReview = () => {
-    console.log('add');
+
     setAdding(true);
   }
 
@@ -179,7 +179,7 @@ const Reviews = (props) => {
 
         </div>
 
-        : <ReviewsNew name='Comfy Pants'/>}
+        : <ReviewsNew name={props.name} id={props.id} chars={meta.characteristics}/>}
         {!adding ?
           <button className='addReviewBtn' onClick={addReview}>
             Add a Review +

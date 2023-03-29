@@ -18,16 +18,14 @@ const charText = {
 const Thumbnails = ({ photos }) => {
 
   return (
-    <div>
+    <div key={Math.random()}>
       {Object.keys(photos).map(photoNum => {
         if (photos[photoNum].loaded) {
           return (<img className='reviewThumbnail' key={photos[photoNum].photo.lastModified} src={buildPath(photos[photoNum].photo.name)}  />)
         } else if (photos[photoNum].photo) {
           return (<div key={Math.random()}>Loading ...</div>)
         }
-      }
-
-      )}
+      })}
     </div>
   );
 
@@ -39,15 +37,9 @@ const ReviewsNew = (props) => {
     {
       rating: 0,
       rec: true,
-      size: '',
-      width: '',
-      comfort: '',
-      quality: '',
-      length: '',
-      fit: '',
+      chars: props.chars,
       sum: '',
       bod: '',
-      photos: '',
       email: '',
       nickname: ''
   });
@@ -58,33 +50,42 @@ const ReviewsNew = (props) => {
     2: {photo: false, loaded: false},
     3: {photo: false, loaded: false},
     4: {photo: false, loaded: false},
-    5: {photo: false, loaded: false}
+    5: {photo: false, loaded: false},
+    urls: []
   });
 
   const [checked, setCheck] = useState({
     rec: 1,
-    size: -1,
-    width: -1,
-    comfort: -1,
-    quality: -1,
-    length: -1,
-    fit: -1
+    Size: -1,
+    Width: -1,
+    Comfort: -1,
+    Quality: -1,
+    Length: -1,
+    Fit: -1
   });
+
+  const handleRecChange = (value) => {
+
+    setData(prevData => {
+      return { ...prevData, rec: value };
+    });
+
+    setCheck(prevCheck => {
+      return { ...prevCheck, rec: value}
+    });
+
+  };
 
   const handleRadioChange = (char, value) => {
 
     setData(prevData => {
-      return { ...prevData, [char.toLowerCase()]: value };
+      return { ...prevData, chars: { ...prevData.chars, [char]: {value: value, id: prevData.chars[char].id} } };
     });
-    if (char === 'rec') {
-      setCheck(prevCheck => {
-        return { ...prevCheck, rec: value}
-      });
-    } else {
-      setCheck(prevCheck => {
-        return { ...prevCheck, [char.toLowerCase()]: charText[char].indexOf(value)}
-      });
-    }
+
+    setCheck(prevCheck => {
+      return { ...prevCheck, [char]: value - 1}
+    });
+
   };
 
   const starSelect = (event) => {
@@ -100,20 +101,49 @@ const ReviewsNew = (props) => {
   const sendReview = (event) => {
     event.preventDefault();
     // Check if all fields are filled out
-    if (data.email === '' || data.bod === '' || rating === 0) {
+    const checkFilled = () => {
+      for (var char in checked) {
+        if (Object.keys(data.chars).indexOf(char) > -1) {
+          if (checked[char] === -1) {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+    if (data.email === '' || data.bod === '' || data.rating === 0 || !checkFilled()) {
       alert('Please fill out all required fields.');
       return;
     }
 
     // Check if the message has at least 10 characters
-    if (data.bod < 50) {
+    if (data.bod.length < 50) {
       alert('Minimum characters for review body not met.');
       return;
     }
 
+    const formattedChars = Object.keys(data.chars).reduce((acc, char) => {
+      acc[data.chars[char].id] = data.chars[char].value
+      return acc;
+    }, {})
+
+    const params = {
+      product_id: props.id,
+      rating: data.rating,
+      summary: data.sum,
+      body: data.bod,
+      recommended: data.rec,
+      name: data.nickname,
+      email: data.email,
+      photos: photos.urls,
+      characteristics: formattedChars
+    }
+
+    console.log(params);
+
     let options = {
       'method': 'post',
-      'params': data,
+      'params': params,
       'url': '/addReview'
     }
 
@@ -128,9 +158,6 @@ const ReviewsNew = (props) => {
     event.persist();
 
     console.log(event.target.files);
-    setData(prevData => {
-      return { ...prevData, photos: prevData.photos.concat([event.target.files[0]])}
-    })
     setPhotos(prevPhotos => {
       return { ...prevPhotos, [pCount]: {photo: event.target.files[0], loaded: false}}
     })
@@ -143,9 +170,11 @@ const ReviewsNew = (props) => {
       formData.append("file", photos[pCount].photo);
 
       axios.post('/uploadReviewPic', formData).then((res) => {
+        console.log(res.data);
         setPhotos(prevPhotos => {
-          return { ...prevPhotos, [pCount]: {photo: prevPhotos[pCount].photo, loaded: true} }
+          return { ...prevPhotos, [pCount]: {photo: prevPhotos[pCount].photo, loaded: true}, urls: prevPhotos.urls.concat([res.data]) };
         })
+
         pCount += 1;
         console.log(res);
       }).catch((err) => {
@@ -157,6 +186,7 @@ const ReviewsNew = (props) => {
 
   return (
     <div className="reviewsNew">
+      {/* {JSON.stringify(props)} */}
       <div className='rnTitle'>
         Write Your Review
       </div>
@@ -179,32 +209,32 @@ const ReviewsNew = (props) => {
           Do you recommend this product?*
           <label className='yesNoSelect'>
             Yes
-            <input type='radio' checked={checked.rec} onChange={() => {handleRadioChange('rec', true)}} value='Yes'/>
+            <input type='radio' checked={checked.rec} onChange={() => {handleRecChange(true)}} value='Yes'/>
           </label>
           <label className='yesNoSelect'>
             No
-            <input type='radio' checked={!checked.rec} onChange={() => {handleRadioChange('rec', false)}} value='No'/>
+            <input type='radio' checked={!checked.rec} onChange={() => {handleRecChange(false)}} value='No'/>
           </label>
 
 
         </label>
-        {Object.keys(charText).map((char) => {
+        {Object.keys(data.chars).map((char) => {
           return (
             <label key={Math.random()} className='flexcolumn'>
               <div>
-                {char}
+                {char + '*'}
               </div>
               <div className='flexrow charButtonsRow'>
                 {charText[char].map((desc, counter) => {
                   return (
                     <div key={Math.random()} className='flexcolumn'>
                       <input
-                          className='charButtons' checked={counter === checked[char.toLowerCase()]} type="radio"
+                          className='charButtons' checked={counter === checked[char]} type="radio"
                           onClick={() => {
-                            if (counter === checked[char.toLowerCase()]) {
-                              handleRadioChange(char, '');
+                            if (counter === checked[char]) {
+                              handleRadioChange(char, 0);
                             }
-                          }} onChange={() => handleRadioChange(char, desc)}/>
+                          }} onChange={() => handleRadioChange(char, counter + 1)}/>
                       <div className='charText'>{desc}</div>
                     </div>
                   )
