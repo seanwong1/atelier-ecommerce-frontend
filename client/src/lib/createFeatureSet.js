@@ -3,17 +3,17 @@
     // console.log('relatedfeatures', relatedProduct.features);
     var newFeatureSet = new Set();
 
-    newFeatureSet.add(originalProduct.features.map(
-        (originalProductFeatures) => {
-          console.log(originalProductFeatures);
-          return originalProductFeatures['features'];
-        }));
+    try {
+      originalProduct.features.map((feature) => {
+        newFeatureSet.add(feature.feature);
+      });
 
-    newFeatureSet.add(relatedProduct.features.map(
-        (relatedProductFeatures) => {
-          console.log(relatedProductFeatures);
-          return relatedProductFeatures['features'];
-        }));
+      relatedProduct.features.map((feature) => {
+        newFeatureSet.add(feature.feature);
+      });
+    } catch (err) {
+      console.log(err);
+    }
 
     return newFeatureSet;
   };

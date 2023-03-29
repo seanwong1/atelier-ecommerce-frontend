@@ -43,38 +43,42 @@ const RelatedProduct = (props) => {
     });
     getHandler('reviewsMeta', props.relatedProductID, (response) => {
       setAverageRating(calculateAverage(calculateTotal(response), response.data));
-      setStars(((Math.round(averageRating * 4) / 4).toFixed(2)));
     });
   }, [props.relatedProductID]);
 
+  useEffect(() => {
+    setStars(((Math.round(averageRating * 4) / 4).toFixed(2)));
+  }, [averageRating]);
+
+  console.log(props.originalProduct.features);
+
   return (
     <div className='related-product'>
-      <button className='related-product-action-button' onClick={() => {showModal(); setFeatureSet(createFeatureSet(props.originalProduct, relatedProduct))}}>⭐</button>
-      <Modal className='related-product-comparison-modal' show={modalState} handleClose={() => {hideModal()}} >
-        <div className='related-product-comparison-modal-title'>Comparison</div>
+      <button className='related-product-action-button' onClick={() => { showModal(); setFeatureSet(createFeatureSet(props.originalProduct, relatedProduct)); }}>⭐</button>
+      <Modal className='related-product-comparison-modal' show={modalState} handleClose={() => { hideModal(); }} >
+        <div className='related-product-comparison-modal-title'>Product Comparison</div>
         <table>
           <thead>
             <tr>
-              <th></th>
-              <th></th>
-              <th></th>
+              <th>{props.originalProduct.name}</th>
+              <th> | features | </th>
+              <th>{relatedProduct.name}</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Emil</td>
-              <td>Tobias</td>
-              <td>Linus</td>
-            </tr>
-            <tr>
-              <td>16</td>
-              <td>14</td>
-              <td>10</td>
-            </tr>
+            {[...featureSet].map((feature) => {
+              return (
+                <tr>
+                  <td>{props.originalProduct.features.feature ? props.originalProduct.features[0].value : null}</td>
+                  <td>{feature}</td>
+                  <td>{relatedProduct.features.feature ? relatedProduct.features[0].value: null}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </Modal>
-      <div className='preview-image' onClick={() => {props.setProduct(relatedProduct.id)}}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
+      <div className='preview-image' onClick={() => { props.setProduct(relatedProduct.id); }}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
       <div className='product-category' >Category: {relatedProduct.category}</div>
       <div className='product-name' >Name: {relatedProduct.name}</div>
       <div className='product-price' >Price: {
