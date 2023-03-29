@@ -50,7 +50,9 @@ app.get('/questions', async (req, res) => {
     'method': 'get',
     'url': api.QUESTIONS,
     'params': {
-      'product_id': req.query.product_id
+      'product_id': req.query.product_id,
+      'page': 1,
+      'count': 10
     },
     'headers': {
       'Authorization': api.TOKEN
@@ -81,7 +83,8 @@ app.post('/questions/add', async (req, res) => {
   }
 
   try {
-    axios.request(options);
+    let result = await axios.request(options);
+    console.log(result);
     res.send('Working');
   } catch (err){
     res.status(404).send(err);
@@ -106,11 +109,44 @@ app.post('/answer/add', async (req, res) => {
   }
 
   try {
-    axios.request(options);
+    let result = await axios.request(options);
+    console.log(result);
     res.send('Working');
   } catch(err) {
     res.status(404).send(err)
   }
+});
+
+
+//increase helpfulness of question
+app.put('/question/helpful', async (req, res) => {
+  let options = {
+    'url': api.QUESTIONS + `/${req.body.question_id}/helpful`,
+    'method': 'put',
+    'headers': {
+      'Authorization': api.TOKEN
+    }
+  }
+
+  await axios.request(options);
+  res.status(201).send('working');
+
+});
+
+//increase helpfulness of answer
+app.put('/answer/helpful', async (req, res) => {
+  console.log(req.body.answer_id);
+  let options = {
+    'url': api.ANSWER + `/${req.body.answer_id}/helpful`,
+    'method': 'put',
+    'headers': {
+      'Authorization': api.TOKEN
+    }
+  }
+
+  await axios.request(options);
+  res.status(201).send('working');
+
 });
 
 app.get('/reviews', (req, res, next) => {
