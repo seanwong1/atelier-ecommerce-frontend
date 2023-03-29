@@ -4,8 +4,9 @@ const path = require('path')
 const axios = require('axios');
 require('dotenv').config();
 const api = require('../config.js');
-const fs = require('fs');
 const multer = require('multer');
+
+const storeImage = require('./lib/storeImage.js');
 
 app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use(express.json());
@@ -30,11 +31,21 @@ app.post('/uploadReviewPic', upload.single('file'), (req, res) => {
   const file = req.file;
   const fileName = file.originalname;
 
-  // Return a response to the client
-  res.json({
-    fileName: fileName,
-    filePath: `/images/${fileName}`
-  });
+  const filePath = path.join(__dirname, `../client/dist/images/${fileName}`)
+
+  // Redirect to the storeReviewPic route with fileName as a query parameter
+  res.redirect(`/storeReviewPic?filePath=${filePath}`);
+});
+
+app.get('/storeReviewPic', (req, res) => {
+  const filePath = req.query.filePath;
+  storeImage('' + filePath);
+  res.sendStatus(202);
+})
+
+app.post('/addReview', (req, res, next) => {
+  console.log(req.query);
+  res.sendStatus(202);
 });
 
 app.get('/product', (req, res, next) => {

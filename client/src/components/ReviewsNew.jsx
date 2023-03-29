@@ -43,10 +43,11 @@ const ReviewsNew = (props) => {
       width: '',
       comfort: '',
       quality: '',
-      lenth: '',
+      length: '',
       fit: '',
       sum: '',
       bod: '',
+      photos: '',
       email: '',
       nickname: ''
   });
@@ -96,14 +97,40 @@ const ReviewsNew = (props) => {
     })
   }
 
-  const sendReview = () => {
+  const sendReview = (event) => {
+    event.preventDefault();
+    // Check if all fields are filled out
+    if (data.email === '' || data.bod === '' || rating === 0) {
+      alert('Please fill out all required fields.');
+      return;
+    }
 
+    // Check if the message has at least 10 characters
+    if (data.bod < 50) {
+      alert('Minimum characters for review body not met.');
+      return;
+    }
+
+    let options = {
+      'method': 'post',
+      'params': data,
+      'url': '/addReview'
+    }
+
+    axios.request(options).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 
   const uploadPhoto = (event) => {
     event.persist();
 
     console.log(event.target.files);
+    setData(prevData => {
+      return { ...prevData, photos: prevData.photos.concat([event.target.files[0]])}
+    })
     setPhotos(prevPhotos => {
       return { ...prevPhotos, [pCount]: {photo: event.target.files[0], loaded: false}}
     })
@@ -136,7 +163,7 @@ const ReviewsNew = (props) => {
       <div className='rnSubtitle'>
         {'About the ' + props.name}
       </div>
-      <form className='flexcolumn' onSubmit={sendReview}>
+      <form className='flexcolumn'>
         <label className='flexcolumn'>
           Overall rating*
           <div className='starSelect flexrow' onClick={starSelect}>
@@ -190,26 +217,26 @@ const ReviewsNew = (props) => {
           Review Summary
         </label>
         <textarea
-              onChange={(event) => {
-                event.persist();
-                setData((prevData) => {
-                  return { ...prevData, sum: event.target.value };
-                });
-              }}
-              maxLength={60} placeholder='Example: Best purchase ever!'>
+          onChange={(event) => {
+            event.persist();
+            setData((prevData) => {
+              return { ...prevData, sum: event.target.value };
+            });
+          }}
+          maxLength={60} placeholder='Example: Best purchase ever!'>
         </textarea>
         <label>
           Review Body*
         </label>
         <textarea
-              onChange={(event) => {
-                event.persist();
-                setData((prevData) => {
-                  return { ...prevData, bod: event.target.value };
-                });
-              }}
-              className='rBodBox' placeholder="Enter your text here..."
-              maxLength={1000}>
+          onChange={(event) => {
+            event.persist();
+            setData((prevData) => {
+              return { ...prevData, bod: event.target.value };
+            });
+          }}
+          className='rBodBox' placeholder="Enter your text here..."
+          maxLength={1000}>
 
         </textarea>
         <div style={{fontSize: 'x-small'}}>
@@ -255,10 +282,10 @@ const ReviewsNew = (props) => {
             For authentication purposes, you will not be emailed.
           </div>
         </label>
-        <button type="reset">
+        <button>
           Reset form
         </button>
-        <button type='sumbit'>
+        <button onClick={sendReview}>
           Submit
         </button>
 
