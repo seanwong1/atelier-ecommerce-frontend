@@ -2,20 +2,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProductImages from './ProductImages.jsx';
 import Styles from './ProductStyles.jsx';
+import Cart from './Cart.jsx';
 
 const ProductOverview = ({ product, productID }) => {
     const [styles, setStyles] = useState([]);
     const [style, setStyle] = useState({});
     const [images, setImages] = useState([]);
     const [image, setImage] = useState([]);
-    const getStyles = () => {
+    const  getStyles = async () => {
         let options = {
             'url': '/styles',
-            'params': {'productID': productID},
+            'params': {'product_id': productID},
             'method': 'get'
           }
         
-          axios.request(options)
+          await axios.request(options)
             .then((result) => {
                 console.log(result);
                 setStyles(result.data);
@@ -50,6 +51,7 @@ const ProductOverview = ({ product, productID }) => {
         }
     }
 
+    //will change style data when a style thumbnail is clicked
     const styleClick = (e) => {
         e.preventDefault();
         styles.forEach((indStyle) => {
@@ -62,9 +64,33 @@ const ProductOverview = ({ product, productID }) => {
         
     }
 
+    //change the current image displayed when an image thumbnail is clicked
     const imageChange = (e) => {
         e.preventDefault();
+        images.forEach(img => {
+            if(img.thumbnail_url === e.target.src) {
+                setImage(img);
+            }
+        })
 
+    }
+
+    const cartSubmit = (e) => {
+        e.preventDefault();
+
+        let options = {
+            'url': '/cart',
+            'params': {},
+            'method': 'post'
+          }
+        
+          axios.request(options)
+            .then((result) => {
+                alert('added to cart')
+            })
+            .catch((err) => {
+              console.log('ErrgettingStyles', err);
+            });
     }
 
 
@@ -80,7 +106,7 @@ const ProductOverview = ({ product, productID }) => {
 
 
             <div className="productImages">
-                <ProductImages images={images} image={image} />
+                <ProductImages images={images} image={image} imageChange={imageChange} />
             </div>
             <div className='styles'>
                 <Styles styles={styles} styleClick={styleClick} />
@@ -93,7 +119,7 @@ const ProductOverview = ({ product, productID }) => {
                 <p>features: {showFeatures()}</p>
 
 
-                <h3>Add to Cart Here</h3>
+                <Cart cartSubmit={cartSubmit}/>
             </div>
             <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
             <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
