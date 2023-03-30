@@ -128,27 +128,28 @@ const ReviewsNew = (props) => {
     }, {})
 
     const params = {
-      product_id: props.id,
-      rating: data.rating,
-      summary: data.sum,
-      body: data.bod,
-      recommended: data.rec,
-      name: data.nickname,
-      email: data.email,
-      photos: photos.urls,
-      characteristics: formattedChars
+      "product_id": Number(props.id),
+      "rating": data.rating,
+      "summary": data.sum,
+      "body": data.bod,
+      "recommend": data.rec,
+      "name": data.nickname,
+      "email": data.email,
+      "photos": photos.urls,
+      "characteristics": formattedChars
     }
 
     console.log(params);
 
     let options = {
       'method': 'post',
-      'params': params,
+      'data': params,
       'url': '/addReview'
     }
 
     axios.request(options).then((res) => {
       console.log(res);
+      props.finished();
     }).catch((err) => {
       console.log(err);
     });

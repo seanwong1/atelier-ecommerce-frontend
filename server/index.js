@@ -18,14 +18,15 @@ const storage = multer.diskStorage({
     cb(null, path.join(__dirname, '../client/dist/images'));
   },
   filename: function (req, file, cb) {
-    const originalName = path.parse(file.originalname).name;
-    cb(null, `${originalName}.png`);
+    const originalName = file.originalname;
+    cb(null, `${originalName}`);
   }
 });
 
 const upload = multer({ storage });
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
+
 
 app.post('/uploadReviewPic', upload.single('file'), (req, res) => {
   const file = req.file;
@@ -37,8 +38,12 @@ app.post('/uploadReviewPic', upload.single('file'), (req, res) => {
   res.redirect(`/storeReviewPic?filePath=${filePath}`);
 });
 
+
+
 app.get('/storeReviewPic', (req, res) => {
   const filePath = req.query.filePath;
+
+  // Add image to cloudinary api
   storeImage(filePath, (file) => {
     res.send('' + file.url);
   });
@@ -46,8 +51,27 @@ app.get('/storeReviewPic', (req, res) => {
 })
 
 app.post('/addReview', (req, res, next) => {
-  console.log(req.query);
-  res.sendStatus(202);
+
+
+  console.log(JSON.stringify(req.body));
+  let options = {
+    'url': api.REVIEWSURL,
+    'method': 'post',
+    'maxBodyLength': Infinity,
+    'maxContentLength': Infinity,
+    'headers': {
+      'Authorization': api.TOKEN,
+      'Content-Type': 'application/json'
+    },
+    'data': req.body
+  }
+
+  axios.request(options).then((data) => {
+    res.sendStatus(202);
+  }).catch((err) => {
+    console.log(err);
+    res.sendStatus(405);
+  })
 });
 
 app.get('/product', (req, res, next) => {

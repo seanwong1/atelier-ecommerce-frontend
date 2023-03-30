@@ -57,7 +57,7 @@ const Reviews = (props) => {
     //Need to add functionality to stop adding to count and remove the button once count
     // gets to max value which can be obtained in meta data
     setCount(total);
-    sortReviews(sort);
+
     setMore(false);
   };
 
@@ -100,7 +100,7 @@ const Reviews = (props) => {
       setAverage(calculateAverage(total, meta));
       getReviews({product_id: props.id, count: total});
     }
-  }, [total, count]);
+  }, [total]);
 
   useEffect(() => {
     props.setAv(average);
@@ -146,8 +146,11 @@ const Reviews = (props) => {
   }
 
   const addReview = () => {
-
     setAdding(true);
+  }
+
+  const doneAdding = () => {
+    setAdding(false);
   }
 
 
@@ -179,7 +182,7 @@ const Reviews = (props) => {
 
         </div>
 
-        : <ReviewsNew name={props.name} id={props.id} chars={meta.characteristics}/>}
+        : <ReviewsNew name={props.name} id={props.id} chars={meta.characteristics} finished={doneAdding}/>}
         {!adding ?
           <button className='addReviewBtn' onClick={addReview}>
             Add a Review +
