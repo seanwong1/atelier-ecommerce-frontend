@@ -228,3 +228,8 @@ html {
 .totalDescript {
   font-weight: bold;
 }
+
+.carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
