@@ -3,7 +3,7 @@ import axios from 'axios';
 const getProductReviewMetadata = (id, callback) => {
   let options = {
     'url': '/reviewsMeta',
-    'params': {'productID': id},
+    'params': {'product_id': id},
     'method': 'get'
   }
 

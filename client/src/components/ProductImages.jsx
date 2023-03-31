@@ -12,13 +12,16 @@ const ProductImages = ({images, image}) => {
         })
     }
 
-        return (
-            <div className='styleImages'>
-                <img className='currImg' src={image.url}></img>
-                <div className="imgThumbs">{thumbnails()}</div>
-            </div>
+    return (
+        <div className='styleImages'>
+            <img className='currImg' src={image.url}></img>
+            <div className="imgThumbs">{thumbnails()}</div>
+        </div>
 
-        )
+
+    )
+
+
 }
 
 export default ProductImages;
