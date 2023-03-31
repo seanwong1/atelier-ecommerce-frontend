@@ -4,6 +4,7 @@ import axios from 'axios';
 import QACard from './QACard.jsx';
 import AddQuestion from './AddQuestion.jsx';
 import AddAnswer from './AddAnswer.jsx';
+import QASearchBar from './QASearchBar.jsx';
 import getImagePath from '../lib/fileReader.js';
 import missing from '../lib/filterMissing.js';
 
@@ -18,14 +19,14 @@ const QA = ({ id, product_name }) => {
   const [photos, setPhotos] = useState([]);
   const [showQuestionModal, setShowQuestionModal] = useState(false);
   const [showAnswerModal, setShowAnswerModal] = useState(false);
-  const [showMore, setShowMore] = useState(false);
+  const [moreQuestions, setMoreQuestions] = useState(false);
 
   useEffect((() => {
     async function fetchQuestions() {
       try {
         let options = {
           'url': '/questions',
-          'params': {product_id: 71701}, //place the id prop here,
+          'params': {product_id: 71697}, //place the id prop here,
           'method': 'get'
         }
         let result = await axios.request(options);
@@ -84,6 +85,10 @@ const QA = ({ id, product_name }) => {
     }
   };
 
+  const isHelpful = async (e, id) => {
+    await axios.put('/question/helpful', {'question_id': id });
+  };
+
   const onChangeQuestion = (e) => {
     setQuestionText(e.target.value);
   };
@@ -105,7 +110,6 @@ const QA = ({ id, product_name }) => {
 
     if (thumbnail === '') {setThumbnail(photo)};
     setPhotos([...photos, photo]);
-
   };
 
   const toggleShowQuestionModal =  (e) => {
@@ -117,8 +121,8 @@ const QA = ({ id, product_name }) => {
     setQuestion({'question_id': id, 'question': question});
   };
 
-  const toggleShowMore = (e) => {
-    setShowMore(!showMore);
+  const toggleMoreQuestions = (e) => {
+    setMoreQuestions(!moreQuestions);
   };
 
   const sortedQuestions = [...questions].sort((a, b) => {
@@ -131,6 +135,7 @@ const QA = ({ id, product_name }) => {
         id={question.question_id}
         question={question.question_body}
         helpfulness={question.question_helpfulness}
+        isHelpful={isHelpful}
         reported={question.reported}
         answers={question.answers}
         toggleShowAnswerModal={toggleShowAnswerModal}
@@ -140,22 +145,18 @@ const QA = ({ id, product_name }) => {
   return (
     <>
       <div className='QA'>
-        {/* Q&A for {JSON.stringify(helpfulQuestions)} */}
-        {/* {helpfulQuestions} */}
-        {!showMore ? helpfulQuestions[0] : helpfulQuestions}
-        {!showMore && helpfulQuestions[1]}
+        <QASearchBar />
+        {!moreQuestions ? helpfulQuestions[0] : helpfulQuestions}
+        {!moreQuestions && helpfulQuestions[1]}
         {
-        showMore && helpfulQuestions.length > 2
-        && <button className='QA-ShowMore' onClick={toggleShowMore}>Less Answered Questions</button>
+        moreQuestions && helpfulQuestions.length > 2
+        && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>Less Answered Questions</button>
         }
         {
-        !showMore && helpfulQuestions.length > 2
-        && <button className='QA-ShowMore' onClick={toggleShowMore}>More Answered Questions</button>
+        !moreQuestions && helpfulQuestions.length > 2
+        && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>More Answered Questions</button>
         }
-        {/* Button to add question if */}
         <button onClick={toggleShowQuestionModal}>Ask a question</button>
-        {/* AddQuestion Modal here */}
-        {/* Pass product name as proops to AddQuestion */}
         {/* Double check if Addquestion is a Modal/test for it */}
         {showQuestionModal && createPortal(
           <AddQuestion
