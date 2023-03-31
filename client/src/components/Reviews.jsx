@@ -19,6 +19,7 @@ const Reviews = (props) => {
   const [filters, setFilters] = useState([]);
   const [showMore, setMore] = useState(true);
   const [adding, setAdding] = useState(false);
+  const [keyword, setKeyword] = useState('');
 
   const currentDate = new Date();
 
@@ -63,6 +64,12 @@ const Reviews = (props) => {
 
   const addHelpful = (id) => {
     axios.put(`/reviewsHelpful?reviewID=${id}`).then(() => {
+      getReviews({product_id: props.id, count, sort});
+    });
+  }
+
+  const reportReview = (id) => {
+    axios.put(`/reviewsReport?reviewID=${id}`).then(() => {
       getReviews({product_id: props.id, count, sort});
     });
   }
@@ -175,7 +182,7 @@ const Reviews = (props) => {
             </div>
             <div className="reviewsList">
 
-              {reviews ? <ReviewsList reviews={reviews.slice(0, count)} moreFunc={addReviews} addHelpful={addHelpful} filters={filters} showMore={showMore}/>
+              {reviews ? <ReviewsList reviews={reviews.slice(0, count)} moreFunc={addReviews} addHelpful={addHelpful} reportFunc={reportReview} filters={filters} keyFilter={keyword} showMore={showMore}/>
               : ''}
             </div>
           </div>
@@ -183,11 +190,18 @@ const Reviews = (props) => {
         </div>
 
         : <ReviewsNew name={props.name} id={props.id} chars={meta.characteristics} finished={doneAdding}/>}
-        {!adding ?
-          <button className='addReviewBtn' onClick={addReview}>
-            Add a Review +
-          </button>
-          : <></>}
+        <div className='flexcolumn'>
+          {!adding ?
+            <button className='addReviewBtn' onClick={addReview}>
+              Add a Review +
+            </button>
+            : <></>}
+          <label className='searchReviews flexrow'>
+            Search Reviews
+            <input type='text' onChange={(event) => {setKeyword(event.target.value.toLowerCase())}}>
+            </input>
+          </label>
+        </div>
 
     </div>
   )

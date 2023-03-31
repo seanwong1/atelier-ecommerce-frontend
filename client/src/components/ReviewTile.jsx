@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { format, parseISO } from "date-fns";
-import ShadedStar from './ShadedStar.jsx'
+import ShadedStar from './ShadedStar.jsx';
+import Modal from './Modal.jsx';
 
-const ReviewTile = ({ review, addHelpful, helpfulness }) => {
+const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
   const [hov, setHov] = useState(false);
+  const [rhov, setRHov] = useState(false);
   const [helped, setHelped] = useState(false);
   const [helpful, setHelpful] = useState(helpfulness);
+  const [modalStatus, setModalStatus] = useState(-1);
+
+  const openPhoto = (count) => {
+    setModalStatus(count);
+  }
+
+  const closePhoto = () => {
+    setModalStatus(-1);
+  }
 
   const changeHelp = () => {
     if (!helped) {
@@ -13,6 +24,10 @@ const ReviewTile = ({ review, addHelpful, helpfulness }) => {
       setHelped(true);
       setHelpful(helpful + 1);
     }
+  }
+
+  const reportReview = () => {
+    reportFunc(review.review_id);
   }
 
   return (
@@ -41,6 +56,29 @@ const ReviewTile = ({ review, addHelpful, helpfulness }) => {
       <p className='reviewBody'>
         {review.body}
       </p>
+      <div className='reviewPhotos'>
+        {review.photos.map((photoUrl, counter) => {
+          return (
+            <div>
+              <img
+                key={Math.random()}
+                className='reviewThumbnail'
+                src={photoUrl.url}
+                alt='Review Photo'
+                onClick={() => {openPhoto(counter)}}
+              />
+              <Modal show={modalStatus === counter} handleClose={closePhoto} reviewModal={'reviewModal'}>
+                <img
+                  key={Math.random()}
+                  className='reviewPhotoModal'
+                  src={photoUrl.url}
+                  alt='Review Photo'
+                />
+              </Modal>
+            </div>
+          )
+        })}
+      </div>
       <div className='reviewHelpfulness'>
         <div style={{marginRight: '3px'}}>
           Helpful?
@@ -55,6 +93,17 @@ const ReviewTile = ({ review, addHelpful, helpfulness }) => {
         </div>
         <div>
           {`(${helpful})`}
+        </div>
+        <div style={{marginLeft: '3px'}}>
+          |
+        </div>
+        <div
+          style={rhov ? {cursor: 'pointer'} : { textDecoration: 'underline' }}
+          className='reportBtn'
+          onMouseEnter={() => {setRHov(true)}}
+          onMouseLeave={() => {setRHov(false)}}
+          onClick={reportReview}>
+          Report
         </div>
       </div>
       <div className='reviewResponses'>

@@ -18,12 +18,8 @@ const ProductImages = ({images, image}) => {
             <div className="imgThumbs">{thumbnails()}</div>
         </div>
 
-<<<<<<< HEAD
-        )
-=======
     )
 
->>>>>>> 619727a108c6ae70062cef22a8629fbba41b259f
 }
 
 export default ProductImages;

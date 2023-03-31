@@ -218,6 +218,12 @@ html {
 
 .yesBtn {
   margin-right: 3px;
+  margin-left: 3px;
+}
+
+.reportBtn {
+  margin-left: 3px;
+  margin-bottom: 3px;
 }
 
 .line {
@@ -286,6 +292,42 @@ html {
 }
 
 .reviewThumbnail {
-  height: 50px;
-  width: 50px;
+  max-width: 50px;
+  max-height: 50px;
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+}
+
+.reviewPhotos {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.reviewPhotoModal {
+  max-height: 500px;
+  max-width: 500px;
+  width: auto;
+  height: auto;
+}
+
+#reviewModal {
+  max-width: 500px;
+  width: auto;
+  background-color: transparent;
+}
+
+.closeButton {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  border: none;
+  background-color: white;
+}
+
+.searchReviews {
+  margin-top: 300px;
+  font-weight: bold;
+  font-size: small;
 }

@@ -11,8 +11,6 @@ const storeImage = require('./lib/storeImage.js');
 app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use(express.json());
 
-<<<<<<< HEAD
-=======
 // Set up multer to handle file uploads
 // Set up multer to handle file uploads
 const storage = multer.diskStorage({
@@ -76,10 +74,9 @@ app.post('/addReview', (req, res, next) => {
   })
 });
 
->>>>>>> 619727a108c6ae70062cef22a8629fbba41b259f
 app.get('/product', (req, res, next) => {
   let options = {
-    'url': req.query ? api.testURL + req.query['product_id'] : api.URL,
+    'url': req.query ? api.URL + req.query['product_id'] : api.testURL,
     // 'url': api.URL,
     // 'params': req.query,
     'method': 'get',
@@ -99,7 +96,7 @@ app.get('/product', (req, res, next) => {
 
 app.get('/styles', (req, res, next) => {
   let options = {
-    'url': req.query ? api.testURL + req.query['product_id'] + '/styles' : api.URL,
+    'url': req.query ? api.URL + req.query['product_id'] + '/styles' : api.testURL,
     // 'url': api.URL + '/styles',
     'params': req.query,
     'method': 'get',
@@ -197,7 +194,7 @@ app.get('/related', (req, res, next) => {
     //TODO: change this back when api.URL no longer hardcoded
     // 'url': req.query ? api.testURL + req.query['product_id'] + '/related' : api.URL + '/related',
     // 'url': api.URL + req.query['product_id'] + '/related',
-    'url': api.testURL + req.query['product_id'] + '/related',
+    'url': api.URL + req.query['product_id'] + '/related',
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
@@ -254,6 +251,25 @@ app.get('/related', (req, res, next) => {
 app.put('/reviewsHelpful', (req, res, next) => {
   let options = {
     'url': api.REVIEWSURL + req.query['reviewID'] + '/helpful',
+    'method': 'put',
+    'headers': {
+      'Authorization': api.TOKEN
+    }
+  }
+
+  axios.request(options)
+    .then((data) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(404);
+    })
+})
+
+app.put('/reviewsReport', (req, res, next) => {
+  let options = {
+    'url': api.REVIEWSURL + req.query['reviewID'] + '/report',
     'method': 'put',
     'headers': {
       'Authorization': api.TOKEN

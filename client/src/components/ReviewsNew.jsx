@@ -122,6 +122,12 @@ const ReviewsNew = (props) => {
       return;
     }
 
+    if (!(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))) {
+      alert('Email is not in correct format.')
+      return;
+    }
+
+
     const formattedChars = Object.keys(data.chars).reduce((acc, char) => {
       acc[data.chars[char].id] = data.chars[char].value
       return acc;
