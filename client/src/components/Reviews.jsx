@@ -17,6 +17,8 @@ const Reviews = (props) => {
   const [average, setAverage] = useState(0);
   const [sort, setSort] = useState('relevance');
   const [filters, setFilters] = useState([]);
+  const [showMore, setMore] = useState(true);
+  const [adding, setAdding] = useState(false);
 
   const currentDate = new Date();
 
@@ -55,7 +57,8 @@ const Reviews = (props) => {
     //Need to add functionality to stop adding to count and remove the button once count
     // gets to max value which can be obtained in meta data
     setCount(total);
-    sortReviews(sort);
+
+    setMore(false);
   };
 
   const addHelpful = (id) => {
@@ -97,7 +100,7 @@ const Reviews = (props) => {
       setAverage(calculateAverage(total, meta));
       getReviews({product_id: props.id, count: total});
     }
-  }, [total, count]);
+  }, [total]);
 
   useEffect(() => {
     props.setAv(average);
@@ -142,6 +145,14 @@ const Reviews = (props) => {
     }
   }
 
+  const addReview = () => {
+    setAdding(true);
+  }
+
+  const doneAdding = () => {
+    setAdding(false);
+  }
+
 
   return (
     <div className="reviews">
@@ -149,21 +160,35 @@ const Reviews = (props) => {
         {total > 0 ? <ReviewsOverview data={meta} total={total} average={average} filterFunc={filterByStar}/>
         : ''}
       </aside>
-      <div className="reviewsList">
-        <div className='flexrow'>
-          <div className='totalDescript'>
-            {total + ' reviews, sorted by '}
+      {!adding ?
+        <div>
+          <div className='flexcolumn'>
+            <div className='totalDescript'>
+              <div className='flexrow'>
+                {total + ' reviews, sorted by '}
+                <select value={sort} onChange={changeSort} className='sortDrop'>
+                  <option value='relevance'>relevance</option>
+                  <option value='newest'>newest</option>
+                  <option value='helpfulness'>helpfulness</option>
+                </select>
+              </div>
+            </div>
+            <div className="reviewsList">
+
+              {reviews ? <ReviewsList reviews={reviews.slice(0, count)} moreFunc={addReviews} addHelpful={addHelpful} filters={filters} showMore={showMore}/>
+              : ''}
+            </div>
           </div>
-          <select value={sort} onChange={changeSort} className='sortDrop'>
-            <option value='relevance'>relevance</option>
-            <option value='newest'>newest</option>
-            <option value='helpfulness'>helpfulness</option>
-          </select>
+
         </div>
 
-        {reviews ? <ReviewsList reviews={reviews.slice(0, count)} moreFunc={addReviews} addHelpful={addHelpful} filters={filters}/>
-        : ''}
-      </div>
+        : <ReviewsNew name={props.name} id={props.id} chars={meta.characteristics} finished={doneAdding}/>}
+        {!adding ?
+          <button className='addReviewBtn' onClick={addReview}>
+            Add a Review +
+          </button>
+          : <></>}
+
     </div>
   )
 }

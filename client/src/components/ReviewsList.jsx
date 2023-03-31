@@ -18,12 +18,12 @@ const ReviewsList = (props) => {
           return (<ReviewTile review={review} key={review.review_id} addHelpful={props.addHelpful} helpfulness={review.helpfulness}/>);
         })}
       </div>
-      <button onClick={addReviews}>
-        More Reviews
-      </button>
-      <button>
-        Add a Review +
-      </button>
+
+      {props.showMore ?
+        <button className='moreReviewsBtn' onClick={addReviews}>
+          More Reviews
+        </button>
+        : <></>}
     </div>
   )
 }
