@@ -24,6 +24,9 @@ const Carousel = (props) => {
   useEffect(() => {
     setArray(props.relatedProductIDs);
     setDisplay(array.slice(0, 5));
+    if (array.length > 4) {
+      setShowRight(true);
+    }
   }, [props]);
 
   useEffect(() => {
