@@ -204,6 +204,7 @@ html {
 .reviewBody {
   overflow-wrap: anywhere;
   font-size: smaller;
+  margin-top: 10px;
 }
 
 .reviewSummary {
@@ -300,6 +301,8 @@ html {
 }
 
 .reviewPhotos {
+  margin-top: 10px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -330,4 +333,9 @@ html {
   margin-top: 300px;
   font-weight: bold;
   font-size: small;
+}
+
+.increaseReviewBody {
+  margin-top: 15px;
+  text-decoration: underline;
 }

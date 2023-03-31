@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { format, parseISO } from "date-fns";
 import ShadedStar from './ShadedStar.jsx';
 import Modal from './Modal.jsx';
+import getFirst250 from '../lib/getFirst250.js';
 
 const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
   const [hov, setHov] = useState(false);
@@ -9,6 +10,7 @@ const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
   const [helped, setHelped] = useState(false);
   const [helpful, setHelpful] = useState(helpfulness);
   const [modalStatus, setModalStatus] = useState(-1);
+  const [bodyText, setBodyText] = useState(getFirst250(review.body));
 
   const openPhoto = (count) => {
     setModalStatus(count);
@@ -53,15 +55,20 @@ const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
       <div className='reviewRecommended'>
         {review.recommend ? '✓ I recomment this product' : ''}
       </div>
-      <p className='reviewBody'>
-        {review.body}
-      </p>
+      <div className='reviewBody'>
+        {bodyText}
+        {bodyText.length < review.body.length ? '...' : ''}
+        {bodyText.length < review.body.length ? (
+          <div className='flexcolumn' className='increaseReviewBody' onClick={() => {setBodyText(review.body)}}>
+            Show more
+          </div>) : ''}
+
+      </div>
       <div className='reviewPhotos'>
         {review.photos.map((photoUrl, counter) => {
           return (
-            <div>
+            <div key={Math.random()}>
               <img
-                key={Math.random()}
                 className='reviewThumbnail'
                 src={photoUrl.url}
                 alt='Review Photo'
