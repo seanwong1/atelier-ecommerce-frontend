@@ -111,9 +111,10 @@ const ReviewsOver = ({data, total, average, filterFunc}) => {
                     )
                   }
                 })}
-                <div className='triangle' style={{left: `${percentHelper(data.characteristics[cName].value, 5)/100*220}px`}}>
+                <div className='triangle' style={{left: `${percentHelper(data.characteristics[cName].value, 5)}%`}}>
 
                 </div>
+
 
               </div>
             </div>
