@@ -39,7 +39,7 @@ html {
 .reviews {
   display: flex;
   justify-content: center;
-  width: 800px;
+  width: 1000px;
   font-family: 'Verdana';
 }
 
@@ -51,10 +51,13 @@ html {
 
 .reviewsList {
   width: 500px;
+  height: 500px;
+  overflow: scroll;
   flex-grow: 1;
   size: fixed;
   font-size: 12px;
   padding-left: 5px;
+  position: relative;
 }
 
 .averageStars {
@@ -96,6 +99,7 @@ html {
   display: flex;
   justify-content: space-between;
   width: 200px;
+  position: relative;
 }
 
 .descriptorText {
@@ -128,6 +132,10 @@ html {
 .flexrow {
   display: flex;
   flex-direction: row;
+}
+.flexcolumn {
+  display: flex;
+  flex-direction: column;
 }
 .descriptorBox1 {
   background-color: rgb(232, 231, 231);
@@ -227,9 +235,66 @@ html {
 
 .totalDescript {
   font-weight: bold;
+    font-size: small;
+  padding-bottom: 10px;
 }
+
+
 
 .carousel-container {
   display: flex;
   flex-wrap: nowrap;
+}
+
+
+
+.addReviewBtn, .moreReviewsBtn {
+  height: 40px;
+  width: 100%;
+  margin-left: 10px;
+  background-color: white;
+}
+
+.moreReviewsBtn {
+  height: 40px;
+  width: 200px;
+  margin-top: 10px;
+}
+
+.reviewsNew {
+  width: 500px;
+  height: 500px;
+  overflow: scroll;
+}
+
+.charButtonsRow {
+  width: 500px;
+  justify-content: space-between;
+}
+
+.charButtons {
+  justify-self: center;
+}
+.charText {
+  font-size: xx-small;
+  display: flex;
+  justify-content: center;
+}
+
+.rBodBox {
+  height: 200px;
+  text-align: left;
+  overflow-y: scroll;
+  resize: none;
+  display: block;
+
+}
+
+.starSelect {
+  font-size: 15px;
+}
+
+.reviewThumbnail {
+  height: 50px;
+  width: 50px;
 }

@@ -9,7 +9,7 @@ const ProductOverview = ({ product }) => {
     const [images, setImages] = useState([]);
     const [image, setImage] = useState([]);
     const getStyles = () => {
-        axios.get('/styles').then((result) => {
+        axios.get('/styles/?productID=71697').then((result) => {
             console.log(result);
             setStyles(result.data);
             setStyle(result.data[0]);
@@ -53,7 +53,7 @@ const ProductOverview = ({ product }) => {
                 console.log('no');
             }
         })
-        
+
     }
 
     const imageChange = (e) => {

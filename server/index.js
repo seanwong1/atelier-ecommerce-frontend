@@ -4,10 +4,79 @@ const path = require('path')
 const axios = require('axios');
 require('dotenv').config();
 const api = require('../config.js');
+const multer = require('multer');
+
+const storeImage = require('./lib/storeImage.js');
 
 app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use(express.json());
 
+<<<<<<< HEAD
+=======
+// Set up multer to handle file uploads
+// Set up multer to handle file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, '../client/dist/images'));
+  },
+  filename: function (req, file, cb) {
+    const originalName = file.originalname;
+    cb(null, `${originalName}`);
+  }
+});
+
+const upload = multer({ storage });
+
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+
+app.post('/uploadReviewPic', upload.single('file'), (req, res) => {
+  const file = req.file;
+  const fileName = file.originalname;
+
+  const filePath = path.join(__dirname, `../client/dist/images/${fileName}`)
+
+  // Redirect to the storeReviewPic route with fileName as a query parameter
+  res.redirect(`/storeReviewPic?filePath=${filePath}`);
+});
+
+
+
+app.get('/storeReviewPic', (req, res) => {
+  const filePath = req.query.filePath;
+
+  // Add image to cloudinary api
+  storeImage(filePath, (file) => {
+    res.send('' + file.url);
+  });
+
+})
+
+app.post('/addReview', (req, res, next) => {
+
+
+  console.log(JSON.stringify(req.body));
+  let options = {
+    'url': api.REVIEWSURL,
+    'method': 'post',
+    'maxBodyLength': Infinity,
+    'maxContentLength': Infinity,
+    'headers': {
+      'Authorization': api.TOKEN,
+      'Content-Type': 'application/json'
+    },
+    'data': req.body
+  }
+
+  axios.request(options).then((data) => {
+    res.sendStatus(202);
+  }).catch((err) => {
+    console.log(err);
+    res.sendStatus(405);
+  })
+});
+
+>>>>>>> 619727a108c6ae70062cef22a8629fbba41b259f
 app.get('/product', (req, res, next) => {
   let options = {
     'url': req.query ? api.testURL + req.query['product_id'] : api.URL,
@@ -105,6 +174,7 @@ app.get('/reviews', (req, res, next) => {
 });
 
 app.get('/reviewsMeta', (req, res, next) => {
+  console.log(req.query);
   let options = {
     'url': api.REVIEWSURL + 'meta',
     'params': req.query,
