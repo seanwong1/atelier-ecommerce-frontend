@@ -16,3 +16,10 @@ test('Related Products component should exist', () => {
   const { container } = render(<RelatedProducts />);
   expect(container.firstChild).toHaveClass('related-products');
 });
+
+test('Product rating should render to page', () => {
+  const { getByTestId } = render(<RelatedProduct />);
+  const productRatings = getByTestId('product-rating');
+  const relatedProduct = getByTestId('related-product');
+  expect(relatedProduct).toContainElement(productRatings)
+});

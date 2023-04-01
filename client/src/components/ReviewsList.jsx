@@ -15,15 +15,21 @@ const ReviewsList = (props) => {
               return;
             }
           }
-          return (<ReviewTile review={review} key={review.review_id} addHelpful={props.addHelpful} helpfulness={review.helpfulness}/>);
+          if (props.keyFilter.length > 2) {
+            console.log(props.keyFilter);
+            if (!(review.body.toLowerCase().includes(props.keyFilter) || review.summary.toLowerCase().includes(props.keyFilter))) {
+              return;
+            }
+          }
+          return (<ReviewTile review={review} key={review.review_id} addHelpful={props.addHelpful} reportFunc={props.reportFunc} helpfulness={review.helpfulness}/>);
         })}
       </div>
-      <button onClick={addReviews}>
-        More Reviews
-      </button>
-      <button>
-        Add a Review +
-      </button>
+
+      {props.showMore ?
+        <button className='moreReviewsBtn' onClick={addReviews}>
+          More Reviews
+        </button>
+        : <></>}
     </div>
   )
 }

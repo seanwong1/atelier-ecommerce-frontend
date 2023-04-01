@@ -1,7 +1,13 @@
 const calculateAverage = (total, data) => {
-  return Object.keys(data.ratings).reduce((acc, rating) => {
+  if (!total) {
+    return 0;
+  }
+
+  const weightTotal = Object.keys(data.ratings).reduce((acc, rating) => {
     return (acc + Number(rating) * Number(data.ratings[rating]));
-  }, 0)/total;
+  }, 0);
+  const output = weightTotal/total;
+  return output;
 }
 
 export default calculateAverage;

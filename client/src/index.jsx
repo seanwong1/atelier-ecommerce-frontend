@@ -15,7 +15,7 @@ const App = () => {
   const [productID, setProductID] = useState(71697)
 
   useEffect(() => {
-    getHandler('/product', 71697, setProduct);
+    getHandler('/product', 71697, (response) => {setProduct(response.data)});
   }, []);
 
   return (
@@ -24,7 +24,7 @@ const App = () => {
       <ProductOverview product={product} productID={productID}/>
       <RelatedProducts setProduct={setProduct} product={product} id={product.id ? product.id : 0} />
       <QA id={product.id ? product.id : 0}/>
-      <Reviews id={product.id ? product.id : 0} setAv={setAverage}/>
+      <Reviews id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
     </div>
   );
 }

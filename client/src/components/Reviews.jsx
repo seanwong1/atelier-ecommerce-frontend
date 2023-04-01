@@ -17,6 +17,9 @@ const Reviews = (props) => {
   const [average, setAverage] = useState(0);
   const [sort, setSort] = useState('relevance');
   const [filters, setFilters] = useState([]);
+  const [showMore, setMore] = useState(true);
+  const [adding, setAdding] = useState(false);
+  const [keyword, setKeyword] = useState('');
 
   const currentDate = new Date();
 
@@ -52,14 +55,19 @@ const Reviews = (props) => {
   }
 
   const addReviews = () => {
-    //Need to add functionality to stop adding to count and remove the button once count
-    // gets to max value which can be obtained in meta data
     setCount(total);
-    sortReviews(sort);
+
+    setMore(false);
   };
 
   const addHelpful = (id) => {
     axios.put(`/reviewsHelpful?reviewID=${id}`).then(() => {
+      getReviews({product_id: props.id, count, sort});
+    });
+  }
+
+  const reportReview = (id) => {
+    axios.put(`/reviewsReport?reviewID=${id}`).then(() => {
       getReviews({product_id: props.id, count, sort});
     });
   }
@@ -94,10 +102,13 @@ const Reviews = (props) => {
 
   useEffect(() => {
     if (props.id) {
+      if (total < 3) {
+        setMore(false);
+      }
       setAverage(calculateAverage(total, meta));
       getReviews({product_id: props.id, count: total});
     }
-  }, [total, count]);
+  }, [total]);
 
   useEffect(() => {
     props.setAv(average);
@@ -142,6 +153,19 @@ const Reviews = (props) => {
     }
   }
 
+  const addReview = () => {
+    setAdding(true);
+  }
+
+  const doneAdding = () => {
+    setAdding(false);
+    axios.post('/deleteImages').then(() => {
+      console.log('Images folder emptied');
+    }).catch(() => {
+      console.log('Error deleting images');
+    })
+  }
+
 
   return (
     <div className="reviews">
@@ -149,21 +173,42 @@ const Reviews = (props) => {
         {total > 0 ? <ReviewsOverview data={meta} total={total} average={average} filterFunc={filterByStar}/>
         : ''}
       </aside>
-      <div className="reviewsList">
-        <div className='flexrow'>
-          <div className='totalDescript'>
-            {total + ' reviews, sorted by '}
+      {!adding ?
+        <div>
+          <div className='flexcolumn'>
+            <div className='totalDescript'>
+              <div className='flexrow'>
+                {total + ' reviews, sorted by '}
+                <select value={sort} onChange={changeSort} className='sortDrop'>
+                  <option value='relevance'>relevance</option>
+                  <option value='newest'>newest</option>
+                  <option value='helpfulness'>helpfulness</option>
+                </select>
+              </div>
+            </div>
+            <div className="reviewsList">
+
+              {reviews ? <ReviewsList reviews={reviews.slice(0, count)} moreFunc={addReviews} addHelpful={addHelpful} reportFunc={reportReview} filters={filters} keyFilter={keyword} showMore={showMore}/>
+              : ''}
+            </div>
           </div>
-          <select value={sort} onChange={changeSort} className='sortDrop'>
-            <option value='relevance'>relevance</option>
-            <option value='newest'>newest</option>
-            <option value='helpfulness'>helpfulness</option>
-          </select>
+
         </div>
 
-        {reviews ? <ReviewsList reviews={reviews.slice(0, count)} moreFunc={addReviews} addHelpful={addHelpful} filters={filters}/>
-        : ''}
-      </div>
+        : <ReviewsNew name={props.name} id={props.id} chars={meta.characteristics} finished={doneAdding}/>}
+        <div className='flexcolumn'>
+          {!adding ?
+            <button className='addReviewBtn' onClick={addReview}>
+              Add a Review +
+            </button>
+            : <></>}
+          <label className='searchReviews flexrow'>
+            Search Reviews
+            <input style={{marginLeft: '3px', height: '10px'}} type='text' onChange={(event) => {setKeyword(event.target.value.toLowerCase())}}>
+            </input>
+          </label>
+        </div>
+
     </div>
   )
 }

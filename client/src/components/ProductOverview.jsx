@@ -61,7 +61,7 @@ const ProductOverview = ({ product, productID }) => {
                 setImages(indStyle.photos)
             }
         })
-        
+
     }
 
     //change the current image displayed when an image thumbnail is clicked
