@@ -24,7 +24,15 @@ const RelatedProducts = (props) => {
           </div>
         )
       })} */}
-      <Carousel relatedProductIDs={relatedProductsID} originalProduct={props.product} setProduct={props.setProduct} />
+      <Carousel relatedProductIDs={relatedProductsID} originalProduct={props.product} setProduct={props.setProduct} >
+        {relatedProductsID.map((relatedProductID) => {
+          return (
+            <div key={relatedProductID}>
+              <RelatedProduct originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProduct={props.setProduct} />
+            </div>
+        )
+      })}
+      </Carousel>
     </div>
   )
 }

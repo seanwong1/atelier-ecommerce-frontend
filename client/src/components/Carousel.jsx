@@ -42,13 +42,14 @@ const Carousel = (props) => {
   return (
     <div className='carousel-container' >
       {showLeft ? <button className='carousel-left' onClick={previousItem} >left</button> : null}
-      {display.map((relatedProductID) => {
+      {props.children}
+      {/* {display.map((relatedProductID) => {
         return (
           <div key={relatedProductID}>
             <RelatedProduct originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProduct={props.setProduct} />
           </div>
         )
-      })}
+      })} */}
       {showRight ?  <button className='carousel-right' onClick={nextItem} >right</button> : null}
     </div>
   )
