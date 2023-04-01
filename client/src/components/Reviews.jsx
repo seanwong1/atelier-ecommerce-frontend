@@ -55,8 +55,6 @@ const Reviews = (props) => {
   }
 
   const addReviews = () => {
-    //Need to add functionality to stop adding to count and remove the button once count
-    // gets to max value which can be obtained in meta data
     setCount(total);
 
     setMore(false);
@@ -104,6 +102,9 @@ const Reviews = (props) => {
 
   useEffect(() => {
     if (props.id) {
+      if (total < 3) {
+        setMore(false);
+      }
       setAverage(calculateAverage(total, meta));
       getReviews({product_id: props.id, count: total});
     }
@@ -198,7 +199,7 @@ const Reviews = (props) => {
             : <></>}
           <label className='searchReviews flexrow'>
             Search Reviews
-            <input type='text' onChange={(event) => {setKeyword(event.target.value.toLowerCase())}}>
+            <input style={{marginLeft: '3px', height: '10px'}} type='text' onChange={(event) => {setKeyword(event.target.value.toLowerCase())}}>
             </input>
           </label>
         </div>

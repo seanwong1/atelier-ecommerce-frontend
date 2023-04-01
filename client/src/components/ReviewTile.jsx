@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { format, parseISO } from "date-fns";
 import ShadedStar from './ShadedStar.jsx';
 import Modal from './Modal.jsx';
-import getFirst250 from '../lib/getFirst250.js';
+import getFirstN from '../lib/getFirstN.js';
 
 const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
   const [hov, setHov] = useState(false);
@@ -10,7 +10,9 @@ const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
   const [helped, setHelped] = useState(false);
   const [helpful, setHelpful] = useState(helpfulness);
   const [modalStatus, setModalStatus] = useState(-1);
-  const [bodyText, setBodyText] = useState(getFirst250(review.body));
+  const [bodyText, setBodyText] = useState(getFirstN(review.body, 250));
+  const sumText = getFirstN(review.summary, 40);
+  const sumRemain = review.summary.substring(40);
 
   const openPhoto = (count) => {
     setModalStatus(count);
@@ -50,7 +52,11 @@ const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
         </div>
       </div>
       <h4 className='reviewSummary'>
-        {review.summary}
+        {sumText}
+        {sumRemain.length ? '...' : ''}
+        <div className='flexcolumn sumRemain'>
+          {sumRemain.length ? '...' + sumRemain : ''}
+        </div>
       </h4>
       <div className='reviewRecommended'>
         {review.recommend ? '✓ I recomment this product' : ''}
@@ -113,9 +119,16 @@ const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
           Report
         </div>
       </div>
-      <div className='reviewResponses'>
-        {review.response}
-      </div>
+      {review.response ?
+        <div className='reviewResponse'>
+          <div style={{marginBottom: '10px', paddingTop: '5px', paddingLeft: '5px', fontWeight: 'bold'}}>
+            Response:
+          </div>
+          <div style={{paddingBottom: '10px', paddingLeft: '5px'}}>
+            {'Here is the response'}
+          </div>
+        </div> : <></>}
+
       <div className='line'>
       </div>
     </div>

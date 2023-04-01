@@ -39,8 +39,8 @@ html {
 .reviews {
   display: flex;
   justify-content: center;
-  width: 1000px;
-  font-family: 'Verdana';
+  width: 1200px;
+  font-family: Geneva;
 }
 
 .reviewsOver {
@@ -58,6 +58,7 @@ html {
   font-size: 12px;
   padding-left: 5px;
   position: relative;
+  margin-right: 20px;
 }
 
 .averageStars {
@@ -203,12 +204,20 @@ html {
 
 .reviewBody {
   overflow-wrap: anywhere;
-  font-size: smaller;
+  font-size: small;
   margin-top: 10px;
 }
 
 .reviewSummary {
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  font-size: large;
+}
+
+.sumRemain {
+  font-size: 11px;
+  font-weight: normal;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .reviewHelpfulness {
@@ -263,6 +272,24 @@ html {
   width: 500px;
   height: 500px;
   overflow: scroll;
+  font-family: Geneva;
+
+}
+
+.rnTitle {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.rnSubtitle {
+  font-size: smaller;
+  margin-left: 5px;
+  margin-bottom: 20px;
+}
+
+.rnContainer {
+  height: 1000px;
+  justify-content: space-between;
 }
 
 .charButtonsRow {
@@ -330,12 +357,19 @@ html {
 }
 
 .searchReviews {
-  margin-top: 300px;
+  margin-top: 500px;
   font-weight: bold;
-  font-size: small;
+  font-size: x-small;
 }
 
 .increaseReviewBody {
   margin-top: 15px;
   text-decoration: underline;
+}
+
+.reviewResponse {
+  background-color: lightgrey;
+  font-size: x-small;
+  margin-top: 5px;
+  margin-bottom: 7px;
 }

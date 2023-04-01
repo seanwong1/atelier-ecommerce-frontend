@@ -200,7 +200,7 @@ const ReviewsNew = (props) => {
       <div className='rnSubtitle'>
         {'About the ' + props.name}
       </div>
-      <form className='flexcolumn'>
+      <form className='flexcolumn rnContainer'>
         <label className='flexcolumn'>
           Overall rating*
           <div className='starSelect flexrow' onClick={starSelect}>
@@ -319,9 +319,6 @@ const ReviewsNew = (props) => {
             For authentication purposes, you will not be emailed.
           </div>
         </label>
-        <button>
-          Reset form
-        </button>
         <button onClick={sendReview}>
           Submit
         </button>
