@@ -20,6 +20,7 @@ const QA = ({ id, product_name }) => {
   const [showQuestionModal, setShowQuestionModal] = useState(false);
   const [showAnswerModal, setShowAnswerModal] = useState(false);
   const [moreQuestions, setMoreQuestions] = useState(false);
+  const [search, setSearch] = useState('');
 
   useEffect((() => {
     async function fetchQuestions() {
@@ -60,7 +61,6 @@ const QA = ({ id, product_name }) => {
       alert('Your question was not submitted due to some internal error. Please try again shortly');
     }
   };
-
 
   const onSubmitAnswer = async (e) => {
     e.preventDefault();
@@ -125,11 +125,16 @@ const QA = ({ id, product_name }) => {
     setMoreQuestions(!moreQuestions);
   };
 
-  const sortedQuestions = [...questions].sort((a, b) => {
-    return a['question_helpfulness'] - b['question_helpfulness'];
-  });
+  const onSearch = (e) => {
+    setSearch(e.target.value);
+  };
 
-  const helpfulQuestions = sortedQuestions.map((question) =>
+  let sortedAndFilteredQuestions = [...questions].filter((question) => {
+   return question.question_body.toLowerCase().includes(search.toLowerCase());
+  })
+  .sort((a, b) => {
+    return a['question_helpfulness'] - b['question_helpfulness'];
+  }).map((question) =>
       <QACard
         key={question.question_id}
         id={question.question_id}
@@ -145,15 +150,16 @@ const QA = ({ id, product_name }) => {
   return (
     <>
       <div className='QA'>
-        <QASearchBar />
-        {!moreQuestions ? helpfulQuestions[0] : helpfulQuestions}
-        {!moreQuestions && helpfulQuestions[1]}
+        <QASearchBar onSearch={onSearch} search={search}/>
+
+        {!moreQuestions ? sortedAndFilteredQuestions[0] : sortedAndFilteredQuestions}
+        {!moreQuestions && sortedAndFilteredQuestions[1]}
         {
-        moreQuestions && helpfulQuestions.length > 2
+        moreQuestions && sortedAndFilteredQuestions.length > 2
         && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>Less Answered Questions</button>
         }
         {
-        !moreQuestions && helpfulQuestions.length > 2
+        !moreQuestions && sortedAndFilteredQuestions.length > 2
         && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>More Answered Questions</button>
         }
         <button onClick={toggleShowQuestionModal}>Ask a question</button>
@@ -166,6 +172,7 @@ const QA = ({ id, product_name }) => {
             onChangeNickname={onChangeNickname}
             onChangeEmail={onChangeEmail}
             onSubmitQuestion={onSubmitQuestion}
+            toggleShowQuestionModal={toggleShowQuestionModal}
           />
           ,document.body
         )}
@@ -182,6 +189,7 @@ const QA = ({ id, product_name }) => {
             onChangeEmail={onChangeEmail}
             onInputPhoto={onInputPhoto}
             onSubmitAnswer={onSubmitAnswer}
+            toggleShowAnswerModal={toggleShowAnswerModal}
          />
          , document.body
         )}
