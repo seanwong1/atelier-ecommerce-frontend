@@ -251,9 +251,18 @@ html {
 
 .totalDescript {
   font-weight: bold;
-  font-size: small;
+    font-size: small;
   padding-bottom: 10px;
 }
+
+
+
+.carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+
 
 .addReviewBtn, .moreReviewsBtn {
   height: 40px;

@@ -28,7 +28,6 @@ const RelatedProduct = (props) => {
   };
 
   useEffect(() => {
-    // setFeatureSet(createFeatureS)
     getHandler('/product', props.relatedProductID, (response) => {
       setRelatedProduct(response.data);
     });
@@ -50,28 +49,30 @@ const RelatedProduct = (props) => {
     setStars(((Math.round(averageRating * 4) / 4).toFixed(2)));
   }, [averageRating]);
 
-  console.log(props.originalProduct.features);
+  useEffect(() => {
+    setFeatureSet(createFeatureSet(props.originalProduct, relatedProduct));
+  }, [relatedProduct]);
 
   return (
-    <div className='related-product'>
-      <button className='related-product-action-button' onClick={() => { showModal(); setFeatureSet(createFeatureSet(props.originalProduct, relatedProduct)); }}>⭐</button>
-      <Modal className='related-product-comparison-modal' show={modalState} handleClose={() => { hideModal(); }} >
-        <div className='related-product-comparison-modal-title'>Product Comparison</div>
+    <div className='related-product' data-testid='related-product' >
+      <button className='related-product-action-button' onClick={() => { showModal(); }}>⭐</button>
+      <Modal show={modalState} handleClose={() => { hideModal(); }} >
+        <div data-testid="modal" className='related-product-comparison-modal'>Product Comparison</div>
         <table>
           <thead>
             <tr>
-              <th>{props.originalProduct.name}</th>
+              <th>{typeof props.originalProduct !== undefined ? null : props.originalProduct.name}</th>
               <th> | features | </th>
-              <th>{relatedProduct.name}</th>
+              <th>{relatedProduct.name ? relatedProduct.name : null}</th>
             </tr>
           </thead>
           <tbody>
-            {[...featureSet].map((feature) => {
+            {featureSet.map((featureObj) => {
               return (
                 <tr>
-                  <td>{props.originalProduct.features.feature ? props.originalProduct.features[0].value : null}</td>
-                  <td>{feature}</td>
-                  <td>{relatedProduct.features.feature ? relatedProduct.features[0].value: null}</td>
+                  <td>{featureObj.originalValue ? featureObj.originalValue : null}</td>
+                  <td>{featureObj.feature}</td>
+                  <td>{featureObj.relatedValue ? featureObj.relatedValue : null}</td>
                 </tr>
               )
             })}
@@ -85,7 +86,7 @@ const RelatedProduct = (props) => {
         salePrice ? <div><s>relatedProduct.default_price</s><p style="color:red;">salePrice</p></div> : relatedProduct.default_price
         }
       </div>
-      <div className='product-rating' >Rating:
+      <div className='product-rating' data-testid='product-rating' >Rating:
         <div className='averageStars'>
           <div>
             {'★'.repeat(Math.floor(stars))}

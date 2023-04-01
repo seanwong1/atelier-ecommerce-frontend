@@ -39,6 +39,9 @@
   },
   "homepage": "https://github.com/RPP2210-FEC-SCAMP/FEC#readme",
   "devDependencies": {
+
+    "@testing-library/jest-dom": "^5.16.5",
+
     "@testing-library/react": "^12.1.5",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0"
