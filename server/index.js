@@ -10,28 +10,30 @@ app.use(express.json());
 
 app.get('/product', (req, res, next) => {
   let options = {
-    'url': req.query ? api.testURL + req.query['product_id'] : api.URL,
+    'url': req.query ? api.testURL + `${req.query.product_id}` : api.URL,
+    //'url': api.URL + `${req.query.product_id}`,
+
     // 'url': api.URL,
-    // 'params': req.query,
+    'params': req.query,
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
     }
   }
-  console.log(options);
+  //console.log(options);
   axios.request(options).then((data) => {
     res.send(data.data);
   }).catch((err) => {
-    console.log(err);
+    //console.log(err);
     res.sendStatus(404);
   })
 });
-
+//stylez API request*******
 app.get('/styles', (req, res, next) => {
-  console.log('=========********',req.query['productID'])
+  console.log(req.query.product_id)
   let options = {
-    'url': req.query ? api.testURL + req.query['product_id'] + '/styles' : api.URL,
-    // 'url': api.URL + '/styles',
+    'url': req.query ? api.testURL + `${req.query.product_id}` + '/styles' : api.URL,
+    //'url':  api.URL + `${req.query.product_id}` + '/styles',
     'params': req.query,
     'method': 'get',
     'headers': {
@@ -198,6 +200,10 @@ app.put('/reviewsHelpful', (req, res, next) => {
       console.log(err);
       res.sendStatus(404);
     })
+})
+
+app.post('/cart', (req, res) => {
+  
 })
 
 const port = process.env.PORT;

@@ -222,25 +222,26 @@ html {
 
 /* Product overview css here */
 .productOverview {
-  border: solid greenyellow 5px;
+  border: transparent greenyellow 5px;
 }
 
 .currImg {
   border: solid black 3px;
   border-radius: 7%;
-  width:40%;
+  width:400px;
   height: auto;
+  margin-bottom: 50px;
 }
 
 .imgThumbs {
   position: relative;
-  margin-top: -400px;
+  margin-top: -600px;
   margin-bottom: 70px;
 
 }
 
 .indThumnails {
-  width: 5%;
+  width: 50px;
   height:auto;
   aspect-ratio: 1/1;
   margin-top: 10px;
@@ -252,12 +253,12 @@ html {
 }
 
 .productImages {
-margin-bottom: 40px;
+margin-bottom: 100px;
 border: 3px solid pink;
 }
 
 .style_thumb {
-width: 10%;
+width: 40px;
 height: auto;
 aspect-ratio: 1/1;
 margin: 1%;
@@ -266,5 +267,6 @@ border-radius: 50%;
 }
 
 .style_selector {
+  margin: 20px;
 border: 3px solid magenta;
 }
