@@ -51,7 +51,7 @@ app.get('/questions', async (req, res) => {
     'url': api.QUESTIONS,
     'params': {
       'product_id': req.query.product_id,
-      'page': 1,
+      'page': 2,
       'count': 10
     },
     'headers': {
