@@ -159,6 +159,11 @@ const Reviews = (props) => {
 
   const doneAdding = () => {
     setAdding(false);
+    axios.post('/deleteImages').then(() => {
+      console.log('Images folder emptied');
+    }).catch(() => {
+      console.log('Error deleting images');
+    })
   }
 
 

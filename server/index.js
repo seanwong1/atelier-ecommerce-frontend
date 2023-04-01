@@ -5,6 +5,7 @@ const axios = require('axios');
 require('dotenv').config();
 const api = require('../config.js');
 const multer = require('multer');
+const fs = require('fs');
 
 const storeImage = require('./lib/storeImage.js');
 
@@ -284,6 +285,24 @@ app.put('/reviewsReport', (req, res, next) => {
       console.log(err);
       res.sendStatus(404);
     })
+})
+
+app.post('/deleteImages', (req, res, next) => {
+  const directory = path.join(__dirname, '../client/dist/images');
+  fs.readdir(directory, (err, files) => {
+    if (err) {
+      res.sendStatus(405);
+    };
+
+    for (const file of files) {
+      fs.unlink(path.join(directory, file), (err) => {
+        if (err) {
+          res.sendStatus(405);
+        }
+      });
+    }
+  });
+  res.sendStatus(202);
 })
 
 const port = process.env.PORT;

@@ -12,7 +12,12 @@ const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
   const [modalStatus, setModalStatus] = useState(-1);
   const [bodyText, setBodyText] = useState(getFirstN(review.body, 250));
   const sumText = getFirstN(review.summary, 40);
-  const sumRemain = review.summary.substring(40);
+  var sumRemain;
+  if (review.summary.length > 40) {
+    sumRemain = review.summary.substring(sumText.length-1);
+  } else {
+    sumRemain = '';
+  }
 
   const openPhoto = (count) => {
     setModalStatus(count);
