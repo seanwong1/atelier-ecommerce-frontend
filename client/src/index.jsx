@@ -15,7 +15,7 @@ const App = () => {
   const [productID, setProductID] = useState(71697)
 
   useEffect(() => {
-    getHandler('/product', 71697, (response) => {setProduct(response.data)});
+    getHandler('/product', productID, (response) => {setProduct(response.data)});
   }, []);
 
   return (

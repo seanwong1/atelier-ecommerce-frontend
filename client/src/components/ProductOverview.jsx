@@ -67,11 +67,23 @@ const ProductOverview = ({ product, productID }) => {
     //change the current image displayed when an image thumbnail is clicked
     const imageChange = (e) => {
         e.preventDefault();
-        images.forEach(img => {
-            if(img.thumbnail_url === e.target.src) {
-                setImage(img);
+        var imageIndex = images.indexOf(image);
+        console.log(imageIndex)
+        if(e.target.className === 'currImg') {
+            if(imageIndex === images.length - 1) {
+                setImage(images[0]);
+            } else {
+                setImage(images[imageIndex +1]);
             }
-        })
+            
+        } else {
+            images.forEach(img => {
+                if(img.thumbnail_url === e.target.src) {
+                    setImage(img);
+                }
+            })
+        }
+
 
     }
 
