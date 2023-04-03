@@ -34,7 +34,7 @@ const RelatedProducts = (props) => {
         )
       })}
       </Carousel>
-      <Outfits currentProduct={props.originalProduct} />
+      {/* <Outfits currentProduct={props.originalProduct} /> */}
     </div>
   )
 }
