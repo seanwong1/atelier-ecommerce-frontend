@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Carousel from './Carousel.jsx';
 import RelatedProduct from './RelatedProduct.jsx';
+import Outfits from './Outfits.jsx';
 
 import getHandler from '../lib/getHandler.js';
 
@@ -33,6 +34,7 @@ const RelatedProducts = (props) => {
         )
       })}
       </Carousel>
+      <Outfits currentProduct={props.originalProduct} />
     </div>
   )
 }

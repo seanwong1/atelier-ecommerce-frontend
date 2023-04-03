@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
+import Carousel from './Carousel.jsx';
+
 const Outfits = (props) => {
   const [outfits, setOutfits] = useState([]);
 
   return (
-    <Carousel outfitIDs={outfitIDs} originalProduct={props.product} setProduct={props.setProduct} />
-    <button className='add-to-outfit' onClick={} >Add to Outfit</button>
+    <div>
+      <Carousel>
+        {outfits.map((outfit) => {
+          <div>hello</div>
+        })}
+      </Carousel>
+      <button className='add-to-outfit' onClick={() => {
+        setOutfits([...artists, props.currentProduct]);
+        }} >Add to Outfit
+      </button>
+    </div>
   )
 }
 
