@@ -16,13 +16,13 @@ const App = () => {
 
   useEffect(() => {
     getHandler('/product', productID, (response) => {setProduct(response.data)});
-  }, []);
+  }, [productID]);
 
   return (
     <div>
       {/* {JSON.stringify(product)} */}
-      <ProductOverview product={product} productID={productID}/>
-      <RelatedProducts setProduct={setProduct} product={product} id={product.id ? product.id : 0} />
+      <ProductOverview product={product} productID={product.id}/>
+      <RelatedProducts setProductID={setProductID} product={product} id={product.id ? product.id : 0} />
       <QA id={product.id ? product.id : 0}/>
       <Reviews id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
     </div>

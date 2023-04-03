@@ -24,7 +24,7 @@ const RelatedProducts = (props) => {
           </div>
         )
       })} */}
-      <Carousel relatedProductIDs={relatedProductsID} originalProduct={props.product} setProduct={props.setProduct} />
+      <Carousel relatedProductIDs={relatedProductsID} originalProduct={props.product} setProductID={props.setProductID} />
     </div>
   )
 }

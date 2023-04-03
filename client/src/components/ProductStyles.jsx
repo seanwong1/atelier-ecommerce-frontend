@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Styles = ({styles, styleClick}) => {
+const Styles = ({style, styles, styleClick}) => {
 
 
 
@@ -14,7 +14,7 @@ const Styles = ({styles, styleClick}) => {
 
     return (
         <div className='style_selector'>
-            <h3>Styles:</h3>
+            <h3>Style: {style.name}</h3>
             {styleRender()}
         </div>
     )

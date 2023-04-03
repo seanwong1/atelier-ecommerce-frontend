@@ -9,14 +9,14 @@ const ProductOverview = ({ product, productID }) => {
     const [style, setStyle] = useState({});
     const [images, setImages] = useState([]);
     const [image, setImage] = useState([]);
-    const  getStyles = async () => {
+    const getStyles = async () => {
         let options = {
             'url': '/styles',
-            'params': {'product_id': productID},
+            'params': { 'product_id': productID },
             'method': 'get'
-          }
-        
-          await axios.request(options)
+        }
+
+        await axios.request(options)
             .then((result) => {
                 console.log(result);
                 setStyles(result.data);
@@ -25,12 +25,13 @@ const ProductOverview = ({ product, productID }) => {
                 setImage(result.data[0].photos[0])
             })
             .catch((err) => {
-              console.log('ErrgettingStyles', err);
+                console.log('ErrgettingStyles', err);
             });
     }
 
     //will return sale info if item is on sale
     const onSale = () => {
+        console.log(product)
         if (style.sale_price !== null) {
             return (
                 <p>was: ${style.original_price} is: ${style.sale_price}</p>
@@ -44,7 +45,7 @@ const ProductOverview = ({ product, productID }) => {
 
     //render all the features
     const showFeatures = () => {
-        if(product.features) {
+        if (product.features) {
             return product.features.map(ftr => {
                 return `${ftr.feature}: ${ftr.value},  `
             })
@@ -55,7 +56,7 @@ const ProductOverview = ({ product, productID }) => {
     const styleClick = (e) => {
         e.preventDefault();
         styles.forEach((indStyle) => {
-            if(indStyle.style_id.toString() === e.target.id) {
+            if (indStyle.style_id.toString() === e.target.id) {
                 setStyle(indStyle);
                 setImage(indStyle.photos[0]);
                 setImages(indStyle.photos)
@@ -69,16 +70,16 @@ const ProductOverview = ({ product, productID }) => {
         e.preventDefault();
         var imageIndex = images.indexOf(image);
         console.log(imageIndex)
-        if(e.target.className === 'currImg') {
-            if(imageIndex === images.length - 1) {
+        if (e.target.className === 'currImg') {
+            if (imageIndex === images.length - 1) {
                 setImage(images[0]);
             } else {
-                setImage(images[imageIndex +1]);
+                setImage(images[imageIndex + 1]);
             }
-            
+
         } else {
             images.forEach(img => {
-                if(img.thumbnail_url === e.target.src) {
+                if (img.thumbnail_url === e.target.src) {
                     setImage(img);
                 }
             })
@@ -94,14 +95,14 @@ const ProductOverview = ({ product, productID }) => {
             'url': '/cart',
             'params': {},
             'method': 'post'
-          }
-        
-          axios.request(options)
+        }
+
+        axios.request(options)
             .then((result) => {
                 alert('added to cart')
             })
             .catch((err) => {
-              console.log('ErrgettingStyles', err);
+                console.log('ErrgettingStyles', err);
             });
     }
 
@@ -109,34 +110,27 @@ const ProductOverview = ({ product, productID }) => {
 
 
     useEffect(() => {
-        getStyles()
-    }, [])
+        if (productID !== undefined) {
+            getStyles()
+        }
+    }, [productID, product])
 
 
     return (
         <div className="productOverview">
 
-
-            <div className="productImages">
                 <ProductImages images={images} image={image} imageChange={imageChange} />
-            </div>
-            <div className='styles'>
-                <Styles styles={styles} styleClick={styleClick} />
-            </div>
             <div className='productDetails'>
                 <h2>{product.name}</h2>
                 <p>{product.description}</p>
                 {onSale()}
                 <p>category:{product.category}</p>
                 <p>features: {showFeatures()}</p>
-
-
-                <Cart cartSubmit={cartSubmit}/>
+                <div className='styles'>
+                    <Styles style={style} styles={styles} styleClick={styleClick} />
+                </div>
+                <Cart cartSubmit={cartSubmit} />
             </div>
-            <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
-            <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
-            <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
-
         </div>
     )
 
