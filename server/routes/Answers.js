@@ -5,8 +5,9 @@ const api = require('../../config.js');
 
 //post answer
 app.post('/add', async (req, res) => {
+  console.log(req.body.question_id);
   let options = {
-    'url': api.QUESTIONS + `/?0=${req.body.question_id}/answers`,
+    'url': api.QUESTIONS + `/${req.body.question_id}/answers`,
     // 'params': req.body.question_id,
     'method': 'post',
     'headers': {
