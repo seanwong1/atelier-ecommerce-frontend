@@ -448,6 +448,16 @@ border: 3px solid magenta;
 .QASearchBar {
   border: 2px ridge lightgray;
   height: 50px;
+  position: relative;
+}
+
+.QASearchBar > input {
+  position: absolute;
+  border: none;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .QACard {
