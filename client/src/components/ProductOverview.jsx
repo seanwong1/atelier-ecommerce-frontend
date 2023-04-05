@@ -9,6 +9,7 @@ const ProductOverview = ({ product, productID }) => {
     const [style, setStyle] = useState({});
     const [images, setImages] = useState([]);
     const [image, setImage] = useState([]);
+    const [skus, setSkus] = useState([]);
     const getStyles = async () => {
         let options = {
             'url': '/styles',
@@ -23,6 +24,7 @@ const ProductOverview = ({ product, productID }) => {
                 setStyle(result.data[0]);
                 setImages(result.data[0].photos)
                 setImage(result.data[0].photos[0])
+                setSkus(result.data[0].skus)
             })
             .catch((err) => {
                 console.log('ErrgettingStyles', err);
@@ -31,7 +33,6 @@ const ProductOverview = ({ product, productID }) => {
 
     //will return sale info if item is on sale
     const onSale = () => {
-        console.log(product)
         if (style.sale_price !== null) {
             return (
                 <p>was: ${style.original_price} is: ${style.sale_price}</p>
@@ -59,9 +60,11 @@ const ProductOverview = ({ product, productID }) => {
             if (indStyle.style_id.toString() === e.target.id) {
                 setStyle(indStyle);
                 setImage(indStyle.photos[0]);
-                setImages(indStyle.photos)
+                setImages(indStyle.photos);
+                setSkus(indStyle.skus);
             }
         })
+        console.log(skus);
 
     }
 
@@ -69,7 +72,6 @@ const ProductOverview = ({ product, productID }) => {
     const imageChange = (e) => {
         e.preventDefault();
         var imageIndex = images.indexOf(image);
-        console.log(imageIndex)
         if (e.target.className === 'currImg') {
             if (imageIndex === images.length - 1) {
                 setImage(images[0]);
@@ -129,7 +131,7 @@ const ProductOverview = ({ product, productID }) => {
                 <div className='styles'>
                     <Styles style={style} styles={styles} styleClick={styleClick} />
                 </div>
-                <Cart cartSubmit={cartSubmit} />
+                <Cart cartSubmit={cartSubmit} skus={skus}/>
             </div>
         </div>
     )
