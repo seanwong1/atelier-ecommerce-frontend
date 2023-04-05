@@ -39,8 +39,6 @@ app.post('/uploadReviewPic', upload.single('file'), (req, res) => {
   res.redirect(`/storeReviewPic?filePath=${filePath}`);
 });
 
-
-
 app.get('/storeReviewPic', (req, res) => {
   const filePath = req.query.filePath;
 
@@ -77,14 +75,8 @@ app.post('/addReview', (req, res, next) => {
 
 app.get('/product', (req, res, next) => {
   let options = {
-<<<<<<< HEAD
-    'url': req.query ? api.testURL + `${req.query.product_id}` : api.URL,
-    //'url': api.URL + `${req.query.product_id}`,
 
-=======
     'url': req.query ? api.URL + req.query['product_id'] : api.testURL,
->>>>>>> ef11834eb97ec4fd059d63bb86c63499a4d29879
-    // 'url': api.URL,
     'params': req.query,
     'method': 'get',
     'headers': {
@@ -103,13 +95,9 @@ app.get('/product', (req, res, next) => {
 app.get('/styles', (req, res, next) => {
   console.log(req.query.product_id)
   let options = {
-<<<<<<< HEAD
-    'url': req.query ? api.testURL + `${req.query.product_id}` + '/styles' : api.URL,
-    //'url':  api.URL + `${req.query.product_id}` + '/styles',
-=======
-    'url': req.query ? api.URL + req.query['product_id'] + '/styles' : api.testURL,
-    // 'url': api.URL + '/styles',
->>>>>>> ef11834eb97ec4fd059d63bb86c63499a4d29879
+
+    'url': req.query ? api.URL + req.query['product_id'] + '/styles' : api.testURL + '/styles',
+
     'params': req.query,
     'method': 'get',
     'headers': {
@@ -273,9 +261,9 @@ app.get('/reviewsMeta', (req, res, next) => {
 app.get('/related', (req, res, next) => {
   let options = {
     //TODO: change this back when api.URL no longer hardcoded
-    // 'url': req.query ? api.testURL + req.query['product_id'] + '/related' : api.URL + '/related',
+    'url': req.query ? api.URL + req.query['product_id'] + '/related' : api.testURL + '/related',
     // 'url': api.URL + req.query['product_id'] + '/related',
-    'url': api.URL + req.query['product_id'] + '/related',
+    // 'url': api.URL + req.query['product_id'] + '/related': api.testURL,
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
@@ -289,45 +277,6 @@ app.get('/related', (req, res, next) => {
     res.sendStatus(404);
   })
 });
-
-// app.get('/relatedProduct', (req, res, next) => {
-//   let options = {
-//     'url': api.testURL + req.query['productID'],
-//     'method': 'get',
-//     'headers': {
-//       'Authorization': api.TOKEN
-//     }
-//   }
-
-//   axios.request(options)
-//     .then((data) => {
-//       res.send(data.data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.sendStatus(404);
-//     })
-// });
-
-// app.get('/relatedProduct', (req, res, next) => {
-//   let options = {
-//     'url': api.URL + req.query['product_id'],
-//     'method': 'get',
-//     'headers': {
-//       'Authorization': api.TOKEN
-//     }
-//   }
-
-//   axios.request(options)
-//     .then((data) => {
-//       res.send(data.data);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.sendStatus(404);
-//     })
-// });
-
 
 app.put('/reviewsHelpful', (req, res, next) => {
   let options = {

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Carousel from './Carousel.jsx';
 import RelatedProduct from './RelatedProduct.jsx';
+import Outfits from './Outfits.jsx';
 
 import getHandler from '../lib/getHandler.js';
 
@@ -24,7 +25,16 @@ const RelatedProducts = (props) => {
           </div>
         )
       })} */}
-      <Carousel relatedProductIDs={relatedProductsID} originalProduct={props.product} setProduct={props.setProduct} />
+      <Carousel relatedProductIDs={relatedProductsID} originalProduct={props.product} setProduct={props.setProduct} >
+        {relatedProductsID.map((relatedProductID) => {
+          return (
+            <div key={relatedProductID}>
+              <RelatedProduct originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProduct={props.setProduct} />
+            </div>
+        )
+      })}
+      </Carousel>
+      {/* <Outfits currentProduct={props.originalProduct} /> */}
     </div>
   )
 }
