@@ -77,28 +77,39 @@ app.post('/addReview', (req, res, next) => {
 
 app.get('/product', (req, res, next) => {
   let options = {
+<<<<<<< HEAD
+    'url': req.query ? api.testURL + `${req.query.product_id}` : api.URL,
+    //'url': api.URL + `${req.query.product_id}`,
+
+=======
     'url': req.query ? api.URL + req.query['product_id'] : api.testURL,
+>>>>>>> ef11834eb97ec4fd059d63bb86c63499a4d29879
     // 'url': api.URL,
-    // 'params': req.query,
+    'params': req.query,
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
     }
   }
-  console.log(options);
+  //console.log(options);
   axios.request(options).then((data) => {
-    // console.log(data.data);
     res.send(data.data);
   }).catch((err) => {
-    console.log(err);
+    //console.log(err);
     res.sendStatus(404);
   })
 });
-
+//stylez API request*******
 app.get('/styles', (req, res, next) => {
+  console.log(req.query.product_id)
   let options = {
+<<<<<<< HEAD
+    'url': req.query ? api.testURL + `${req.query.product_id}` + '/styles' : api.URL,
+    //'url':  api.URL + `${req.query.product_id}` + '/styles',
+=======
     'url': req.query ? api.URL + req.query['product_id'] + '/styles' : api.testURL,
     // 'url': api.URL + '/styles',
+>>>>>>> ef11834eb97ec4fd059d63bb86c63499a4d29879
     'params': req.query,
     'method': 'get',
     'headers': {

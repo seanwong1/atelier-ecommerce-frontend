@@ -12,15 +12,16 @@ import getHandler from './lib/getHandler.js';
 const App = () => {
   const [product, setProduct] = useState({});
   const [average, setAverage] = useState(0);
+  const [productID, setProductID] = useState(71697)
 
   useEffect(() => {
-    getHandler('/product', 71697, (response) => {setProduct(response.data)});
+    getHandler('/product', productID, (response) => {setProduct(response.data)});
   }, []);
 
   return (
     <div>
       {/* {JSON.stringify(product)} */}
-      <ProductOverview product={product}/>
+      <ProductOverview product={product} productID={productID}/>
       <RelatedProducts setProduct={setProduct} product={product} id={product.id ? product.id : 0} />
       <QA id={product.id ? product.id : 0}/>
       <Reviews id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
