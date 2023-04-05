@@ -75,28 +75,29 @@ app.post('/addReview', (req, res, next) => {
 
 app.get('/product', (req, res, next) => {
   let options = {
+
     'url': req.query ? api.URL + req.query['product_id'] : api.testURL,
-    // 'url': api.URL,
-    // 'params': req.query,
+    'params': req.query,
     'method': 'get',
     'headers': {
       'Authorization': api.TOKEN
     }
   }
-  console.log(options);
+  //console.log(options);
   axios.request(options).then((data) => {
-    // console.log(data.data);
     res.send(data.data);
   }).catch((err) => {
-    console.log(err);
+    //console.log(err);
     res.sendStatus(404);
   })
 });
-
+//stylez API request*******
 app.get('/styles', (req, res, next) => {
+  console.log(req.query.product_id)
   let options = {
+
     'url': req.query ? api.URL + req.query['product_id'] + '/styles' : api.testURL + '/styles',
-    // 'url': api.URL + '/styles',
+
     'params': req.query,
     'method': 'get',
     'headers': {
