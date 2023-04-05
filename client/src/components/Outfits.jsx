@@ -1,19 +1,34 @@
 import React, { useState, useEffect } from 'react';
 
 import Carousel from './Carousel.jsx';
+import RelatedProduct from './RelatedProduct.jsx';
 
 const Outfits = (props) => {
-  const [outfits, setOutfits] = useState([]);
+  const removeOutfit = (outfitToRemove) => {
+    console.log(outfitToRemove)
+    var array = [...props.outfits]; // make a separate copy of the array
+    for (var i = 0; i < array.length; i++) {
+      if (array[i].id === outfitToRemove.id) {
+        array.splice(i, 1);
+        props.setOutfits(array);
+        break;
+      }
+    }
+  }
 
   return (
     <div>
-      <Carousel>
-        {outfits.map((outfit) => {
-          <div>hello</div>
+      <Carousel relatedProductIDs={props.outfits} originalProduct={props.product} >
+        {props.outfits.map((outfit) => {
+          return (
+            <RelatedProduct outfit={outfit} removeOutfit={removeOutfit} />
+          )
         })}
       </Carousel>
       <button className='add-to-outfit' onClick={() => {
-        setOutfits([...artists, props.currentProduct]);
+          if (!props.outfits.some(outfit => outfit.id === props.currentProduct.id)) {
+            props.setOutfits([...props.outfits, props.currentProduct]);
+          }
         }} >Add to Outfit
       </button>
     </div>

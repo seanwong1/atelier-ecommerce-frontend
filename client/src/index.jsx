@@ -13,6 +13,7 @@ const App = () => {
   const [product, setProduct] = useState({});
   const [average, setAverage] = useState(0);
   const [productID, setProductID] = useState(71697)
+  const [outfits, setOutfits] = useState([]);
 
   useEffect(() => {
     getHandler('/product', productID, (response) => {setProduct(response.data)});
@@ -22,7 +23,7 @@ const App = () => {
     <div>
       {/* {JSON.stringify(product)} */}
       <ProductOverview product={product} productID={productID}/>
-      <RelatedProducts setProduct={setProduct} product={product} id={product.id ? product.id : 0} />
+      <RelatedProducts setProduct={setProduct} setOutfits={setOutfits} outfits={outfits} product={product} id={product.id ? product.id : 0} />
       <QA id={product.id ? product.id : 0}/>
       <Reviews id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
     </div>
