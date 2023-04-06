@@ -156,15 +156,14 @@ const QA = ({ id, product_name }) => {
           {!moreQuestions ? sortedAndFilteredQuestions[0] : sortedAndFilteredQuestions}
           {!moreQuestions && sortedAndFilteredQuestions[1]}
         </div>
-        {
-        moreQuestions && sortedAndFilteredQuestions.length > 2
-        && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>Less Answered Questions</button>
-        }
-        {
-        !moreQuestions && sortedAndFilteredQuestions.length > 2
-        && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>More Answered Questions</button>
-        }
-        <button onClick={toggleShowQuestionModal}>Ask a question</button>
+        <div className='QA-Buttons'>
+          {moreQuestions && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>Less Answered Questions</button>}
+          {
+          !moreQuestions && sortedAndFilteredQuestions.length > 2
+          && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>More Answered Questions</button>
+          }
+          <button className='QA-Ask-Question'onClick={toggleShowQuestionModal}>Ask a question</button>
+        </div>
         {showQuestionModal && createPortal(
           <AddQuestion
             product_id={id}
