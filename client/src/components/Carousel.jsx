@@ -46,7 +46,7 @@ const Carousel = (props) => {
       {/* {display.map((relatedProductID) => {
         return (
           <div key={relatedProductID}>
-            <RelatedProduct originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProduct={props.setProduct} />
+            <RelatedProduct originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProductID={props.setProductID} />
           </div>
         )
       })} */}
