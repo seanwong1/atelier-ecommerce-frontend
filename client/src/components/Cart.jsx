@@ -37,7 +37,7 @@ const Cart = ( {cartSubmit, skus} )  => {
             <button className='QTY'>Qty: {qty} ^ </button>
             </div>
 
-        
+
         <button onClick={sizeDrop} className='Size'>Size</button>
         <button className='Add-to-Cart'>Add to Cart</button>
         </div>
