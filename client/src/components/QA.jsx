@@ -22,21 +22,21 @@ const QA = ({ id, product_name }) => {
   const [moreQuestions, setMoreQuestions] = useState(false);
   const [search, setSearch] = useState('');
 
-  useEffect((() => {
-    async function fetchQuestions() {
-      try {
-        let options = {
-          'url': '/questions',
-          'params': {product_id: 71697}, //place the id prop here,
-          'method': 'get'
-        }
-        let result = await axios.request(options);
-        setQuestions(result.data);
-      } catch(err) {
-        console.log(err);
+  async function fetchQuestions() {
+    try {
+      let options = {
+        'url': '/questions',
+        'params': id, //{product_id: 71697}, //place the id prop here,
+        'method': 'get'
       }
-    };
+      let result = await axios.request(options);
+      setQuestions(result.data);
+    } catch(err) {
+      console.log(err);
+    }
+  };
 
+  useEffect((() => {
     fetchQuestions();
   }), [id]);
 
@@ -57,6 +57,8 @@ const QA = ({ id, product_name }) => {
     try {
       await axios.post('/questions/add', body);
       alert(`Thank you for submitting your question: ${body.question}`);
+      toggleShowQuestionModal();
+      await fetchQuestions();
     } catch (err) {
       alert('Your question was not submitted due to some internal error. Please try again shortly');
     }
@@ -80,6 +82,8 @@ const QA = ({ id, product_name }) => {
     try {
       await axios.post('/answer/add', body);
       alert(`Thank you for submitting your answer: ${body.answer}`);
+      toggleShowAnswerModal();
+      fetchQuestions();
     } catch (err) {
       alert('Your answer was not submitted due to some internal error. Please try again shortly');
     }
@@ -105,6 +109,10 @@ const QA = ({ id, product_name }) => {
     setEmail(e.target.value);
   };
 
+  const onSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
   const onInputPhoto = async (e) => {
     let photo = await getImagePath(e.target.files[0]);
 
@@ -123,10 +131,6 @@ const QA = ({ id, product_name }) => {
 
   const toggleMoreQuestions = (e) => {
     setMoreQuestions(!moreQuestions);
-  };
-
-  const onSearch = (e) => {
-    setSearch(e.target.value);
   };
 
   let sortedAndFilteredQuestions = [...questions].filter((question) => {

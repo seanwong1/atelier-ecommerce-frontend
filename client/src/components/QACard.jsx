@@ -36,13 +36,13 @@ const QACard = ({ id, question, helpfulness, reported, answers, isHelpful, toggl
       <div className='Question'>
         <div>Q: {question}</div>
         <div className='QA-Option'>
-          <span className='Helpful'>Helpful?</span>
+          <span className='Helpful'>Helpful?&ensp;</span>
           {
             helpful === false ?
-            <span onClick={onClickHelpful}>Yes ({helpfulness})  |</span> :
+            <span onClick={onClickHelpful}>&ensp;Yes ({helpfulness})&ensp;|&ensp;</span> :
             <span>Yes ({helpfulness + 1})</span>
           }
-          <span className='Question-add' onClick={(e) => toggleShowAnswerModal(e, question, id)}>   Add answer</span>
+          <span className='Question-add' onClick={(e) => toggleShowAnswerModal(e, question, id)}> Add answer</span>
         </div>
       </div>
 
