@@ -17,7 +17,9 @@ const RelatedProducts = (props) => {
   }, [props.id]);
 
   return (
-    <div className='related-products'>
+    <div className='related-products' onClick={(event) => {
+      props.clickTrack('rp', event);
+    }}>
       {/* {relatedProductsID.map((relatedProductID) => {
         return (
           <div key={relatedProductID}>

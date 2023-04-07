@@ -83,21 +83,26 @@ const RelatedProduct = (props) => {
           </tbody>
         </table>
       </Modal>
-      <div className='preview-image' onClick={() => { props.setProductID(relatedProduct.id); }}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
-      <div className='product-category' >Category: {relatedProduct.category}</div>
-      <div className='product-name' >Name: {relatedProduct.name}</div>
-      <div className='product-price' >Price: {
-        salePrice ? <div><s>relatedProduct.default_price</s><p style="color:red;">salePrice</p></div> : relatedProduct.default_price
-        }
-      </div>
-      <div className='product-rating' data-testid='product-rating' >Rating:
-        <div className='averageStars'>
-          <div>
-            {'★'.repeat(Math.floor(stars))}
+      <div className='rp-data'>
+
+        <div className='preview-image' onClick={() => { props.setProductID(relatedProduct.id); }}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
+        <div className='preview-text'>
+          <div className='product-category' >Category: {relatedProduct.category}</div>
+          <div className='product-name' >Name: {relatedProduct.name}</div>
+          <div className='product-price' >Price: {
+            salePrice ? <div><s>relatedProduct.default_price</s><p style="color:red;">salePrice</p></div> : relatedProduct.default_price
+            }
           </div>
-          <ShadedStar shade={stars % 1}/>
-          <div>
-            {'☆'.repeat(5-Math.floor(stars))}
+          <div className='product-rating' data-testid='product-rating' >Rating:
+            <div className='averageStars'>
+              <div>
+                {'★'.repeat(Math.floor(stars))}
+              </div>
+              <ShadedStar shade={stars % 1}/>
+              <div>
+                {'☆'.repeat(5-Math.floor(stars))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
