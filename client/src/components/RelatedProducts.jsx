@@ -30,12 +30,14 @@ const RelatedProducts = (props) => {
         {relatedProductsID.map((relatedProductID) => {
           return (
             <div key={relatedProductID}>
-              <RelatedProduct originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProduct={props.setProduct} />
+              <RelatedProduct originalProduct={props.product} relatedProductID={relatedProductID} setProduct={props.setProduct} />
             </div>
         )
       })}
       </Carousel>
-      {/* <Outfits currentProduct={props.originalProduct} /> */}
+
+      <Outfits currentProduct={props.product} setOutfits={props.setOutfits} outfits={props.outfits} />
+
 
     </div>
   )
