@@ -4,7 +4,7 @@ import ProductImages from './ProductImages.jsx';
 import Styles from './ProductStyles.jsx';
 import Cart from './Cart.jsx';
 
-const ProductOverview = ({ product, productID }) => {
+const ProductOverview = ({ product, productID, clickTrack }) => {
     const [styles, setStyles] = useState([]);
     const [style, setStyle] = useState({});
     const [images, setImages] = useState([]);
@@ -119,7 +119,9 @@ const ProductOverview = ({ product, productID }) => {
 
 
     return (
-        <div className="productOverview">
+        <div className="productOverview" onClick={(event) => {
+            clickTrack('po', event);
+        }}>
 
                 <ProductImages images={images} image={image} imageChange={imageChange} />
             <div className='productDetails'>
