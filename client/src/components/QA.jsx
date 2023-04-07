@@ -8,7 +8,7 @@ import QASearchBar from './QASearchBar.jsx';
 import getImagePath from '../lib/fileReader.js';
 import missing from '../lib/filterMissing.js';
 
-const QA = ({ id, product_name }) => {
+const QA = ({ id, product_name, clickTrack }) => {
   const [questions, setQuestions] = useState([]);
   const [question, setQuestion] = useState({});
   const [questionText, setQuestionText] = useState('');
@@ -26,7 +26,7 @@ const QA = ({ id, product_name }) => {
     try {
       let options = {
         'url': '/questions',
-        'params': id, //{product_id: 71697}, //place the id prop here,
+        'params': {product_id: id}, //, //place the id prop here,
         'method': 'get'
       }
       let result = await axios.request(options);
@@ -153,7 +153,9 @@ const QA = ({ id, product_name }) => {
 
   return (
     <>
-      <div className='QA'>
+      <div className='QA' onClick={(event) => {
+            clickTrack('qa', event);
+        }}>
         <h3>QUESTIONS & ANSWERS</h3>
         <QASearchBar onSearch={onSearch} search={search}/>
         <div className='QA-List'>

@@ -1,16 +1,28 @@
 html {
-    background-color: white;
+    background-color: rgb(0, 0, 0);
 }
 
-/* #app {
-  can we reference process.env here?
-} */
+#app {
+  font-family: 'Comic Sans MS';
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+.headingRect {
+  width: 6000px;
+  height: 100px;
+  background: linear-gradient(to bottom, rgb(20, 20, 32), rgb(50, 34, 34), rgb(0, 0, 0));
+  color: rgb(255, 255, 255);
+  font-size: 70px;
+}
 
 .reviews {
   display: flex;
   justify-content: center;
   width: 1200px;
-  font-family: Geneva;
+
 }
 
 .reviewsOver {
@@ -345,7 +357,6 @@ border-radius: 50%;
   width: 500px;
   height: 500px;
   overflow: scroll;
-  font-family: Geneva;
 
 }
 
@@ -540,4 +551,39 @@ body .QA-Modal-Container > .QAModal{
   border-radius: 40px;
   transform: translate(-50%, -50%);
   background-color: white ;
+}
+
+.preview-image {
+  min-height: 200px;
+  min-width: 100px;
+  max-height: 200px;
+  max-width: 100px;
+  height: auto;
+  width: auto;
+  margin-bottom: 10px;
+}
+
+
+
+.rp-data {
+  margin-left: 10px;
+  margin-right: 220px;
+  margin-bottom: 50px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.related-products {
+  height: auto;
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.image-box {
+  background-color: transparent;
 }
