@@ -17,10 +17,12 @@ const ProductImages = ({images, image,  imageChange}) => {
             <div className='image-box'>
             <img onClick={imageChange} className='currImg' src={image.url}></img>
             </div>
-            
+
         </div>
 
+
     )
+
 
 }
 

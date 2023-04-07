@@ -22,21 +22,21 @@ const QA = ({ id, product_name }) => {
   const [moreQuestions, setMoreQuestions] = useState(false);
   const [search, setSearch] = useState('');
 
-  useEffect((() => {
-    async function fetchQuestions() {
-      try {
-        let options = {
-          'url': '/questions',
-          'params': {product_id: 71697}, //place the id prop here,
-          'method': 'get'
-        }
-        let result = await axios.request(options);
-        setQuestions(result.data);
-      } catch(err) {
-        console.log(err);
+  async function fetchQuestions() {
+    try {
+      let options = {
+        'url': '/questions',
+        'params': id, //{product_id: 71697}, //place the id prop here,
+        'method': 'get'
       }
-    };
+      let result = await axios.request(options);
+      setQuestions(result.data);
+    } catch(err) {
+      console.log(err);
+    }
+  };
 
+  useEffect((() => {
     fetchQuestions();
   }), [id]);
 
@@ -57,6 +57,8 @@ const QA = ({ id, product_name }) => {
     try {
       await axios.post('/questions/add', body);
       alert(`Thank you for submitting your question: ${body.question}`);
+      toggleShowQuestionModal();
+      await fetchQuestions();
     } catch (err) {
       alert('Your question was not submitted due to some internal error. Please try again shortly');
     }
@@ -80,13 +82,15 @@ const QA = ({ id, product_name }) => {
     try {
       await axios.post('/answer/add', body);
       alert(`Thank you for submitting your answer: ${body.answer}`);
+      toggleShowAnswerModal();
+      fetchQuestions();
     } catch (err) {
       alert('Your answer was not submitted due to some internal error. Please try again shortly');
     }
   };
 
-  const isHelpful = async (e, id) => {
-    await axios.put('/question/helpful', {'question_id': id });
+  const onClickQuestionHelpful = async (e, id) => {
+    await axios.put('/questions/helpful', {'question_id': id });
   };
 
   const onChangeQuestion = (e) => {
@@ -103,6 +107,10 @@ const QA = ({ id, product_name }) => {
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
+  };
+
+  const onSearch = (e) => {
+    setSearch(e.target.value);
   };
 
   const onInputPhoto = async (e) => {
@@ -125,10 +133,6 @@ const QA = ({ id, product_name }) => {
     setMoreQuestions(!moreQuestions);
   };
 
-  const onSearch = (e) => {
-    setSearch(e.target.value);
-  };
-
   let sortedAndFilteredQuestions = [...questions].filter((question) => {
    return question.question_body.toLowerCase().includes(search.toLowerCase());
   })
@@ -140,7 +144,7 @@ const QA = ({ id, product_name }) => {
         id={question.question_id}
         question={question.question_body}
         helpfulness={question.question_helpfulness}
-        isHelpful={isHelpful}
+        isHelpful={onClickQuestionHelpful}
         reported={question.reported}
         answers={question.answers}
         toggleShowAnswerModal={toggleShowAnswerModal}
@@ -150,20 +154,20 @@ const QA = ({ id, product_name }) => {
   return (
     <>
       <div className='QA'>
+        <h3>QUESTIONS & ANSWERS</h3>
         <QASearchBar onSearch={onSearch} search={search}/>
-
-        {!moreQuestions ? sortedAndFilteredQuestions[0] : sortedAndFilteredQuestions}
-        {!moreQuestions && sortedAndFilteredQuestions[1]}
-        {
-        moreQuestions && sortedAndFilteredQuestions.length > 2
-        && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>Less Answered Questions</button>
-        }
-        {
-        !moreQuestions && sortedAndFilteredQuestions.length > 2
-        && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>More Answered Questions</button>
-        }
-        <button onClick={toggleShowQuestionModal}>Ask a question</button>
-        {/* Double check if Addquestion is a Modal/test for it */}
+        <div className='QA-List'>
+          {!moreQuestions ? sortedAndFilteredQuestions[0] : sortedAndFilteredQuestions}
+          {!moreQuestions && sortedAndFilteredQuestions[1]}
+        </div>
+        <div className='QA-Buttons'>
+          {moreQuestions && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>Less Answered Questions</button>}
+          {
+          !moreQuestions && sortedAndFilteredQuestions.length > 2
+          && <button className='QA-More-Questions' onClick={toggleMoreQuestions}>More Answered Questions</button>
+          }
+          <button className='QA-Ask-Question'onClick={toggleShowQuestionModal}>Ask a question</button>
+        </div>
         {showQuestionModal && createPortal(
           <AddQuestion
             product_id={id}
