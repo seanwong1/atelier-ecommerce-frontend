@@ -24,10 +24,10 @@ const App = () => {
       {/* {JSON.stringify(product)} */}
 
       <ProductOverview product={product} productID={productID}/>
-      <RelatedProducts setProduct={setProduct} setOutfits={setOutfits} outfits={outfits} product={product} id={product.id ? product.id : 0} />
+      <RelatedProducts setProductID={setProductID} setOutfits={setOutfits} outfits={outfits} product={product} id={product.id ? product.id : 0} />
 
       <QA id={product.id ? product.id : 0}/>
-      <Reviews id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/> */}
+      <Reviews id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
     </div>
   );
 }
