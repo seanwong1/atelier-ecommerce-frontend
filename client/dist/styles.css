@@ -299,11 +299,16 @@ html {
 
 }
 
+.productImages {
+margin-bottom: 100px;
+border: 3px solid pink;
+}
+
 .style_thumb {
-width: 12%;
+width: 40px;
 height: auto;
 aspect-ratio: 1/1;
-margin: 15px;
+margin: 1%;
 border: 1px transparent;
 border-radius: 50%;
 }
@@ -440,4 +445,99 @@ border-radius: 50%;
   font-size: x-small;
   margin-top: 5px;
   margin-bottom: 7px;
+}
+
+
+/* ________________Q&A Styles ______________*/
+
+/* Q&A Modals */
+
+.QA {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 90%;
+  width: 1200px;
+  margin-left: 5%;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  padding-right: 10px;
+
+}
+
+/* .QA-List {
+  overflow: scroll;
+  min-height: 100px;
+  max-height: 900px;
+} */
+
+.QASearchBar {
+  border: 2px ridge lightgray;
+  height: 50px;
+  position: relative;
+}
+
+.QASearchBar > input {
+  position: absolute;
+  border: none;
+  top: 0;
+  left: 0;
+  height: 95%;
+  width: 99%;
+}
+
+.QASearchBar > input:focus {
+  outline: none;
+}
+
+.QA-Buttons > button {
+  background-color: white;
+  border: 2px ridge lightgray;
+  height: 50px;
+  position: relative;
+}
+
+.QA-Ask-Question {
+  margin-left: 20px;
+}
+
+.QACard {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.Question {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.QA-Answer {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+body .QA-Modal-Container {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(5px);
+}
+
+body .QA-Modal-Container > .QAModal{
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  height: 50%;
+  width: 50%;
+  top: 50%;
+  left: 50%;
+  border-radius: 40px;
+  transform: translate(-50%, -50%);
+  background-color: white ;
 }
