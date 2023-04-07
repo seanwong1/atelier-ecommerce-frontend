@@ -29,7 +29,7 @@ const RelatedProducts = (props) => {
         {relatedProductsID.map((relatedProductID) => {
           return (
             <div key={relatedProductID}>
-              <RelatedProduct originalProduct={props.product} relatedProductID={relatedProductID} setProduct={props.setProduct} />
+              <RelatedProduct originalProduct={props.product} relatedProductID={relatedProductID} setProductID={props.setProductID} />
             </div>
         )
       })}
