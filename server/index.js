@@ -335,6 +335,28 @@ app.post('/clickTrack', (req, res, next) => {
   })
 })
 
+app.post('/cart', (req, res) => {
+  let options = {
+    'url': api.CARTURL,
+    'method': 'post',
+    'headers': {
+      'Authorization': api.TOKEN
+    },
+    'data': {
+      'sku_id': req.query.sku_id
+    }
+  }
+
+  axios.request(options).then((data) => {
+     console.log('********************');
+    res.sendStatus(201);
+  }).catch((err) => {
+    console.log('**********', err);
+    res.sendStatus(404);
+  })
+
+})
+
 const port = process.env.PORT;
 
 app.listen(port, () => {

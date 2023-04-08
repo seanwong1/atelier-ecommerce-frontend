@@ -587,3 +587,45 @@ flex-direction: column;
 .image-box {
 background-color: transparent;
 }
+
+.CartButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sizeSelect {
+  display: table-row;
+  font-size: 0px;
+}
+
+.sizeDrop {
+  font-size: 0px;
+  overflow: scroll;
+  height: 100px;
+}
+
+.size-item {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.qtySelect {
+  font-size: 0px;
+}
+
+.qtyDrop {
+  font-size: 0px;
+  overflow: scroll;
+  height: 100px;
+}
+
+.qty-item {
+  position: relative;
+  width: 100%;
+  text-align: center;
+}
+
+.Add-to-Cart {
+  height: 75%;
+}
