@@ -6,7 +6,7 @@ const ProductImages = ({images, image,  imageChange}) => {
     const thumbnails = () => {
         return images.map((img) => {
             return (
-            <div key={Math.random()*10000}><img  className='indThumnails' src={img.thumbnail_url} onClick={imageChange}></img></div>
+            <div key={Math.random()*10000}><img  className='indThumnails' src={img.thumbnail_url} alt={'Hello'} onClick={imageChange}></img></div>
             )
         })
     }

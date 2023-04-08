@@ -168,7 +168,9 @@ const Reviews = (props) => {
 
 
   return (
-    <div className="reviews">
+    <div className="reviews" onClick={(event) => {
+      props.clickTrack('re', event);
+    }}>
       <aside className="reviewsOver">
         {total > 0 ? <ReviewsOverview data={meta} total={total} average={average} filterFunc={filterByStar}/>
         : ''}

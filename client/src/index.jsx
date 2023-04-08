@@ -19,15 +19,32 @@ const App = () => {
     getHandler('/product', productID, (response) => {setProduct(response.data)});
   }, [productID]);
 
+  const clickHandle = (widget, element) => {
+    console.log(widget);
+    let options = {
+      url: '/clickTrack',
+      params: {widget, 'element': element.target.className},
+      method: 'post'
+    }
+    axios.request(options).then(() => {
+      console.log('click was tracked');
+    }).catch(() => {
+      console.log('click not tracked');
+    })
+  }
+
   return (
-    <div>
+    <div onClick={clickHandle}>
+      <div className='headingRect'>
+        SCAMpD.COM
+      </div>
       {/* {JSON.stringify(product)} */}
 
-      <ProductOverview product={product} productID={productID}/>
-      <RelatedProducts setProductID={setProductID} setOutfits={setOutfits} outfits={outfits} product={product} id={product.id ? product.id : 0} />
+      <ProductOverview clickTrack={clickHandle} product={product} productID={productID}/>
+      <RelatedProducts clickTrack={clickHandle} setProductID={setProductID} setOutfits={setOutfits} outfits={outfits} product={product} id={product.id ? product.id : 0} />
 
-      <QA id={product.id ? product.id : 0}/>
-      <Reviews id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
+      <QA clickTrack={clickHandle} id={product.id ? product.id : 0} />
+      <Reviews clickTrack={clickHandle} id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
     </div>
   );
 }
