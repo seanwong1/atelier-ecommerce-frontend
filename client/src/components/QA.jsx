@@ -126,6 +126,7 @@ const QA = ({ id, product_name, clickTrack }) => {
 
   const toggleShowAnswerModal = (e, question, id) => {
     setShowAnswerModal(!showAnswerModal);
+    setThumbnail('');
     setQuestion({'question_id': id, 'question': question});
   };
 
@@ -137,7 +138,7 @@ const QA = ({ id, product_name, clickTrack }) => {
    return question.question_body.toLowerCase().includes(search.toLowerCase());
   })
   .sort((a, b) => {
-    return a['question_helpfulness'] - b['question_helpfulness'];
+    return b['question_helpfulness'] - a['question_helpfulness'];
   }).map((question) =>
       <QACard
         key={question.question_id}

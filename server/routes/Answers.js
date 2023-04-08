@@ -22,6 +22,7 @@ app.post('/add', async (req, res) => {
   }
 
   try {
+    console.log('OPTIONS_____________________________________,',options)
     let result = await axios.request(options);
     console.log(result);
     res.send('Working');
@@ -35,6 +36,22 @@ app.put('/helpful', async (req, res) => {
   console.log(req.body.answer_id);
   let options = {
     'url': api.ANSWER + `/${req.body.answer_id}/helpful`,
+    'method': 'put',
+    'headers': {
+      'Authorization': api.TOKEN
+    }
+  }
+
+  await axios.request(options);
+  res.status(201).send('working');
+
+});
+
+//report an answer
+app.put('/report', async (req, res) => {
+  console.log(req.body.answer_id);
+  let options = {
+    'url': api.ANSWER + `/${req.body.answer_id}/report`,
     'method': 'put',
     'headers': {
       'Authorization': api.TOKEN
