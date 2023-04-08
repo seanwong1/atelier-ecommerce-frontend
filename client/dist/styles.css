@@ -1,240 +1,240 @@
 html {
-    background-color: rgb(0, 0, 0);
+  background-color: rgb(0, 0, 0);
 }
 
 #app {
-  font-family: 'Comic Sans MS';
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(0, 0, 0);
-  color: white;
+font-family: 'Comic Sans MS';
+display: flex;
+flex-direction: column;
+background-color: rgb(0, 0, 0);
+color: white;
 }
 
 .headingRect {
-  width: 6000px;
-  height: 100px;
-  background: linear-gradient(to bottom, rgb(20, 20, 32), rgb(50, 34, 34), rgb(0, 0, 0));
-  color: rgb(255, 255, 255);
-  font-size: 70px;
+width: 6000px;
+height: 100px;
+background: linear-gradient(to bottom, rgb(20, 20, 32), rgb(50, 34, 34), rgb(0, 0, 0));
+color: rgb(255, 255, 255);
+font-size: 70px;
 }
 
 .reviews {
-  display: flex;
-  justify-content: center;
-  width: 1200px;
+display: flex;
+justify-content: center;
+width: 1200px;
 
 }
 
 .reviewsOver {
-  width: 200px;
-  margin-left: 2%;
-  margin-right: 40px;
+width: 200px;
+margin-left: 2%;
+margin-right: 40px;
 }
 
 .reviewsList {
-  width: 500px;
-  height: 500px;
-  overflow: scroll;
-  flex-grow: 1;
-  size: fixed;
-  font-size: 12px;
-  padding-left: 5px;
-  position: relative;
-  margin-right: 20px;
+width: 500px;
+height: 500px;
+overflow: scroll;
+flex-grow: 1;
+size: fixed;
+font-size: 12px;
+padding-left: 5px;
+position: relative;
+margin-right: 20px;
 }
 
 .averageStars {
-  display: flex;
+display: flex;
 }
 
 .averageStarText {
-  font-weight: bold;
-  font-size: xx-large;
-  margin-right: 10px;
+font-weight: bold;
+font-size: xx-large;
+margin-right: 10px;
 }
 
 .reviewsByStar {
-  display: flex;
-  flex-direction: column-reverse;
-  font-size: xx-small;
+display: flex;
+flex-direction: column-reverse;
+font-size: xx-small;
 }
 
 .starsTextBtn {
-  flex: '0 0 auto';
-  width: 25%;
-  border: none;
-  background-color: white;
-  font-size: xx-small;
+flex: '0 0 auto';
+width: 25%;
+border: none;
+background-color: white;
+font-size: xx-small;
 }
 
 .percentRecommended {
-  font-size: 9.75px;
-  margin-bottom: 5px;
+font-size: 9.75px;
+margin-bottom: 5px;
 }
 
 .ratingDescript {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+width: 100%;
+display: flex;
+flex-direction: column;
 }
 
 .descriptors {
-  display: flex;
-  justify-content: space-between;
-  width: 200px;
-  position: relative;
+display: flex;
+justify-content: space-between;
+width: 200px;
+position: relative;
 }
 
 .descriptorText {
-  display: flex;
-  margin-bottom: 2px;
-  font-size: 8px;
+display: flex;
+margin-bottom: 2px;
+font-size: 8px;
 }
 
 #descriptor1 {
-  display: flex;
-  justify-content: center;
+display: flex;
+justify-content: center;
 }
 
 #descriptor11 {
-  display: flex;
-  justify-content: flex-end;
+display: flex;
+justify-content: flex-end;
 }
 
 #descriptor2 {
-  display: flex;
-  justify-content: flex-end;
+display: flex;
+justify-content: flex-end;
 }
 
 .descriptorBox {
-  background-color: rgb(232, 231, 231);
-  height: 5px;
-  width: 63px;
-  justify-content: space-between;
+background-color: rgb(232, 231, 231);
+height: 5px;
+width: 63px;
+justify-content: space-between;
 }
 .flexrow {
-  display: flex;
-  flex-direction: row;
+display: flex;
+flex-direction: row;
 }
 .flexcolumn {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 }
 .descriptorBox1 {
-  background-color: rgb(232, 231, 231);
-  height: 5px;
-  width: 47px;
+background-color: rgb(232, 231, 231);
+height: 5px;
+width: 47px;
 }
 
 .triangle {
-  position: absolute;
-  width: 0;
-  height: 0;
-  border-left: 3.5px solid transparent;
-  border-right: 3.5px solid transparent;
-  border-top: 7px solid black;
+position: absolute;
+width: 0;
+height: 0;
+border-left: 3.5px solid transparent;
+border-right: 3.5px solid transparent;
+border-top: 7px solid black;
 }
 
 .reviewTile {
-  margin-top: 10px;
+margin-top: 10px;
 }
 
 .reviewStarRating {
-  display: flex;
+display: flex;
 }
 
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width:100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+position: fixed;
+top: 0;
+left: 0;
+width:100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.6);
 }
 
 .modal-main {
-  position:fixed;
-  background: white;
-  width: 80%;
-  height: auto;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+position:fixed;
+background: white;
+width: 80%;
+height: auto;
+top:50%;
+left:50%;
+transform: translate(-50%,-50%);
 }
 
 .display-block {
-  display: block;
+display: block;
 }
 
 .display-none {
-  display: none;
+display: none;
 }
 
 .reviewStarRating {
-  display: flex;
+display: flex;
 }
 
 .tileTop {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
 }
 
 .reviewNameDate {
-  font-size: x-small;
+font-size: x-small;
 }
 
 .reviewBody {
-  overflow-wrap: anywhere;
-  font-size: small;
-  margin-top: 10px;
+overflow-wrap: anywhere;
+font-size: small;
+margin-top: 10px;
 }
 
 .reviewSummary {
-  overflow-wrap: normal;
-  font-size: large;
+overflow-wrap: normal;
+font-size: large;
 }
 
 .sumRemain {
-  font-size: 11px;
-  font-weight: normal;
-  margin-top: 5px;
-  margin-bottom: 5px;
+font-size: 11px;
+font-weight: normal;
+margin-top: 5px;
+margin-bottom: 5px;
 }
 
 .reviewHelpfulness {
-  display: flex;
-  flex-direction: row;
-  font-size: smaller;
+display: flex;
+flex-direction: row;
+font-size: smaller;
 }
 
 .yesBtn {
-  margin-right: 3px;
-  margin-left: 3px;
+margin-right: 3px;
+margin-left: 3px;
 }
 
 .reportBtn {
-  margin-left: 3px;
-  margin-bottom: 3px;
+margin-left: 3px;
+margin-bottom: 3px;
 }
 
 .line {
-  height: 2px;
-  background-color: black;
-  width: 100%;
+height: 2px;
+background-color: black;
+width: 100%;
 }
 
 .sortDrop {
-  font-size: 11px;
-  text-decoration: underline;
-  font-weight: bold;
-  border: none;
+font-size: 11px;
+text-decoration: underline;
+font-weight: bold;
+border: none;
 }
 
 .totalDescript {
-  font-weight: bold;
-    font-size: small;
-  padding-bottom: 10px;
+font-weight: bold;
+  font-size: small;
+padding-bottom: 10px;
 }
 
 
@@ -260,54 +260,54 @@ html {
 
 /* Product overview css here */
 .productOverview {
-  position: relative;
-  top: 50px;
-  margin-bottom: 200px;
-  display: flex;
-  border: transparent greenyellow 5px;
+position: relative;
+top: 50px;
+margin-bottom: 200px;
+display: flex;
+border: transparent greenyellow 5px;
 }
 .styleImages {
-  display: flex;
-  width: 50%;
-  margin: 30px;
-  border: 3px transparent pink;
+display: flex;
+width: 50%;
+margin: 30px;
+border: 3px transparent pink;
 }
 .productDetails{
-  width: 50%;
-  margin: 30px;
-  border: transparent green 2px;
+width: 50%;
+margin: 30px;
+border: transparent green 2px;
 }
 
 .image-box {
-  margin-left: 50px;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  border: transparent black 1px;
-  width: 70%;
-  height: 750px;
+margin-left: 50px;
+background-color: white;
+display: flex;
+align-items: center;
+border: transparent black 1px;
+width: 70%;
+height: 750px;
 }
 
 .currImg {
-  margin: auto;
-  width: 100%;
-  height: auto;
+margin: auto;
+width: 100%;
+height: auto;
 }
 
 .imgThumbs {
-  width: 10%;
-  margin: 20px;
+width: 10%;
+margin: 20px;
 }
 
 .indThumnails {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1/1;
-  margin-top: 30px;
-  margin-left: 5px;
-  opacity: 90%;
-  border: 1px black solid;
-  border-radius: 10%;
+width: 100%;
+height: auto;
+aspect-ratio: 1/1;
+margin-top: 30px;
+margin-left: 5px;
+opacity: 90%;
+border: 1px black solid;
+border-radius: 10%;
 
 }
 
@@ -326,136 +326,136 @@ border-radius: 50%;
 }
 
 .style_selector {
-  margin-top: 30px;
-  margin-bottom: 50px;
-  border: 3px transparent magenta;
+margin-top: 30px;
+margin-bottom: 50px;
+border: 3px transparent magenta;
 }
 
 
 
 .carousel-container {
-  display: flex;
-  flex-wrap: nowrap;
+display: flex;
+flex-wrap: nowrap;
 }
 
 
 
 .addReviewBtn, .moreReviewsBtn {
-  height: 40px;
-  width: 100%;
-  margin-left: 10px;
-  background-color: white;
+height: 40px;
+width: 100%;
+margin-left: 10px;
+background-color: white;
 }
 
 .moreReviewsBtn {
-  height: 40px;
-  width: 200px;
-  margin-top: 10px;
+height: 40px;
+width: 200px;
+margin-top: 10px;
 }
 
 .reviewsNew {
-  width: 500px;
-  height: 500px;
-  overflow: scroll;
+width: 500px;
+height: 500px;
+overflow: scroll;
 
 }
 
 .rnTitle {
-  font-weight: bold;
-  font-size: larger;
+font-weight: bold;
+font-size: larger;
 }
 
 .rnSubtitle {
-  font-size: smaller;
-  margin-left: 5px;
-  margin-bottom: 20px;
+font-size: smaller;
+margin-left: 5px;
+margin-bottom: 20px;
 }
 
 .rnContainer {
-  height: 1000px;
-  justify-content: space-between;
+height: 1000px;
+justify-content: space-between;
 }
 
 .charButtonsRow {
-  width: 500px;
-  justify-content: space-between;
+width: 500px;
+justify-content: space-between;
 }
 
 .charButtons {
-  justify-self: center;
+justify-self: center;
 }
 .charText {
-  font-size: xx-small;
-  display: flex;
-  justify-content: center;
+font-size: xx-small;
+display: flex;
+justify-content: center;
 }
 
 .rBodBox {
-  height: 200px;
-  text-align: left;
-  overflow-y: scroll;
-  resize: none;
-  display: block;
+height: 200px;
+text-align: left;
+overflow-y: scroll;
+resize: none;
+display: block;
 
 }
 
 .starSelect {
-  font-size: 15px;
+font-size: 15px;
 }
 
 .reviewThumbnail {
-  max-width: 50px;
-  max-height: 50px;
-  width: auto;
-  height: auto;
-  margin-right: 10px;
+max-width: 50px;
+max-height: 50px;
+width: auto;
+height: auto;
+margin-right: 10px;
 }
 
 .reviewPhotos {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+margin-top: 10px;
+margin-bottom: 10px;
+display: flex;
+flex-direction: row;
+width: 100%;
 }
 
 .reviewPhotoModal {
-  max-height: 500px;
-  max-width: 500px;
-  width: auto;
-  height: auto;
+max-height: 500px;
+max-width: 500px;
+width: auto;
+height: auto;
 }
 
 #reviewModal {
-  max-width: 500px;
-  width: auto;
-  background-color: transparent;
+max-width: 500px;
+width: auto;
+background-color: transparent;
 }
 
 .closeButton {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  border: none;
-  background-color: white;
+display: flex;
+justify-content: flex-end;
+width: 100%;
+border: none;
+background-color: white;
 }
 
 .searchReviews {
-  margin-top: 500px;
-  font-weight: bold;
-  font-size: x-small;
+margin-top: 500px;
+font-weight: bold;
+font-size: x-small;
 }
 
 .increaseReviewBody {
-  margin-top: 15px;
-  text-decoration: underline;
+margin-top: 15px;
+text-decoration: underline;
 }
 
 .reviewResponse {
-  background-color: lightgrey;
-  font-size: x-small;
-  margin-top: 5px;
-  margin-bottom: 7px;
+background-color: lightgrey;
+font-size: x-small;
+margin-top: 5px;
+margin-bottom: 7px;
 }
 
 
@@ -464,15 +464,15 @@ border-radius: 50%;
 /* Q&A Modals */
 
 .QA {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 90%;
-  width: 1200px;
-  margin-left: 5%;
-  margin-bottom: 5%;
-  margin-top: 5%;
-  padding-right: 10px;
+display: flex;
+justify-content: center;
+flex-direction: column;
+height: 90%;
+width: 1200px;
+margin-left: 5%;
+margin-bottom: 5%;
+margin-top: 5%;
+padding-right: 10px;
 
 }
 
@@ -505,34 +505,34 @@ border-radius: 50%;
 }
 
 .QASearchBar > input:focus {
-  outline: none;
+outline: none;
 }
 
 .QA-Buttons > button {
-  background-color: white;
-  border: 2px ridge lightgray;
-  height: 50px;
-  position: relative;
+background-color: white;
+border: 2px ridge lightgray;
+height: 50px;
+position: relative;
 }
 
 .QA-Ask-Question {
-  margin-left: 20px;
+margin-left: 20px;
 }
 
 .QACard {
-  margin-top: 10px;
-  margin-bottom: 10px;
+margin-top: 10px;
+margin-bottom: 10px;
 }
 
 .Question {
-  display: flex;
-  justify-content: space-between;
+display: flex;
+justify-content: space-between;
 }
 
 
 .QA-Answer {
-  margin-top: 10px;
-  margin-bottom: 10px;
+margin-top: 10px;
+margin-bottom: 10px;
 }
 
 body .QA-Modal-Container {
@@ -603,36 +603,36 @@ body .QA-Modal-Container .QA-Modal-Thumbnail {
 }
 
 .preview-image {
-  min-height: 200px;
-  min-width: 100px;
-  max-height: 200px;
-  max-width: 100px;
-  height: auto;
-  width: auto;
-  margin-bottom: 10px;
+min-height: 200px;
+min-width: 100px;
+max-height: 200px;
+max-width: 100px;
+height: auto;
+width: auto;
+margin-bottom: 10px;
 }
 
 
 
 .rp-data {
-  margin-left: 10px;
-  margin-right: 220px;
-  margin-bottom: 50px;
-  height: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+margin-left: 10px;
+margin-right: 220px;
+margin-bottom: 50px;
+height: 700px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
 }
 
 
 .related-products {
-  height: auto;
-  width: 1200px;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+height: auto;
+width: 1200px;
+display: flex;
+justify-content: space-between;
+flex-direction: column;
 }
 
 .image-box {
-  background-color: transparent;
+background-color: transparent;
 }
