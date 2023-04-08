@@ -43,7 +43,7 @@ const App = () => {
       <ProductOverview clickTrack={clickHandle} product={product} productID={productID}/>
       <RelatedProducts clickTrack={clickHandle} setProductID={setProductID} setOutfits={setOutfits} outfits={outfits} product={product} id={product.id ? product.id : 0} />
 
-      <QA clickTrack={clickHandle} id={product.id ? product.id : 0} />
+      <QA clickTrack={clickHandle} id={product.id ? product.id : 0} product_name={product.name}/>
       <Reviews clickTrack={clickHandle} id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
     </div>
   );
