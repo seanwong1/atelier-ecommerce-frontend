@@ -10,6 +10,9 @@ const ProductOverview = ({ product, productID, clickTrack }) => {
     const [images, setImages] = useState([]);
     const [image, setImage] = useState([]);
     const [skus, setSkus] = useState([]);
+    const [currSku, setCurrSku] = useState({});
+    const [size, setSize] = useState('');
+    const [stock, setStock] = useState(0);
     const getStyles = async () => {
         let options = {
             'url': '/styles',
@@ -25,6 +28,10 @@ const ProductOverview = ({ product, productID, clickTrack }) => {
                 setImages(result.data[0].photos)
                 setImage(result.data[0].photos[0])
                 setSkus(result.data[0].skus)
+                setCurrSku(Object.keys(result.data[0].skus)[0]);
+                setSize(result.data[0].skus[Object.keys(result.data[0].skus)[0]].size);
+                setStock(result.data[0].skus[Object.keys(result.data[0].skus)[0]].quantity);
+
             })
             .catch((err) => {
                 console.log('ErrgettingStyles', err);
@@ -133,7 +140,7 @@ const ProductOverview = ({ product, productID, clickTrack }) => {
                 <div className='styles'>
                     <Styles style={style} styles={styles} styleClick={styleClick} />
                 </div>
-                <Cart cartSubmit={cartSubmit} skus={skus}/>
+                <Cart cartSubmit={cartSubmit} skus={skus} currSku={currSku} size={size} stock={stock} setSize={setSize} setCurrSku= {setCurrSku}/>
             </div>
         </div>
     )

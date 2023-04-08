@@ -20,7 +20,6 @@ const App = () => {
   }, [productID]);
 
   const clickHandle = (widget, element) => {
-    console.log(widget);
     let options = {
       url: '/clickTrack',
       params: {widget, 'element': element.target.className},
