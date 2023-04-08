@@ -6,6 +6,8 @@ require('dotenv').config();
 const api = require('../config.js');
 const multer = require('multer');
 const fs = require('fs');
+const questionsRoute = require('./routes/Questions.js');
+const answersRoute = require('./routes/Answers.js');
 
 const storeImage = require('./lib/storeImage.js');
 
@@ -82,17 +84,17 @@ app.get('/product', (req, res, next) => {
       'Authorization': api.TOKEN
     }
   }
-  console.log(options);
+  //console.log(options);
   axios.request(options).then((data) => {
-    // console.log(data.data);
     res.send(data.data);
   }).catch((err) => {
-    console.log(err);
+    //console.log(err);
     res.sendStatus(404);
   })
 });
-
+//stylez API request*******
 app.get('/styles', (req, res, next) => {
+  console.log(req.query.product_id)
   let options = {
     'url': req.query ? api.URL + req.query['product_id'] + '/styles' : api.testURL + '/styles',
     'params': req.query,
@@ -112,53 +114,9 @@ app.get('/styles', (req, res, next) => {
   })
 });
 
-//retrieve list of questions
-app.get('/questions', async (req, res) => {
-  let options = {
-    'method': 'get',
-    'url': api.QUESTIONS,
-    'params': {
-      'product_id': req.query.product_id,
-      'page': 2,
-      'count': 10
-    },
-    'headers': {
-      'Authorization': api.TOKEN
-    }
-  }
-
-  try {
-    let questions = await axios.request(options);
-    res.send(questions.data.results)
-  } catch(err) {
-    console.log(err);
-  }
-});
-
-//post question
-app.post('/questions/add', async (req, res) => {
-  let options = {
-    'url': api.QUESTIONS,
-    'method': 'post',
-    'headers': {
-      'Authorization': api.TOKEN
-    },
-    'data': {
-      'body': req.body.question,
-      'name': req.body.nickname,
-      'email': req.body.email,
-      'product_id': req.body.product_id
-    }
-  }
-
-  try {
-    let result = await axios.request(options);
-    console.log(result);
-    res.send('Working');
-  } catch (err){
-    res.status(404).send(err);
-  }
-});
+//Questions & Answers routes
+app.use('/questions', questionsRoute);
+app.use('/answer', answersRoute);
 
 //post answer
 app.post('/answer/add', async (req, res) => {
