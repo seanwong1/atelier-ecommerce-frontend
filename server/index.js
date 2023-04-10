@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const compression = require('compression');
 const path = require('path')
 const axios = require('axios');
 require('dotenv').config();
@@ -8,9 +9,9 @@ const multer = require('multer');
 const fs = require('fs');
 const questionsRoute = require('./routes/Questions.js');
 const answersRoute = require('./routes/Answers.js');
-
 const storeImage = require('./lib/storeImage.js');
 
+app.use(compression());
 app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use(express.json());
 
