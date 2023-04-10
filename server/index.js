@@ -119,63 +119,6 @@ app.get('/styles', (req, res, next) => {
 app.use('/questions', questionsRoute);
 app.use('/answer', answersRoute);
 
-//post answer
-app.post('/answer/add', async (req, res) => {
-  let options = {
-    'url': api.QUESTIONS + `/?0=${req.body.question_id}/answers`,
-    // 'params': req.body.question_id,
-    'method': 'post',
-    'headers': {
-      'Authorization': api.TOKEN
-    },
-    'data': {
-      'body': req.body.answer,
-      'name': req.body.nickname,
-      'email': req.body.email,
-      'photos': req.body.photos
-    }
-  }
-
-  try {
-    let result = await axios.request(options);
-    console.log(result);
-    res.send('Working');
-  } catch(err) {
-    res.status(404).send(err)
-  }
-});
-
-
-//increase helpfulness of question
-app.put('/question/helpful', async (req, res) => {
-  let options = {
-    'url': api.QUESTIONS + `/${req.body.question_id}/helpful`,
-    'method': 'put',
-    'headers': {
-      'Authorization': api.TOKEN
-    }
-  }
-
-  await axios.request(options);
-  res.status(201).send('working');
-
-});
-
-//increase helpfulness of answer
-app.put('/answer/helpful', async (req, res) => {
-  console.log(req.body.answer_id);
-  let options = {
-    'url': api.ANSWER + `/${req.body.answer_id}/helpful`,
-    'method': 'put',
-    'headers': {
-      'Authorization': api.TOKEN
-    }
-  }
-
-  await axios.request(options);
-  res.status(201).send('working');
-
-});
 
 app.get('/reviews', (req, res, next) => {
   let options = {
