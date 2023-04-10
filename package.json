@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles --coverage --watchAll --collectCoverageFrom='src/components/**/*.{js,jsx}'",
+    "test": "jest --detectOpenHandles --coverage",
     "server-dev": "npx nodemon server/index.js",
     "client-dev": "webpack --mode development --watch"
   },
