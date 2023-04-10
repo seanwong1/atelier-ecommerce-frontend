@@ -15,7 +15,7 @@ const ProductImages = ({images, image,  imageChange}) => {
         <div className='styleImages'>
             <div className="imgThumbs">{thumbnails()}</div>
             <div className='image-box'>
-            <img onClick={imageChange} className='currImg' src={image.url}></img>
+            <img onClick={imageChange} className='currImg' src={image.url} alt={'no image'}></img>
             </div>
 
         </div>
