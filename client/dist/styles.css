@@ -268,18 +268,19 @@ border: transparent greenyellow 5px;
 }
 .styleImages {
 display: flex;
-width: 50%;
+width: 70%;
 margin: 30px;
 border: 3px transparent pink;
 }
 .productDetails{
-width: 50%;
+width: 30%;
 margin: 30px;
 border: transparent green 2px;
 }
 
 .image-box {
-margin-left: 50px;
+margin-left: 30px;
+margin-right: 30px;
 background-color: white;
 display: flex;
 align-items: center;
@@ -677,4 +678,12 @@ background-color: transparent;
 
 .Add-to-Cart {
   height: 75%;
+}
+
+.next-image, .prev-image{
+  height: auto;
+  width: 100px;
+  aspect-ratio: 5/40;
+  margin: 5px;
+  vertical-align: auto;
 }
