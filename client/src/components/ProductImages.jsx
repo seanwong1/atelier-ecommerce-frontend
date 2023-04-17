@@ -3,7 +3,7 @@ import Zoom from './Zoom.jsx';
 
 
 const ProductImages = ({images, image,  imageChange}) => {
-    const [showZoom,setShowZoom] = useState('none');
+    const [showZoom, setShowZoom] = useState('none');
 
     const thumbnails = () => {
         return images.map((img) => {
@@ -14,30 +14,25 @@ const ProductImages = ({images, image,  imageChange}) => {
     }
 
     const zoomImage = (e) => {
-        setShowZoom('block');
+        if( showZoom === 'none') {
+            setShowZoom('block');
+        } else if ( showZoom === 'block' ) {
+            setShowZoom('none');
+        }
+
     }
     
-    const closeZoom = (e) => {
-        setShowZoom('none')
-    }
 
     return (
         <div className='styleImages'>
             <div className="imgThumbs">{thumbnails()}</div>
             <div className='image-box'>
-            <button className='prev-image' onClick={imageChange}>Back</button>
-            <img onClick={zoomImage} className='currImg' src={image.url}></img>
-            <button className='next-image' onClick={imageChange}>Next</button>
+                <button className='prev-image' onClick={imageChange}>Back</button>
+                <img style={{ transform: `scale(${showZoom})` }} onClick={zoomImage} className='currImg' src={image.url}></img>
+                <button className='next-image' onClick={imageChange}>Next</button>
             </div>
 
-            <Zoom className="zoomedView" onClick={closeZoom} showZoom={showZoom} >
-                <img
-
-                  className='zoomImage'
-                  src={image.url}
-                  alt='No Photo to Display'
-                />
-              </Zoom>
+            <Zoom showZoom={showZoom} image={image} zoomImage={zoomImage} style={{display: showZoom}} />
 
         </div>
 

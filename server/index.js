@@ -292,7 +292,7 @@ app.post('/deleteImages', (req, res, next) => {
 app.get('/cart', (req, res) => {
 
   let options = {
-    'url':  req.query ? api.URL + req.query.product_id : api.testURL,
+    'url': 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/cart',
     // 'url': api.URL,
     // 'params': req.query,
     'method': 'get',
@@ -337,7 +337,7 @@ app.post('/clickTrack', (req, res, next) => {
 
 app.post('/cart', (req, res) => {
   let options = {
-    'url': api.CARTURL,
+    'url': 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/cart',
     'method': 'post',
     'headers': {
       'Authorization': api.TOKEN

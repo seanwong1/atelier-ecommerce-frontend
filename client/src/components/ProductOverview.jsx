@@ -37,7 +37,6 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
 
         await axios.request(options)
             .then((result) => {
-                console.log(result);
                 setStyles(result.data);
                 setStyle(result.data[0]);
                 setImages(result.data[0].photos)
@@ -86,9 +85,8 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
                 setSkus(indStyle.skus);
             }
         })
-        console.log(skus);
 
-    }
+    };
 
     //change the current image displayed when an image thumbnail is clicked
     const imageChange = (e) => {
@@ -185,7 +183,7 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
                 <div className='styles'>
                     <Styles style={style} styles={styles} styleClick={styleClick} />
                 </div>
-                <Cart product={product} outfits={outfits} setOutfits={setOutfits} cartSubmit={cartSubmit} skus={skus} currSku={currSku} size={size} stock={stock} setSize={setSize} setCurrSku={setCurrSku} />
+                <Cart product={product} outfits={outfits} setOutfits={setOutfits} cartSubmit={cartSubmit} skus={skus} currSku={currSku} size={size} stock={stock} setSize={setSize} setCurrSku={setCurrSku} setStock={setStock} />
             </div>
         </div>
     )

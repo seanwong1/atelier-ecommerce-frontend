@@ -296,16 +296,18 @@ height: auto;
 }
 
 .imgThumbs {
-width: 10%;
+width: 15%;
+height: 700px;
+overflow: scroll;
 margin: 20px;
 }
 
 .indThumnails {
-width: 100%;
+width: 80%;
 height: auto;
 aspect-ratio: 1/1;
 margin-top: 30px;
-margin-left: 5px;
+margin-left: 20px;
 opacity: 90%;
 border: 1px black solid;
 border-radius: 10%;
@@ -686,4 +688,33 @@ background-color: transparent;
   aspect-ratio: 5/40;
   margin: 5px;
   vertical-align: auto;
+}
+
+.zoom-box {
+    bottom: 0;
+    right: 2%;
+    z-index: 100000;
+    position: fixed;
+    height: 100vw;
+    width:  100vw;
+    background-color: rgba(0,0,0,.5);
+}
+
+.img-zoom {
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  max-height: 125%;
+  width: auto;
+  top: -2%;
+  left: 30%;
+  z-index: 1000000;
+  border: 5px solid rgb(0, 0, 0);
+  border-radius: 40px;
+  /* transform: translate(-50%, -50%); */
+  background-color: white ;
+}
+
+.Favorite {
+  height: 75%;
 }
