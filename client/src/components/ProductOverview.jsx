@@ -115,7 +115,7 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
     }
 
     const cartSubmit = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
         let options = {
             'url': '/cart',
