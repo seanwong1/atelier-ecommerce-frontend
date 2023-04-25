@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --detectOpenHandles --coverage",
     "server-dev": "npx nodemon server/index.js",
-    "client-dev": "webpack --mode development --watch"
+    "client-dev": "webpack --mode development --watch",
+    "build": "webpack --mode development"
   },
   "dependencies": {
     "@babel/core": "^7.12.3",
