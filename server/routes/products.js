@@ -1,8 +1,9 @@
-const axios = require('axios');
 const express = require('express');
 const router = express.Router();
 
 require('dotenv').config();
+
+const axios = require('axios');
 
 router.get('/product', (req, res, next) => {
   let options = {
@@ -12,7 +13,8 @@ router.get('/product', (req, res, next) => {
     'headers': {
       'Authorization': process.env.TOKEN
     }
-  }
+  };
+
   axios.request(options).then((data) => {
     res.send(data.data);
   }).catch((err) => {

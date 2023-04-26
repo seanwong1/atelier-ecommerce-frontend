@@ -16,6 +16,8 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
 // Product Routes
 app.use('/', productsRouter);
 
@@ -27,8 +29,6 @@ app.use('/answer', answersRoute);
 app.use('/', cartRouter);
 
 app.use('/', reviewsRouter);
-
-app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.post('/clickTrack', (req, res, next) => {
   console.log(req.query);
