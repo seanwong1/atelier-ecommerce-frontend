@@ -9,9 +9,11 @@ import createFeatureSet from '../lib/createFeatureSet.js';
 import calculateAverage from '../lib/averageCalc.jsx';
 import calculateTotal from '../lib/totalCalc.jsx';
 
+import image_unavailable from '../img/image_unavailable.png';
+
 const RelatedProduct = (props) => {
   const [relatedProduct, setRelatedProduct] = useState(props.outfit ? props.outfit: {});
-  const [productImages, setProductImages] = useState([{thumbnail_url: 'blah'}]);
+  const [productImages, setProductImages] = useState([{thumbnail_url: image_unavailable}]);
   const [modalState, setModalState] = useState(false);
   const [featureSet, setFeatureSet] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
@@ -55,6 +57,7 @@ const RelatedProduct = (props) => {
     setFeatureSet(createFeatureSet(props.originalProduct, relatedProduct));
   }, [relatedProduct]);
 
+  console.log(productImages)
   return (
     <div className='related-product' data-testid='related-product' >
       {isOutfit ?
@@ -85,7 +88,7 @@ const RelatedProduct = (props) => {
       </Modal>
       <div className='rp-data'>
 
-        <div className='preview-image' onClick={() => { props.setProductID(relatedProduct.id); }}><img src={productImages[0].thumbnail_url} alt={relatedProduct.description}></img></div>
+        <div className='preview-image' onClick={() => { props.setProductID(relatedProduct.id); }}><img src={productImages[0].thumbnail_url ? productImages[0].thumbnail_url : image_unavailable} alt={relatedProduct.description} ></img></div>
         <div className='preview-text'>
           <div className='product-category flexrow' >Category: {relatedProduct.category}</div>
           <div className='product-name flexrow' >Name: {relatedProduct.name}</div>
