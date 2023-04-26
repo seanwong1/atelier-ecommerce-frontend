@@ -8,11 +8,12 @@
   2. [Related Items](#related-items)
   3. [Questions & Answers](#questions--answers)
   4. [Reviews](#reviews)
-4. [Authors](#authors)
-5. [License](#license)
+4. [Technologies Used](#technologies-used)
+5. [Authors](#authors)
+6. [License](#license)
 
 ## Overview <a id='overview'></a>
-The FEC Retail Store is a web application built using React.js and Express.js meant to emulate functionality one would find on an online retail store. [NEEDS IMPROVEMENT]
+The FEC Retail Store is a web application meant to emulate functionality one would find on an online retail store. The motivation behind this project was to learn how to navigate building a multi-component application as a team.
 
 ## Setup <a id='setup'></a>
 ### Docker
@@ -80,6 +81,13 @@ $ npm run server-dev
   - Length
   - Fit
 - Allows a user to compose a new review
+
+## Technologies Used <a id='technologies-used'></a>
+FEC Retail Store was built with Node v16.17.1 and uses the following
+- [React.js](https://react.dev/) - To build out front-end
+- [Express.js](https://expressjs.com/) - For building out server
+- [Jest.js](https://jestjs.io/) - For testing
+- [Webpack.js](https://webpack.js.org/)
 
 ## Authors <a id='authors'></a>
 - [David Cardona](https://github.com/clothesTooLarge)
