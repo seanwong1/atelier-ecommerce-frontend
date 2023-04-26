@@ -1,23 +1,91 @@
-FEC
-This repository contains code for the Federal Election Commission (FEC) project for the RPP2210-FEC-SCAMP course.
+# Front End Capstone - Retail Store
 
-Overview
-The FEC project involves analyzing campaign finance data from the FEC to understand patterns and trends in political spending. The code in this repository includes scripts for downloading and cleaning the FEC data, as well as notebooks for analyzing and visualizing the data.
+## Table of Contents
+1. [Overview](#overview)
+2. [Setup](#setup)
+3. [Features](#features)
+  1. [Product Overview](#product-overview)
+  2. [Related Items](#related-items)
+  3. [Questions & Answers](#questions--answers)
+  4. [Reviews](#reviews)
+4. [Authors](#authors)
+5. [License](#license)
 
-Getting Started
-To use this code, you will need to have Python 3 installed on your system. You will also need to install the required packages listed in the requirements.txt file.
+## Overview <a id='overview'></a>
+The FEC Retail Store is a web application built using React.js and Express.js meant to emulate functionality one would find on an online retail store. [NEEDS IMPROVEMENT]
 
-To download the FEC data, run the download_data.py script. This will download the data from the FEC website and save it to the data/ directory. Note that this may take some time, as the data is quite large.
+## Setup <a id='setup'></a>
+### Docker
+```
+$ git clone https://github.com/seanwong1/FEC.git
+$ cd FEC
+$ docker-compose up
+# application viewable at http://localhost:3000
+```
 
-To clean the data, run the clean_data.py script. This will clean the data and save the cleaned data to the clean_data/ directory.
+### macOS
+```
+$ brew install node git
+$ git clone https://github.com/seanwong1/FEC.git
+$ cd FEC
+$ npm install
+$ npm run build
+$ npm run server-dev
+# application viewable at http://localhost:3000
+```
 
-To analyze the data, open one of the Jupyter notebooks in the notebooks/ directory. These notebooks contain code for analyzing and visualizing the FEC data.
+### Linux
+```
+$ sudo apt-get install node git
+$ git clone https://github.com/seanwong1/FEC.git
+$ cd FEC
+$ npm install
+$ npm run build
+$ npm run server-dev
+# application viewable at http://localhost:3000
+```
 
-Contributing
-If you would like to contribute to this project, please fork the repository and create a new branch for your changes. Then submit a pull request with your changes.
+## Features <a id='features'></a>
+### Product Overview <a id='product-overview'></a>
+- Displays product information such as
+  - Product title
+  - Product category
+  - Product price
+  - Average rating
+- Switch between product styles by clicking thumbnail
+- Adding to a cart with options for size and quantity
+- Image gallery with ability to zoom in on an image
 
-License
+### Related Items <a id='related-items'></a>
+- Display a carousel of related items with product information
+  - Clicking a related item brings user to product overview for that item
+  - Clicking the star icon brings up a comparison modal listing features for the clicked item and the item currently in overview
+  - Clicking the plus icon adds the item currently in overview to an outfit list
+- The outfit list stores a list of products the user designates
+  - The list persists across page navigation and through browsing sessions
+
+### Questions & Answers <a id='questions-answers'></a>
+- View a list of questions asked by users, each followed by a list of answers
+- Has search functionality to match text entered in input box
+- User can ask or answer a question
+
+### Reviews <a id='reviews'></a>
+- Display a list of reviews with ability to sort reviews by various metrics
+- Provides a breakdown of user ratings (total number of users who gave a certain rating)
+- Show user feedback of certain product characteristics
+  - Size
+  - Width
+  - Comfort
+  - Quality
+  - Length
+  - Fit
+- Allows a user to compose a new review
+
+## Authors <a id='authors'></a>
+- [David Cardona](https://github.com/clothesTooLarge)
+- [Alvino Handiman](https://github.com/alvinohandiman)
+- [Nick Monteleone](https://github.com/Nickmont3)
+- [Sean Wong](https://github.com/seanwong1)
+
+## License <a id='license'></a>
 This code is released under the MIT License. See the LICENSE file for details.
-
-Acknowledgements
-This project was created as part of the RPP2210-FEC-SCAMP course at [university name]. Thanks to [professor name] for teaching the course and providing guidance on the project.
