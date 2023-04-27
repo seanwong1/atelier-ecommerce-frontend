@@ -67,7 +67,7 @@ const RelatedProduct = (props) => {
         <table>
           <thead>
             <tr>
-              <th>{typeof props.originalProduct !== undefined ? null : props.originalProduct.name}</th>
+              <th>{props.originalProduct.name ? props.originalProduct.name : null}</th>
               <th> | features | </th>
               <th>{relatedProduct.name ? relatedProduct.name : null}</th>
             </tr>
