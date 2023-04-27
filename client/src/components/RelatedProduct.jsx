@@ -57,7 +57,6 @@ const RelatedProduct = (props) => {
     setFeatureSet(createFeatureSet(props.originalProduct, relatedProduct));
   }, [relatedProduct]);
 
-  console.log(productImages)
   return (
     <div className='related-product' data-testid='related-product' >
       {isOutfit ?

@@ -20,14 +20,7 @@ const RelatedProducts = (props) => {
     <div className='related-products' onClick={(event) => {
       props.clickTrack('rp', event);
     }}>
-      {/* {relatedProductsID.map((relatedProductID) => {
-        return (
-          <div key={relatedProductID}>
-            <RelatedProduct originalProduct={props.product} relatedProductID={relatedProductID} setProduct={props.setProduct} />
-          </div>
-        )
-      })} */}
-      <Carousel relatedProductIDs={relatedProductsID} originalProduct={props.product} setProduct={props.setProduct} >
+      <Carousel relatedProductIDs={relatedProductsID} originalProduct={props.product} setProductID={props.setProductID} >
         {relatedProductsID.map((relatedProductID) => {
           return (
             <div key={relatedProductID}>
