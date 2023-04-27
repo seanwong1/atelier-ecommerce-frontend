@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import Carousel from './Carousel.jsx';
 import RelatedProduct from './RelatedProduct.jsx';
-import Outfits from './Outfits.jsx';
 
 import getHandler from '../lib/getHandler.js';
 
@@ -20,19 +19,15 @@ const RelatedProducts = (props) => {
     <div className='related-products' onClick={(event) => {
       props.clickTrack('rp', event);
     }}>
-      <Carousel relatedProductIDs={relatedProductsID} originalProduct={props.product} setProductID={props.setProductID} >
-        {relatedProductsID.map((relatedProductID) => {
+      <Carousel relatedProductIDs={relatedProductsID} originalProduct={props.product} setProductID={props.setProductID} />
+        {/* {relatedProductsID.map((relatedProductID) => {
           return (
             <div key={relatedProductID}>
               <RelatedProduct originalProduct={props.product} relatedProductID={relatedProductID} setProductID={props.setProductID} />
             </div>
         )
       })}
-      </Carousel>
-
-      <Outfits currentProduct={props.product} setOutfits={props.setOutfits} outfits={props.outfits} />
-
-
+      </Carousel> */}
     </div>
   )
 }

@@ -6,6 +6,7 @@ import QA from './components/QA.jsx';
 import ProductOverview from './components/ProductOverview.jsx'
 import Reviews from './components/Reviews.jsx';
 import RelatedProducts from './components/RelatedProducts.jsx';
+import Outfits from './components/Outfits.jsx';
 
 import getHandler from './lib/getHandler.js';
 
@@ -19,8 +20,7 @@ const App = () => {
   const seeReviewsClick = (e) => {
     console.log(ref)
    ref.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-}
-
+  }
 
   useEffect(() => {
     getHandler('/product', productID, (response) => {setProduct(response.data)});
@@ -47,8 +47,8 @@ const App = () => {
       {/* {JSON.stringify(product)} */}
 
       {/* <ProductOverview clickTrack={clickHandle} product={product} productID={productID} seeReviewsClick={seeReviewsClick} outfits={outfits} setOutfits={setOutfits}/> */}
-      <RelatedProducts clickTrack={clickHandle} setProductID={setProductID} setOutfits={setOutfits} outfits={outfits} product={product} id={product.id ? product.id : 0} />
-
+      <RelatedProducts clickTrack={clickHandle} setProductID={setProductID} setOutfits={setOutfits} product={product} id={product.id ? product.id : 0} />
+      <Outfits currentProduct={product} setOutfits={setOutfits} outfits={outfits} />
       <QA clickTrack={clickHandle} id={product.id ? product.id : 0} product_name={product.name}/>
       <Reviews ref={ref} clickTrack={clickHandle} id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
     </div>

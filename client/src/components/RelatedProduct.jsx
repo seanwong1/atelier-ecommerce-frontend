@@ -12,7 +12,7 @@ import calculateTotal from '../lib/totalCalc.jsx';
 import image_unavailable from '../img/image_unavailable.png';
 
 const RelatedProduct = (props) => {
-  const [relatedProduct, setRelatedProduct] = useState(props.outfit ? props.outfit: {});
+  const [relatedProduct, setRelatedProduct] = useState(props.outfit ? props.outfit : {});
   const [productImages, setProductImages] = useState([{thumbnail_url: image_unavailable}]);
   const [modalState, setModalState] = useState(false);
   const [featureSet, setFeatureSet] = useState([]);

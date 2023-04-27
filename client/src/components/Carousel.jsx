@@ -41,8 +41,6 @@ const Carousel = (props) => {
     }
   }, [currentIndex, array]);
 
-
-  console.log(props.relatedProductIDs)
   return (
     <div className='carousel-container' >
       {showLeft ? <button className='carousel-left' onClick={previousItem} >left</button> : null}
