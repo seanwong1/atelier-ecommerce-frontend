@@ -39,6 +39,10 @@ const Carousel = (props) => {
       setShowLeft(true);
       setShowRight(true);
     }
+    if (array.length < CAROUSEL_LENGTH) {
+      setShowLeft(false);
+      setShowRight(false);
+    }
   }, [currentIndex, array]);
 
   return (
@@ -47,7 +51,7 @@ const Carousel = (props) => {
       {display.map((relatedProductID) => {
         return (
           <div key={relatedProductID}>
-            <RelatedProduct originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProductID={props.setProductID} />
+            <RelatedProduct originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProductID={props.setProductID} isOutfit={props.isOutfit ? true : false} removeOutfit={props.removeOutfit} />
           </div>
         )
       })}

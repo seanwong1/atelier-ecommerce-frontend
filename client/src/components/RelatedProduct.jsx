@@ -12,14 +12,14 @@ import calculateTotal from '../lib/totalCalc.jsx';
 import image_unavailable from '../img/image_unavailable.png';
 
 const RelatedProduct = (props) => {
-  const [relatedProduct, setRelatedProduct] = useState(props.outfit ? props.outfit : {});
+  const [relatedProduct, setRelatedProduct] = useState(props.outfit ? props.outfit: {});
   const [productImages, setProductImages] = useState([{thumbnail_url: image_unavailable}]);
   const [modalState, setModalState] = useState(false);
   const [featureSet, setFeatureSet] = useState([]);
   const [averageRating, setAverageRating] = useState(0);
   const [salePrice, setSalePrice] = useState(null);
   const [stars, setStars] = useState(0);
-  const [isOutfit, setIsOutfit] = useState(props.outfit ? true : false);
+  const [isOutfit, setIsOutfit] = useState(props.isOutfit ? true : false);
   // const [totalRating, setTotalRating] = useState(0);
 
   const showModal = () => {
@@ -60,14 +60,14 @@ const RelatedProduct = (props) => {
   return (
     <div className='related-product' data-testid='related-product' >
       {isOutfit ?
-        <button className='related-product-action-button' onClick={() => { props.removeOutfit(relatedProduct); }}>X</button> :
+        <button className='related-product-action-button' onClick={() => { props.removeOutfit(relatedProduct.id); }}>X</button> :
         <button className='related-product-action-button' onClick={() => { showModal(); }}>⭐</button>}
       <Modal show={modalState} handleClose={() => { hideModal(); }} >
         <div data-testid="modal" className='related-product-comparison-modal'>Product Comparison</div>
         <table>
           <thead>
             <tr>
-              <th>{props.originalProduct.name ? props.originalProduct.name : null}</th>
+              <th>{props.originalProduct ? props.originalProduct.name : null}</th>
               <th> | features | </th>
               <th>{relatedProduct.name ? relatedProduct.name : null}</th>
             </tr>
