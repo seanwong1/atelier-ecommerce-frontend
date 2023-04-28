@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { createPortal } from 'react-dom';
+// import { createPortal } from 'react-dom';
+import Modal from './Modal.jsx';
 import axios from 'axios';
 import QACard from './QACard.jsx';
 import AddQuestion from './AddQuestion.jsx';
@@ -157,7 +158,7 @@ const QA = ({ id, product_name, clickTrack }) => {
       <div className='QA' onClick={(event) => {
             clickTrack('qa', event);
         }}>
-        <h3>QUESTIONS & ANSWERS</h3>
+        {/* <h3>QUESTIONS & ANSWERS</h3> */}
         <QASearchBar onSearch={onSearch} search={search}/>
         <div className='QA-List'>
           {!moreQuestions ? sortedAndFilteredQuestions[0] : sortedAndFilteredQuestions}
@@ -171,7 +172,7 @@ const QA = ({ id, product_name, clickTrack }) => {
           }
           <button className='QA-Ask-Question'onClick={toggleShowQuestionModal}>Ask a question</button>
         </div>
-        {showQuestionModal && createPortal(
+        {/* {showQuestionModal && createPortal(
           <AddQuestion
             product_id={id}
             product_name={product_name}
@@ -182,24 +183,34 @@ const QA = ({ id, product_name, clickTrack }) => {
             toggleShowQuestionModal={toggleShowQuestionModal}
           />
           ,document.body
-        )}
-        {/* Do I need product_id in Answer Modal */}
-        {showAnswerModal && createPortal(
+        )} */}
+        <Modal show={showQuestionModal} handleClose={() => { toggleShowQuestionModal(); }}>
+          <AddQuestion
+              product_id={id}
+              product_name={product_name}
+              onChangeQuestion={onChangeQuestion}
+              onChangeNickname={onChangeNickname}
+              onChangeEmail={onChangeEmail}
+              onSubmitQuestion={onSubmitQuestion}
+              toggleShowQuestionModal={toggleShowQuestionModal}
+            />
+        </Modal>
+        <Modal show={showAnswerModal} handleClose={() => { toggleShowAnswerModal(); }}>
           <AddAnswer
             product_name={product_name}
             question_body={question.question}
             id={question.question_id}
             thumbnail={thumbnail}
-            length={photos.length}
+            leng
+            th={photos.length}
             onChangeAnswer={onChangeAnswer}
             onChangeNickname={onChangeNickname}
             onChangeEmail={onChangeEmail}
             onInputPhoto={onInputPhoto}
             onSubmitAnswer={onSubmitAnswer}
             toggleShowAnswerModal={toggleShowAnswerModal}
-         />
-         , document.body
-        )}
+          />
+        </Modal>
       </div>
     </>
   );
