@@ -47,15 +47,17 @@ const Carousel = (props) => {
 
   return (
     <div className='carousel-container' >
-      {showLeft ? <button className='carousel-left' onClick={previousItem} >left</button> : null}
-      {display.map((relatedProductID) => {
-        return (
-          <div key={relatedProductID}>
-            <RelatedProduct originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProductID={props.setProductID} isOutfit={props.isOutfit ? true : false} removeOutfit={props.removeOutfit} />
-          </div>
-        )
-      })}
-      {showRight ? <button className='carousel-right' onClick={nextItem} >right</button> : null}
+      {showLeft ? <div className='carousel-left' onClick={previousItem} >←</div> : <div className='carousel-left' ></div>}
+      <div className='carousel-contents'>
+        {display.map((relatedProductID) => {
+          return (
+            <div key={relatedProductID}>
+              <RelatedProduct originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProductID={props.setProductID} isOutfit={props.isOutfit ? true : false} removeOutfit={props.removeOutfit} />
+            </div>
+          )
+        })}
+      </div>
+      {showRight ? <div className='carousel-right' onClick={nextItem} >→</div> : <div className='carousel-right' ></div>}
     </div>
   )
 }

@@ -59,11 +59,8 @@ const RelatedProduct = (props) => {
 
   return (
     <div className='related-product' data-testid='related-product' >
-      {isOutfit ?
-        <button className='related-product-action-button' onClick={() => { props.removeOutfit(relatedProduct.id); }}>X</button> :
-        <button className='related-product-action-button' onClick={() => { showModal(); }}>⭐</button>}
       <Modal show={modalState} handleClose={() => { hideModal(); }} >
-        <div data-testid="modal" className='related-product-comparison-modal'>Product Comparison</div>
+        <div data-testid="modal" className='related-product-comparison-modal'><h2>Product Comparison</h2></div>
         <table>
           <thead>
             <tr>
@@ -85,17 +82,22 @@ const RelatedProduct = (props) => {
           </tbody>
         </table>
       </Modal>
-      <div className='rp-data'>
-
+      <div className='related-product-info'>
+        <div className='product-name' >
+          <b>{relatedProduct.name}</b>
+          {isOutfit ?
+            <div className='related-product-action-button' onClick={() => { props.removeOutfit(relatedProduct.id); }}>X</div> :
+            <div className='related-product-action-button' onClick={() => { showModal(); }}>⭐</div>
+          }
+        </div>
         <div className='preview-image' onClick={() => { props.setProductID(relatedProduct.id); }}><img src={productImages[0].thumbnail_url ? productImages[0].thumbnail_url : image_unavailable} alt={relatedProduct.description} ></img></div>
         <div className='preview-text'>
-          <div className='product-category flexrow' >Category: {relatedProduct.category}</div>
-          <div className='product-name flexrow' >Name: {relatedProduct.name}</div>
-          <div className='product-price flexrow' >Price: {
+          <div className='product-category' >Category: {relatedProduct.category}</div>
+          <div className='product-price' >Price: {
             salePrice ? <div><s>relatedProduct.default_price</s><p style="color:red;">salePrice</p></div> : relatedProduct.default_price
             }
           </div>
-          <div className='product-rating flexrow' data-testid='product-rating' >Rating:
+          <div className='product-rating' data-testid='product-rating' >Rating:
             <div className='averageStars'>
               <div>
                 {'★'.repeat(Math.floor(stars))}
