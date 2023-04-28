@@ -1,18 +1,22 @@
-.modal {
+.modal-main {
+  display: flex;
+  justify-content: center;
+  z-index: 100000;
+  flex-direction: column;
+  align-items: center;
   position: fixed;
-  top: 0;
-  left: 0;
-  width:100%;
+  width: 50%;
   height: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   backdrop-filter: blur(1px);
 }
 
-.modal-main {
-  position:fixed;
-  background: var(--brown);
-  width: 80%;
+.modal-content {
+  position: fixed;
   height: auto;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  width: auto;
+  background-color: var(--white);
+  color: var(--black);
 }

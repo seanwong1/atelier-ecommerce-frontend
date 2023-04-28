@@ -7,8 +7,10 @@ const Modal = ({ handleClose, show, reviewModal, children }) => {
   return (
     <div className={showHideClassName}>
       <section className="modal-main" id={reviewModal}>
-        <button className='closeButton' type="button" onClick={handleClose}>✖</button>
-        {children}
+        <div className='modal-content'>
+          <button className='closeButton' type="button" onClick={handleClose}>✖</button>
+          {children}
+        </div>
       </section>
     </div>
   );

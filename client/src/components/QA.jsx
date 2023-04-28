@@ -172,18 +172,6 @@ const QA = ({ id, product_name, clickTrack }) => {
           }
           <button className='QA-Ask-Question'onClick={toggleShowQuestionModal}>Ask a question</button>
         </div>
-        {/* {showQuestionModal && createPortal(
-          <AddQuestion
-            product_id={id}
-            product_name={product_name}
-            onChangeQuestion={onChangeQuestion}
-            onChangeNickname={onChangeNickname}
-            onChangeEmail={onChangeEmail}
-            onSubmitQuestion={onSubmitQuestion}
-            toggleShowQuestionModal={toggleShowQuestionModal}
-          />
-          ,document.body
-        )} */}
         <Modal show={showQuestionModal} handleClose={() => { toggleShowQuestionModal(); }}>
           <AddQuestion
               product_id={id}
