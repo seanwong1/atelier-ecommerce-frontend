@@ -41,12 +41,12 @@ const App = () => {
 
   return (
     <div onClick={clickHandle}>
-      <div className='headingRect'>
+      <div className='header'>
         SCAMpD.COM
       </div>
       {/* {JSON.stringify(product)} */}
 
-      {/* <ProductOverview clickTrack={clickHandle} product={product} productID={productID} seeReviewsClick={seeReviewsClick} outfits={outfits} setOutfits={setOutfits}/> */}
+      <ProductOverview clickTrack={clickHandle} product={product} productID={productID} seeReviewsClick={seeReviewsClick} outfits={outfits} setOutfits={setOutfits} />
       <RelatedProducts clickTrack={clickHandle} setProductID={setProductID} setOutfits={setOutfits} product={product} id={product.id ? product.id : 0} />
       <Outfits currentProduct={product} setOutfits={setOutfits} outfits={outfits} />
       <QA clickTrack={clickHandle} id={product.id ? product.id : 0} product_name={product.name}/>

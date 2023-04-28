@@ -21,15 +21,15 @@ const ProductImages = ({images, image,  imageChange}) => {
         }
 
     }
-    
+
 
     return (
         <div className='styleImages'>
             <div className="imgThumbs">{thumbnails()}</div>
             <div className='image-box'>
-                <button className='prev-image' onClick={imageChange}>Back</button>
+                {/* <button className='prev-image' onClick={imageChange}>Back</button> */}
                 <img style={{ transform: `scale(${showZoom})` }} onClick={zoomImage} className='currImg' src={image.url}></img>
-                <button className='next-image' onClick={imageChange}>Next</button>
+                {/* <button className='next-image' onClick={imageChange}>Next</button> */}
             </div>
 
             <Zoom showZoom={showZoom} image={image} zoomImage={zoomImage} style={{display: showZoom}} />
