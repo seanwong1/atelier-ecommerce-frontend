@@ -14,7 +14,7 @@ const Styles = ({style, styles, styleClick}) => {
 
     return (
         <div className='style_selector'>
-            <h3>Style: {style.name}</h3>
+            <p>Style: {style.name}</p>
             {styleRender()}
         </div>
     )

@@ -1,22 +1,17 @@
 .productOverview {
   position: relative;
   /*top: 50px;*/
-  margin-bottom: 10px;
+  margin: 10px;
   display: flex;
-  border: transparent greenyellow 5px;
 }
 
 .styleImages {
   display: flex;
   width: 70%;
-  margin: 30px;
-  border: 3px transparent pink;
 }
 
 .productDetails{
   width: 30%;
-  margin: 30px;
-  border: transparent green 2px;
 }
 
 .image-box {
@@ -25,9 +20,7 @@
   background-color: var(--white);
   display: flex;
   align-items: center;
-  border: transparent var(--black) 1px;
-  width: 70%;
-  height: 700px;
+  width: 85%;
 }
 
 .currImg {
@@ -37,18 +30,14 @@
 }
 
 .imgThumbs {
-  width: 20%;
-  height: 700px;
+  width: 15%;
   overflow: scroll;
-  margin: 5px;
 }
 
 .indThumnails {
-  width: 80%;
+  width: 90%;
   height: auto;
   aspect-ratio: 1;
-  margin-top: 30px;
-  margin-left: 20px;
   opacity: 90%;
   border: 1px var(--black) solid;
   border-radius: 10%;
@@ -56,10 +45,6 @@
 
 .productImages {
   margin-bottom: 100px;
-}
-
-.image-box {
-  background-color: transparent;
 }
 
 .CartButtons {

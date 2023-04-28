@@ -17,16 +17,11 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
     const [currSku, setCurrSku] = useState({});
     const [size, setSize] = useState('');
     const [stock, setStock] = useState(0);
-    //review stuff 
+    //review stuff
     const [stars, setStars] = useState(0);
     const [meta, setMeta] = useState({});
     const [total, setTotal] = useState(0);
     const [avg, setAvg] = useState(0);
-
-
-
-
-
 
     const getStyles = async () => {
         let options = {
@@ -60,7 +55,7 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
             )
         } else {
             return (
-                <p>${style.original_price}</p>
+                <p>Price: ${style.original_price}</p>
             )
         }
     }
@@ -140,8 +135,6 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
           setStars(((Math.round(calculateAverage(calcTotal(result), result.data) * 4) / 4).toFixed(2)));
         });
       }
-    
-
 
 
     useEffect(() => {
@@ -160,9 +153,9 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
 
             <ProductImages images={images} image={image} imageChange={imageChange} />
             <div className='productDetails'>
-                <h2>{product.name}</h2>
+                <h1>{product.name}</h1>
 
-                <div onClick={seeReviewsClick} className='averageStars'>
+                <div className='averageStars'>
                     <div className='OvAvg'>
                         {Math.round(avg * 100) / 100}
                     </div>
@@ -172,14 +165,14 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
                     <ShadedStar shade={stars % 1} />
                     <div>
                         {'☆'.repeat(5 - Math.floor(stars))}
-                        See all {total} Reviews
                     </div>
-            </div>
+                </div>
+                <div onClick={seeReviewsClick}>See all {total} Reviews</div>
 
                 <p>{product.description}</p>
                 {onSale()}
-                <p>category:{product.category}</p>
-                <p>features: {showFeatures()}</p>
+                <p>Category: {product.category}</p>
+                <p>Features: {showFeatures()}</p>
                 <div className='styles'>
                     <Styles style={style} styles={styles} styleClick={styleClick} />
                 </div>
