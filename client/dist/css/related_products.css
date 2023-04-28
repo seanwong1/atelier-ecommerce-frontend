@@ -1,0 +1,27 @@
+.preview-image {
+  height: auto;
+  max-height: 25%;
+  max-width: 5%;
+  margin-bottom: 10px;
+  border: rgb(255, 0, 43) 3px solid;
+}
+
+.rp-data {
+  margin-left: 10px;
+  margin-right: 220px;
+  margin-bottom: 50px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.related-products {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  overflow-y: scroll;
+}
