@@ -178,7 +178,7 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
                         {'☆'.repeat(5 - Math.floor(stars))}
                     </div>
                 </div>
-                <div onClick={seeReviewsClick}>See all {total} Reviews</div>
+                <div className='see-all-reviews' onClick={seeReviewsClick}>See all {total} Reviews</div>
 
                 <p>{product.description}</p>
                 {onSale()}
@@ -187,7 +187,7 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
                 <div className='styles'>
                     <Styles style={style} styles={styles} styleClick={styleClick} />
                 </div>
-                <button className='add-to-outfit' onClick={() => {
+                <button className='add-to-outfits' onClick={() => {
                     outfits.indexOf(productID) === -1 ? setOutfits([...outfits, productID]) : console.log('Product is already in outfits');
                     // if (!props.outfits.some(outfit => outfit.id === props.currentProduct.id)) {
                     //   props.setOutfits([...props.outfits, props.currentProduct.id]);

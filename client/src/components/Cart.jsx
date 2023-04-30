@@ -59,21 +59,21 @@ const Cart = ({ product, outfits, setOutfits, cartSubmit, skus, currSku, size, s
   } else {
     return (
       <form onSubmit={addToCart}>
-        <select value={showSize} onChange={() => {setShowSize(event.target.value);}}>
+        <select className='size-drop' value={showSize} onChange={() => {setShowSize(event.target.value);}}>
         {Object.keys(skus).map((key) => {
           return (
             <option id={key} value={skus[key].size} className='size-item'>{skus[key].size}</option>
           )
         })}
         </select>
-        <select value={showQty} onChange={() => {setShowQty(event.target.value);}} className='QTY'>
+        <select className='qty-drop' value={showQty} onChange={() => {setShowQty(event.target.value);}} >
           {drop.map((num) => {
             return (
               <option value={num} className='qty-item'>{num}</option>
             )
           })}
         </select>
-        <input type='submit' value='Add to Cart' />
+        <input className='cart-submit' type='submit' value='Add to Cart' />
       </form>
     )
   }

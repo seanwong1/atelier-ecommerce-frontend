@@ -17,9 +17,7 @@ const Outfits = (props) => {
   }
 
   return (
-    <div>
-      <Carousel relatedProductIDs={props.outfits} originalProduct={props.product} isOutfit={true} removeOutfit={removeOutfit} />
-    </div>
+    <Carousel relatedProductIDs={props.outfits} originalProduct={props.product} isOutfit={true} removeOutfit={removeOutfit} />
   )
 }
 

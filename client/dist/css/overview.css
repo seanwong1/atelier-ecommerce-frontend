@@ -138,3 +138,41 @@
 .Favorite {
   height: 75%;
 }
+
+.see-all-reviews {
+  font-size: smaller;
+}
+
+.cart-submit {
+  background-color: var(--white);
+  border: 2px ridge var(--light-brown);
+  height: 30px;
+  position: relative;
+}
+
+.add-to-outfits {
+  background-color: var(--white);
+  border: 2px ridge var(--light-brown);
+  height: 30px;
+  position: relative;
+}
+
+.qty-drop {
+  text-decoration: underline;
+  font-weight: bold;
+  border: none;
+  background-color: var(--black);
+  color: var(--white);
+  margin: 5px;
+  border: 2px;
+}
+
+.size-drop {
+  text-decoration: underline;
+  font-weight: bold;
+  border: none;
+  background-color: var(--black);
+  color: var(--white);
+  margin: 5px;
+  border: 2px;
+}
