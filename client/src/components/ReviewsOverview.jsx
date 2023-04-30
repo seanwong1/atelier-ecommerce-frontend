@@ -82,7 +82,7 @@ const ReviewsOver = ({data, total, average, filterFunc}) => {
                     return (
                       <div key={Math.random()}>
                         <div className='flexrow'>
-                          <div style={{margin: '0 4px 10px 0'}} className='descriptorBox1'>
+                          <div style={{margin: '0 4px 5px 0'}} className='descriptorBox1'>
 
                           </div>
                           <div className='descriptorBox1'>
@@ -98,7 +98,7 @@ const ReviewsOver = ({data, total, average, filterFunc}) => {
                   } else {
                     return (
                       <div key={Math.random()}>
-                        <div style={{margin: '0 0 10px 0'}}>
+                        <div style={{margin: '0 0 5px 0'}}>
                           <div className='descriptorBox'>
 
                           </div>

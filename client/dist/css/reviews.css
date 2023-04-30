@@ -5,13 +5,13 @@
 }
 
 .reviewsOver {
-  width: 200px;
-  margin-left: 2%;
-  margin-right: 40px;
+  width: 30%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .reviewsList {
-  width: 500px;
+  width: 100%;
   height: 500px;
   overflow: scroll;
   flex-grow: 1;
@@ -63,6 +63,10 @@
   justify-content: space-between;
   width: 200px;
   position: relative;
+}
+
+.review-list {
+  width: 70%;
 }
 
 .descriptorText {
@@ -204,10 +208,18 @@
 }
 
 .addReviewBtn, .moreReviewsBtn {
-  height: 40px;
-  width: 100%;
+  height: 30px;
+  width: 25%;
   margin-left: 10px;
   background-color: var(--white);
+}
+
+.review-header {
+  display: flex;
+}
+
+.addReviewBtn {
+  margin: 0 auto;
 }
 
 .moreReviewsBtn {
@@ -302,9 +314,7 @@
 }
 
 .searchReviews {
-  margin-top: 500px;
   font-weight: bold;
-  font-size: x-small;
 }
 
 .increaseReviewBody {

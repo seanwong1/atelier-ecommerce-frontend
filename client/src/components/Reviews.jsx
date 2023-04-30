@@ -176,8 +176,19 @@ const Reviews = (props, ref) => {
         : ''}
       </aside>
       {!adding ?
-        <div>
-          <div className='flexcolumn'>
+        <div className='review-list'>
+          <div className='review-header'>
+            <label className='searchReviews'>
+              <input placeholder='Search Reviews...' type='text' onChange={(event) => {setKeyword(event.target.value.toLowerCase())}}>
+              </input>
+            </label>
+            {!adding ?
+              <button className='addReviewBtn' onClick={addReview}>
+                Add a Review +
+              </button>
+              : <></>}
+          </div>
+          <div>
             <div className='totalDescript'>
               <div className='flexrow'>
                 {total + ' reviews, sorted by '}
@@ -198,18 +209,6 @@ const Reviews = (props, ref) => {
         </div>
 
         : <ReviewsNew name={props.name} id={props.id} chars={meta.characteristics} finished={doneAdding}/>}
-        <div className='flexcolumn'>
-          {!adding ?
-            <button className='addReviewBtn' onClick={addReview}>
-              Add a Review +
-            </button>
-            : <></>}
-          <label className='searchReviews flexrow'>
-            Search Reviews
-            <input style={{marginLeft: '3px', height: '10px'}} type='text' onChange={(event) => {setKeyword(event.target.value.toLowerCase())}}>
-            </input>
-          </label>
-        </div>
 
     </div>
   )
