@@ -136,6 +136,17 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
         });
       }
 
+    const removeOutfit = (outfitToRemove) => {
+      console.log(outfitToRemove)
+      var array = [...outfits]; // make a separate copy of the array
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].id === outfitToRemove.id) {
+          array.splice(i, 1);
+          setOutfits(array);
+          break;
+        }
+      }
+    }
 
     useEffect(() => {
         if (productID !== undefined) {
@@ -176,6 +187,13 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
                 <div className='styles'>
                     <Styles style={style} styles={styles} styleClick={styleClick} />
                 </div>
+                <button className='add-to-outfit' onClick={() => {
+                    outfits.indexOf(productID) === -1 ? setOutfits([...outfits, productID]) : console.log('Product is already in outfits');
+                    // if (!props.outfits.some(outfit => outfit.id === props.currentProduct.id)) {
+                    //   props.setOutfits([...props.outfits, props.currentProduct.id]);
+                    // }
+                }} >Add to Outfits
+                </button>
                 <Cart product={product} outfits={outfits} setOutfits={setOutfits} cartSubmit={cartSubmit} skus={skus} currSku={currSku} size={size} stock={stock} setSize={setSize} setCurrSku={setCurrSku} setStock={setStock} />
             </div>
         </div>
