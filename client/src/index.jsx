@@ -15,6 +15,7 @@ const App = () => {
   const [average, setAverage] = useState(0);
   const [productID, setProductID] = useState(71697)
   const [outfits, setOutfits] = useState([]);
+  const [theme, setTheme] = useState(false);
   const ref = useRef(null);
 
   const seeReviewsClick = (e) => {
@@ -25,6 +26,14 @@ const App = () => {
   useEffect(() => {
     getHandler('/product', productID, (response) => {setProduct(response.data)});
   }, [productID]);
+
+  useEffect(() => {
+    if (!theme) {
+      document.documentElement.className = 'dark';
+    } else {
+      document.documentElement.className = 'light';
+    }
+  }, [theme]);
 
   const clickHandle = (widget, element) => {
     let options = {
@@ -41,7 +50,7 @@ const App = () => {
 
   return (
     <div onClick={clickHandle}>
-      <div className='header'>
+      <div className='header' onClick={() => {setTheme(!theme)}} >
         SCAMpD.COM
       </div>
       {/* {JSON.stringify(product)} */}

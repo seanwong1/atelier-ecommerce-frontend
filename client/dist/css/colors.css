@@ -1,6 +1,13 @@
-:root {
-  --black: #1A120B;
-  --brown: #3C2A21;
-  --light-brown: #D5CEA3;
-  --white: #E5E5CB;
-}
+:root,
+  :root.dark {
+    --black: #1A120B;
+    --brown: #3C2A21;
+    --light-brown: #D5CEA3;
+    --white: #E5E5CB;
+  }
+  :root.light {
+    --black: #f6e7e3;
+    --brown: #681c11;
+    --light-brown: #d8919d;
+    --white: #b72618;
+  }
