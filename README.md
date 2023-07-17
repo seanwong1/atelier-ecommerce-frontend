@@ -14,7 +14,7 @@
 6. [License](#license)
 
 ## Overview <a id='overview'></a>
-The FEC Retail Store is a web application meant to emulate functionality one would find on an online retail store. The motivation behind this project was to learn how to navigate building a multi-component application as a team.
+The Atelier E-Commerce Website, a project powered by React.js, Express.js, and CSS. This redesigned e-commerce website features a seamless product overview, a related products section, dynamic questions and answers between users, and insightful reviews to aid in shopping.
 
 ## Setup <a id='setup'></a>
 ### Docker
