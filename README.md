@@ -1,4 +1,4 @@
-# Front End Capstone - Retail Store
+# Atelier E-Commerce Website
 
 ## Table of Contents
 1. [Overview](#overview)
