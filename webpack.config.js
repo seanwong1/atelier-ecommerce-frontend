@@ -1,10 +1,8 @@
 var path = require("path");
 const webpack = require('webpack');
-var SRC_DIR = path.join(__dirname, "/client/src");
-var DIST_DIR = path.join(__dirname, "/client/dist");
+var SRC_DIR = path.join(__dirname, "/src/client/src");
+var DIST_DIR = path.join(__dirname, "/src/client/dist");
 const dotenv = require('dotenv').config();
-var path = require("path");
-
 
 module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
@@ -21,13 +19,12 @@ module.exports = {
           loader: "babel-loader",
         },
       },
-      {test: /\.(png|jpe?g|gif)$/i,
-      use:
-        {
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: {
           loader: 'file-loader',
         },
       }
     ]
   },
-
 };

@@ -1,8 +1,8 @@
-import totalCalc from '../client/src/lib/totalCalc.jsx';
-import averageCalc from '../client/src/lib/averageCalc.jsx';
-import percentCalc from '../client/src/lib/percentHelper.jsx';
-import relevanceCalc from '../client/src/lib/relevanceCalc.jsx';
-import Reviews from '../client/src/components/Reviews.jsx';
+import totalCalc from '../src/client/src/lib/totalCalc.jsx';
+import averageCalc from '../src/client/src/lib/averageCalc.jsx';
+import percentCalc from '../src/client/src/lib/percentHelper.jsx';
+import relevanceCalc from '../src/client/src/lib/relevanceCalc.jsx';
+import Reviews from '../src/client/src/components/Reviews.jsx';
 import {differenceInSeconds, toISOString} from 'date-fns';
 
 const makeRandomReview = (max) => {

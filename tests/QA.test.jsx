@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'
-import QA from '../client/src/components/QA.jsx';
-import QACard from '../client/src/components/QACard.jsx';
-import Answer from '../client/src/components/Answer.jsx';
+import QA from '../src/client/src/components/QA.jsx';
+import QACard from '../src/client/src/components/QACard.jsx';
+import Answer from '../src/client/src/components/Answer.jsx';
 
 /**
  * @jest-environment jsdom

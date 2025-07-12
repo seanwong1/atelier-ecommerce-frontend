@@ -6,9 +6,9 @@ import axios from 'axios';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-import RelatedProducts from '../client/src/components/RelatedProducts.jsx';
-import RelatedProduct from '../client/src/components/RelatedProduct.jsx';
-import getHandler from '../client/src/lib/getHandler.js';
+import RelatedProducts from '../src/client/src/components/RelatedProducts.jsx';
+import RelatedProduct from '../src/client/src/components/RelatedProduct.jsx';
+import getHandler from '../src/client/src/lib/getHandler.js';
 
 // jest.mock('axios');
 
