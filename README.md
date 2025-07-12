@@ -3,15 +3,16 @@
 ## Table of Contents
 1. [Overview](#overview)
 2. [Setup](#setup)
-3. [Features](#features)
+3. [Project Structure](#project-structure)
+4. [Features](#features)
     1. [Product Overview](#product-overview)
     2. [Related Items](#related-items)
     3. [Questions & Answers](#questions--answers)
     4. [Reviews](#reviews)
     5. [Dark and Light Mode](#darklight-mode)
-4. [Technologies Used](#technologies-used)
-5. [Authors](#authors)
-6. [License](#license)
+5. [Technologies Used](#technologies-used)
+6. [Authors](#authors)
+7. [License](#license)
 
 ## Overview <a id='overview'></a>
 The Atelier E-Commerce Website is built with React.js and Express.js. It features a comprehensive product overview, related products carousel, user Q&A, and a reviews section to help inform shopping decisions.
@@ -46,6 +47,14 @@ $ npm run build
 $ npm run server-dev
 # application viewable at http://localhost:3000
 ```
+
+## Project Structure <a id='project-structure'></a>
+- **src/client** - React front-end source and build files
+- **src/server** - Express server and API routes
+- **src/server/routes** - Modular Express routers for each resource, bundled by `routes/index.js`
+- **src/server/routes/track.js** - Handles `/clickTrack` analytics endpoint
+- **docs/examples** - GIFs and documentation images
+- **tests** - Jest test suite
 
 ## Features <a id='features'></a>
 ### Product Overview <a id='product-overview'></a>
