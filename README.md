@@ -14,7 +14,7 @@
 6. [License](#license)
 
 ## Overview <a id='overview'></a>
-The Atelier E-Commerce Website, a project powered by React.js, Express.js, and CSS. This redesigned e-commerce website features a seamless product overview, a related products section, dynamic questions and answers between users, and insightful reviews to aid in shopping.
+The Atelier E-Commerce Website is built with React.js and Express.js. It features a comprehensive product overview, related products carousel, user Q&A, and a reviews section to help inform shopping decisions.
 
 ## Setup <a id='setup'></a>
 ### Docker
@@ -55,34 +55,34 @@ $ npm run server-dev
   - Product price
   - Average rating
 - Switch between product styles by clicking thumbnail
-  - ![switching product styles](./examples/switch_style.gif)
+  - ![switching product styles](./docs/examples/switch_style.gif)
 - Adding to a cart with options for size and quantity
-  - ![adding to cart](./examples/cart.gif)
+  - ![adding to cart](./docs/examples/cart.gif)
 - Image gallery with ability to zoom in on an image
-  - ![image gallery with zoom](./examples/switch_images.gif)
+  - ![image gallery with zoom](./docs/examples/switch_images.gif)
 
 ### Related Items <a id='related-items'></a>
 - Display a carousel of related items with product information
   - Clicking a related item brings user to product overview for that item
-    - ![switching products](./examples/switch_product.gif)
+    - ![switching products](./docs/examples/switch_product.gif)
   - Clicking the star icon brings up a comparison modal listing features for the clicked item and the item currently in overview
-    - ![related features](./examples/related_features.gif)
+    - ![related features](./docs/examples/related_features.gif)
   - Clicking the plus icon adds the item currently in overview to an outfit list
-    - ![adding to outfit list](./examples/outfits.gif)
+    - ![adding to outfit list](./docs/examples/outfits.gif)
 - The outfit list stores a list of products the user designates
   - The list persists across page navigation and through browsing sessions
 
 ### Questions & Answers <a id='questions-answers'></a>
 - View a list of questions asked by users, each followed by a list of answers
-  - ![viewing questions and answers](./examples/questions_answers.gif)
+  - ![viewing questions and answers](./docs/examples/questions_answers.gif)
 - Has search functionality to match text entered in input box
-  - ![searching for answers](./examples/sort_answers.gif)
+  - ![searching for answers](./docs/examples/sort_answers.gif)
 - User can ask or answer a question
-  - ![adding an answer and question](./examples/add_answer_question.gif)
+  - ![adding an answer and question](./docs/examples/add_answer_question.gif)
 
 ### Reviews <a id='reviews'></a>
 - Display a list of reviews with ability to sort reviews by various metrics
-  - ![reviews](./examples/reviews.gif)
+  - ![reviews](./docs/examples/reviews.gif)
 - Provides a breakdown of user ratings (total number of users who gave a certain rating)
 - Show user feedback of certain product characteristics
   - Size
@@ -92,12 +92,12 @@ $ npm run server-dev
   - Length
   - Fit
 - User can search through reviews
-  - ![searching reviews](./examples/reviews_search.gif)
+  - ![searching reviews](./docs/examples/reviews_search.gif)
 - Allows a user to compose a new review
 
 ### Dark/Light Mode <a id='dark_light'></a>
 - Clicking header toggles dark and light modes
-  - ![dark and light mode toggle](./examples/dark_light_mode.gif)
+  - ![dark and light mode toggle](./docs/examples/dark_light_mode.gif)
 
 ## Technologies Used <a id='technologies-used'></a>
 FEC Retail Store was built with Node v16.17.1 and uses the following
