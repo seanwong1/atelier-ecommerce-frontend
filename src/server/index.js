@@ -6,29 +6,13 @@ const axios = require('axios');
 require('dotenv').config();
 const api = require('../config.js');
 
-var productsRouter = require('./routes/products.js');
-const questionsRoute = require('./routes/Questions.js');
-const answersRoute = require('./routes/Answers.js');
-var reviewsRouter = require('./routes/reviews.js');
-var cartRouter = require('./routes/cart.js');
+const routes = require('./routes');
 
 app.use(compression());
-app.use(express.static(path.join(__dirname, '../client/dist')))
+app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
-
-// Product Routes
-app.use('/', productsRouter);
-
-// Questions & Answers Routes
-app.use('/questions', questionsRoute);
-app.use('/answer', answersRoute);
-
-// Cart Routes
-app.use('/', cartRouter);
-
-app.use('/', reviewsRouter);
+app.use(routes);
 
 app.post('/clickTrack', (req, res, next) => {
   console.log(req.query);

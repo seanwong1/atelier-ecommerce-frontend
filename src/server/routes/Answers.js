@@ -1,11 +1,11 @@
 const express = require('express');
-const app = express.Router();
+const router = express.Router();
 const axios = require('axios');
 const api = require('../../config.js');
 const sharp = require('sharp');
 
 //post answer
-app.post('/add', async (req, res) => {
+router.post('/add', async (req, res) => {
   let photos = req.body.photos;
   let sharpImages = await Promise.all(
     photos.map(async (image) => {
@@ -62,7 +62,7 @@ app.put('/helpful', async (req, res) => {
 });
 
 //report an answer
-app.put('/report', async (req, res) => {
+router.put('/report', async (req, res) => {
   console.log(req.body.answer_id);
   let options = {
     'url': api.ANSWER + `/${req.body.answer_id}/report`,
@@ -77,4 +77,4 @@ app.put('/report', async (req, res) => {
 
 });
 
-module.exports = app
+module.exports = router

@@ -1,10 +1,10 @@
 const express = require('express');
-const app = express.Router();
+const router = express.Router();
 const axios = require('axios');
 const api = require('../../config.js');
 
 //retrieve list of questions for a product
-app.get('/', async (req, res) => {
+router.get('/', async (req, res) => {
   let options = {
     'method': 'get',
     'url': api.QUESTIONS,
@@ -27,7 +27,7 @@ app.get('/', async (req, res) => {
 });
 
 //post question
-app.post('/add', async (req, res) => {
+router.post('/add', async (req, res) => {
   let options = {
     'url': api.QUESTIONS,
     'method': 'post',
@@ -66,4 +66,4 @@ app.put('/helpful', async (req, res) => {
 
 });
 
-module.exports = app
+module.exports = router
