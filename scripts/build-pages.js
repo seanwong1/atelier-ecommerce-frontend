@@ -12,7 +12,6 @@ const noJekyll = path.join(distDir, '.nojekyll');
 const env = {
   ...process.env,
   DEMO_MODE: 'true',
-  NODE_OPTIONS: [process.env.NODE_OPTIONS, '--openssl-legacy-provider'].filter(Boolean).join(' '),
 };
 
 const runWebpack = () => {

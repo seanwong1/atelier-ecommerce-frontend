@@ -14,7 +14,6 @@ const baseEnv = {
   DEMO_MODE: 'true',
   PORT: port,
   HOST: host,
-  NODE_OPTIONS: [process.env.NODE_OPTIONS, '--openssl-legacy-provider'].filter(Boolean).join(' '),
 };
 
 const spawnChild = (name, command, args, extraEnv = {}) => {

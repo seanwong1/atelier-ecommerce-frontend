@@ -11,6 +11,9 @@ module.exports = {
     path: DIST_DIR,
     publicPath: './',
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
       {
@@ -22,8 +25,9 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        use: {
-          loader: 'file-loader',
+        type: 'asset/resource',
+        generator: {
+          filename: '[hash][ext][query]',
         },
       },
     ],

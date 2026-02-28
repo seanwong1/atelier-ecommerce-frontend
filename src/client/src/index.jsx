@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import reactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import axios from 'axios';
 
 import QA from './components/QA.jsx';
@@ -70,6 +70,11 @@ const App = () => {
       <Reviews ref={ref} clickTrack={clickHandle} id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
     </div>
   );
-}
+};
 
-reactDOM.render(<App />, document.getElementById('app'));
+const container = document.getElementById('app');
+
+if (container) {
+  const root = createRoot(container);
+  root.render(<App />);
+}

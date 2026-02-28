@@ -1,16 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { act } from 'react-dom/test-utils';
-import axios from 'axios';
 
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import RelatedProducts from '../src/client/src/components/RelatedProducts.jsx';
 import RelatedProduct from '../src/client/src/components/RelatedProduct.jsx';
-import getHandler from '../src/client/src/lib/getHandler.js';
-
-// jest.mock('axios');
 
 test('Related Products component should exist', () => {
   const { container } = render(<RelatedProducts />);
