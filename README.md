@@ -1,5 +1,7 @@
 # Atelier E-Commerce Website
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Site-0a7cff?style=for-the-badge)](https://seanwong1.github.io/atelier-ecommerce-frontend/)
+
 ## Table of Contents
 1. [Overview](#overview)
 2. [Setup](#setup)
