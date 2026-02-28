@@ -57,17 +57,60 @@ const App = () => {
   }
 
   return (
-    <div onClick={(event) => { clickHandle('app', event); }}>
-      <div className='header' onClick={() => {setTheme(!theme)}} >
-        {isDemoMode ? 'SCAMpD.COM DEMO' : 'SCAMpD.COM'}
-      </div>
-      {/* {JSON.stringify(product)} */}
+    <div className='appShell' onClick={(event) => { clickHandle('app', event); }}>
+      <header className='header'>
+        <div>
+          <div className='header-mark'>
+            {isDemoMode ? 'SCAMpD.COM DEMO' : 'SCAMpD.COM'}
+          </div>
+          <div className='header-subtitle'>Curated storefront experience</div>
+        </div>
+        <button
+          className='theme-toggle'
+          type='button'
+          onClick={() => { setTheme(!theme); }}
+        >
+          {theme ? 'Dark mode' : 'Light mode'}
+        </button>
+      </header>
 
-      <ProductOverview clickTrack={clickHandle} product={product} productID={productID} seeReviewsClick={seeReviewsClick} outfits={outfits} setOutfits={setOutfits} />
-      <RelatedProducts clickTrack={clickHandle} setProductID={setProductID} setOutfits={setOutfits} product={product} id={product.id ? product.id : 0} />
-      <Outfits currentProduct={product} setProductID={setProductID} setOutfits={setOutfits} outfits={outfits} />
-      <QA clickTrack={clickHandle} id={product.id ? product.id : 0} product_name={product.name}/>
-      <Reviews ref={ref} clickTrack={clickHandle} id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
+      <main className='pageContent'>
+        <section className='section-shell section-hero'>
+          <ProductOverview clickTrack={clickHandle} product={product} productID={productID} seeReviewsClick={seeReviewsClick} outfits={outfits} setOutfits={setOutfits} />
+        </section>
+
+        <section className='section-shell'>
+          <div className='section-heading'>
+            <p className='section-eyebrow'>Discover</p>
+            <h2>Related picks</h2>
+          </div>
+          <RelatedProducts clickTrack={clickHandle} setProductID={setProductID} setOutfits={setOutfits} product={product} id={product.id ? product.id : 0} />
+        </section>
+
+        <section className='section-shell'>
+          <div className='section-heading'>
+            <p className='section-eyebrow'>Saved</p>
+            <h2>Your outfit board</h2>
+          </div>
+          <Outfits currentProduct={product} setProductID={setProductID} setOutfits={setOutfits} outfits={outfits} />
+        </section>
+
+        <section className='section-shell'>
+          <div className='section-heading'>
+            <p className='section-eyebrow'>Support</p>
+            <h2>Questions and answers</h2>
+          </div>
+          <QA clickTrack={clickHandle} id={product.id ? product.id : 0} product_name={product.name}/>
+        </section>
+
+        <section className='section-shell'>
+          <div className='section-heading'>
+            <p className='section-eyebrow'>Feedback</p>
+            <h2>Ratings and reviews</h2>
+          </div>
+          <Reviews ref={ref} clickTrack={clickHandle} id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
+        </section>
+      </main>
     </div>
   );
 };

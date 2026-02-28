@@ -1,13 +1,25 @@
 :root,
   :root.dark {
-    --black: #1A120B;
-    --brown: #3C2A21;
-    --light-brown: #D5CEA3;
-    --white: #E5E5CB;
+    --black: #171311;
+    --brown: #4b3628;
+    --light-brown: #d4b596;
+    --white: #f6efe7;
+    --surface: rgba(42, 33, 28, 0.88);
+    --surface-soft: rgba(57, 45, 38, 0.72);
+    --border: rgba(212, 181, 150, 0.2);
+    --muted: #cfbeaf;
+    --accent: #efc08f;
+    --shadow: rgba(0, 0, 0, 0.28);
   }
   :root.light {
-    --black: #f6e7e3;
-    --brown: #681c11;
-    --light-brown: #d8919d;
-    --white: #b72618;
+    --black: #f7f1eb;
+    --brown: #7a5944;
+    --light-brown: #d8b99e;
+    --white: #241a15;
+    --surface: rgba(255, 251, 247, 0.88);
+    --surface-soft: rgba(247, 237, 228, 0.9);
+    --border: rgba(122, 89, 68, 0.18);
+    --muted: #6f5647;
+    --accent: #b86c37;
+    --shadow: rgba(48, 31, 22, 0.12);
   }

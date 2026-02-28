@@ -1,18 +1,17 @@
 .QA {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   height: 90%;
   width: 100%;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  padding-right: 10px;
+  margin: 0;
+  padding-right: 0;
 }
 
 .QA-List {
-  overflow: scroll;
+  overflow: auto;
   min-height: 100px;
   max-height: 500px;
+  padding-right: 8px;
 }
 
 ::-webkit-scrollbar {
@@ -21,71 +20,97 @@
 }
 
 .QASearchBar {
-  height: 30px;
+  height: 48px;
   position: relative;
-  border: 2px var(--brown);
+  margin-bottom: 18px;
 }
 
 .QASearchBar > input {
   position: absolute;
-  border: none;
   top: 0;
   left: 0;
-  height: 95%;
+  height: 100%;
   width: 100%;
-  border: 2px ridge var(--light-brown);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-soft);
+  color: var(--white);
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .QASearchBar > input:focus {
   outline: none;
 }
 
+.QA-Buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
 .QA-Buttons > button {
   background-color: var(--white);
-  border: 2px ridge var(--light-brown);
-  height: 30px;
+  border: 1px solid var(--border);
+  color: var(--black);
+  min-height: 44px;
   position: relative;
+  border-radius: 14px;
+  padding: 0 16px;
+  font-weight: 700;
+  box-shadow: 0 12px 24px var(--shadow);
 }
 
 .QA-Ask-Question {
-  margin-left: 20px;
+  margin-left: 0;
 }
 
 .QACard {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 0 0 12px;
+  padding: 16px 18px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 18px;
 }
 
 .Question {
   display: flex;
   justify-content: space-between;
+  gap: 14px;
 }
 
 .QA-Answer {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .QA-Modal-Text {
   margin-top: 15px;
-  border: 2px ridge var(--light-brown);
+  border: 1px solid var(--border);
   width: 70%;
-  height: 40px;
+  min-height: 44px;
   color: var(--black);
+  border-radius: 14px;
+  padding: 10px 12px;
 }
 
 .QA-Modal-Input {
   margin-top: 15px;
-  border: 2px ridge var(--light-brown);
+  border: 1px solid var(--border);
   width: 40%;
-  height: 20px;
+  min-height: 40px;
+  border-radius: 14px;
+  padding: 0 12px;
 }
 
 .QA-Modal-Button {
   width: 41%;
-  height: 20px;
+  min-height: 42px;
   background-color: var(--white);
-  border: 2px ridge var(--light-brown);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-weight: 700;
 }
 
 .QA-Modal-Thumbnail {
@@ -94,4 +119,16 @@
   width: auto;
   height: auto;
   margin-right: 10px;
+}
+
+@media (max-width: 640px) {
+  .Question {
+    flex-direction: column;
+  }
+
+  .QA-Modal-Text,
+  .QA-Modal-Input,
+  .QA-Modal-Button {
+    width: 100%;
+  }
 }

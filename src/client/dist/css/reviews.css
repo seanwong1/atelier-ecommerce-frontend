@@ -2,28 +2,30 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  gap: 24px;
 }
 
 .reviewsOver {
   width: 30%;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0;
 }
 
 .reviewsList {
   width: 100%;
   height: 500px;
-  overflow: scroll;
+  overflow: auto;
   flex-grow: 1;
   size: fixed;
   font-size: 12px;
   padding-left: 5px;
   position: relative;
-  margin-right: 20px;
+  margin-right: 0;
 }
 
 .averageStars {
   display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .averageStarText {
@@ -43,8 +45,9 @@
   width: 25%;
   border: none;
   background-color: transparent;
-  color: var(--white);
+  color: var(--accent);
   font-size: xx-small;
+  cursor: pointer;
 }
 
 .percentRecommended {
@@ -91,7 +94,7 @@
 }
 
 .descriptorBox {
-  background-color: var(--white);
+  background-color: rgba(255, 255, 255, 0.18);
   height: 8px;
   width: 63px;
   justify-content: space-between;
@@ -108,7 +111,7 @@
 }
 
 .descriptorBox1 {
-  background-color: var(--white);
+  background-color: rgba(255, 255, 255, 0.18);
   height: 8px;
   width: 47px;
 }
@@ -124,6 +127,10 @@
 
 .reviewTile {
   margin-top: 10px;
+  padding: 18px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 18px;
 }
 
 .reviewStarRating {
@@ -156,11 +163,13 @@
   overflow-wrap: anywhere;
   font-size: small;
   margin-top: 10px;
+  line-height: 1.55;
 }
 
 .reviewSummary {
   overflow-wrap: normal;
   font-size: large;
+  font-weight: 700;
 }
 
 .sumRemain {
@@ -174,6 +183,7 @@
   display: flex;
   flex-direction: row;
   font-size: smaller;
+  align-items: center;
 }
 
 .yesBtn {
@@ -187,18 +197,21 @@
 }
 
 .line {
-  height: 2px;
-  background-color: var(--black);
+  height: 1px;
+  background-color: var(--border);
   width: 100%;
+  margin-top: 14px;
 }
 
 .sortDrop {
   font-size: 11px;
-  text-decoration: underline;
   font-weight: bold;
-  border: none;
-  background-color: var(--black);
+  border: 1px solid var(--border);
+  background-color: var(--surface-soft);
   color: var(--white);
+  border-radius: 12px;
+  padding: 6px 10px;
+  margin-left: 8px;
 }
 
 .totalDescript {
@@ -208,14 +221,22 @@
 }
 
 .addReviewBtn, .moreReviewsBtn {
-  height: 30px;
+  min-height: 44px;
   width: 25%;
   margin-left: 10px;
   background-color: var(--white);
+  color: var(--black);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-weight: 700;
+  box-shadow: 0 12px 24px var(--shadow);
 }
 
 .review-header {
   display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .addReviewBtn {
@@ -230,7 +251,7 @@
 
 .reviewsNew {
   width: 70%;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .rnTitle {
@@ -256,6 +277,46 @@
 
 .charButtons {
   justify-self: center;
+}
+
+.searchReviews {
+  flex: 1;
+}
+
+.searchReviews input {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-soft);
+  color: var(--white);
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 920px) {
+  .reviews {
+    flex-direction: column;
+  }
+
+  .reviewsOver,
+  .review-list,
+  .reviewsNew {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .review-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .addReviewBtn,
+  .moreReviewsBtn {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 .charText {
   font-size: xx-small;

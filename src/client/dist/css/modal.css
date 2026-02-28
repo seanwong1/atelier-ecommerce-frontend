@@ -10,7 +10,7 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  backdrop-filter: blur(1px);
+  backdrop-filter: blur(8px);
 }
 
 .modal-content {
@@ -19,11 +19,16 @@
   width: auto;
   background-color: var(--white);
   color: var(--black);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 50px var(--shadow);
+  max-width: min(680px, 92vw);
 }
 
 .modal-close {
   background-color: var(--brown);
   color: var(--white);
   text-align: right;
-  padding-right: 5px;
+  padding: 10px 14px;
+  font-weight: 700;
 }
