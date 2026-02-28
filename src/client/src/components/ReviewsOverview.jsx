@@ -18,7 +18,7 @@ const ReviewsOver = ({data, total, average, filterFunc}) => {
 
 
   useEffect(() => {
-    setStars(((Math.round(average * 4) / 4).toFixed(2)));
+    setStars(average);
 
   }, [average]);
 
@@ -34,7 +34,7 @@ const ReviewsOver = ({data, total, average, filterFunc}) => {
         </div>
         <ShadedStar shade={stars % 1}/>
         <div>
-          {'☆'.repeat(5-Math.floor(stars))}
+          {'☆'.repeat(Math.max(0, 5 - Math.ceil(stars)))}
         </div>
       </div>
       <div className='percentRecommended'>

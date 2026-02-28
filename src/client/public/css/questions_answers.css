@@ -1,0 +1,123 @@
+.QA {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 100%;
+  margin: 0;
+  padding-right: 0;
+}
+
+.QA-List {
+  overflow: auto;
+  min-height: 100px;
+  max-height: 500px;
+  padding-right: 8px;
+}
+
+::-webkit-scrollbar {
+  background-color: 1px ridge var(--white);
+  width: 1px;
+}
+
+.QASearchBar {
+  height: 48px;
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.QASearchBar > input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-soft);
+  color: var(--white);
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.QA-Buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.QA-Buttons > button {
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  color: var(--black);
+  min-height: 44px;
+  border-radius: 14px;
+  padding: 0 16px;
+  font-weight: 700;
+  box-shadow: 0 12px 24px var(--shadow);
+}
+
+.QACard {
+  margin: 0 0 12px;
+  padding: 16px 18px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+.Question {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.QA-Answer {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.QA-Modal-Text {
+  margin-top: 15px;
+  border: 1px solid var(--border);
+  width: 70%;
+  min-height: 44px;
+  color: var(--black);
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+
+.QA-Modal-Input {
+  margin-top: 15px;
+  border: 1px solid var(--border);
+  width: 40%;
+  min-height: 40px;
+  border-radius: 14px;
+  padding: 0 12px;
+}
+
+.QA-Modal-Button {
+  width: 41%;
+  min-height: 42px;
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  font-weight: 700;
+}
+
+.QA-Modal-Thumbnail {
+  max-width: 50px;
+  max-height: 50px;
+  margin-right: 10px;
+}
+
+@media (max-width: 640px) {
+  .Question {
+    flex-direction: column;
+  }
+
+  .QA-Modal-Text,
+  .QA-Modal-Input,
+  .QA-Modal-Button {
+    width: 100%;
+  }
+}

@@ -132,8 +132,9 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
         axios.get(`/reviewsMeta/?product_id=${productID}`).then((result) => {
           setMeta(result.data);
           setTotal(calcTotal(result));
-          setAvg(calculateAverage(calcTotal(result), result.data));
-          setStars(((Math.round(calculateAverage(calcTotal(result), result.data) * 4) / 4).toFixed(2)));
+          const averageRating = calculateAverage(calcTotal(result), result.data);
+          setAvg(averageRating);
+          setStars(averageRating);
         });
       }
 
@@ -164,7 +165,7 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
                     </div>
                     <ShadedStar shade={stars % 1} />
                     <div>
-                        {'☆'.repeat(5 - Math.floor(stars))}
+                        {'☆'.repeat(Math.max(0, 5 - Math.ceil(stars)))}
                     </div>
                 </div>
                 <div className='see-all-reviews' onClick={seeReviewsClick}>See all {total} Reviews</div>

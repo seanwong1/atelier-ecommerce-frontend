@@ -48,7 +48,7 @@ const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
           </div>
           <ShadedStar shade={review.rating % 1}/>
           <div>
-            {'☆'.repeat(5-Math.floor(review.rating))}
+            {'☆'.repeat(Math.max(0, 5 - Math.ceil(review.rating)))}
           </div>
         </div>
         <div className='reviewNameDate'>

@@ -1,44 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-const ShadedStarHelper = ({shade}) => {
-  const gradients = {
-    .25: `linear-gradient(to left, black 60%, white 25%)`,
-    .5: `linear-gradient(to right, white 50%, black 50%)`,
-    .75: `linear-gradient(to right, white 60%, black 25%)`,
+const ShadedStar = ({ shade }) => {
+  const normalizedShade = Math.max(0, Math.min(Number(shade) || 0, 1));
+
+  if (normalizedShade <= 0) {
+    return null;
   }
 
-  const gradient = gradients[shade];
-
-  if (shade > 0) {
-    return (
-      <div>
-        <div style={{
+  return (
+    <span
+      style={{
+        position: 'relative',
+        display: 'inline-block',
+        width: '1ch',
+        lineHeight: 1,
+      }}
+    >
+      <span aria-hidden='true'>{'☆'}</span>
+      <span
+        aria-hidden='true'
+        style={{
           position: 'absolute',
-          zIndex: 100,
-        }}>
-          {'☆'}
-        </div>
-        <div style={{
-          backgroundImage: gradient,
-          position: 'absolute',
-          zIndex: 100,
+          inset: 0,
+          backgroundImage: `linear-gradient(to right, currentColor ${normalizedShade * 100}%, transparent ${normalizedShade * 100}%)`,
           WebkitBackgroundClip: 'text',
-          MozBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          MozTextFillColor: 'transparent'
-        }}>
-          {'★'}
-        </div>
-        <div style={{
-          position: 'absolute',
-          zIndex: 100,
-        }}>
-          {'☆'}
-        </div>
-      </div>);
-  } else {
-    return <div style={{position: 'absolute', zIndex: 100}}></div>;
-  }
-}
+          backgroundClip: 'text',
+          color: 'transparent',
+        }}
+      >
+        {'★'}
+      </span>
+    </span>
+  );
+};
 
-export default ShadedStarHelper;
+export default ShadedStar;

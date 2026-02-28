@@ -49,7 +49,7 @@ const RelatedProduct = (props) => {
   }, [props.outfit, props.relatedProductID]);
 
   useEffect(() => {
-    setStars(((Math.round(averageRating * 4) / 4).toFixed(2)));
+    setStars(averageRating);
   }, [averageRating]);
 
   useEffect(() => {
@@ -103,7 +103,7 @@ const RelatedProduct = (props) => {
               </div>
               <ShadedStar shade={stars % 1}/>
               <div>
-                {'☆'.repeat(5-Math.floor(stars))}
+                {'☆'.repeat(Math.max(0, 5 - Math.ceil(stars)))}
               </div>
             </div>
           </div>
