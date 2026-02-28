@@ -6,7 +6,6 @@ import Cart from './Cart.jsx';
 import ShadedStar from './ShadedStar.jsx'
 import calcTotal from '../lib/totalCalc.jsx';
 import calculateAverage from '../lib/averageCalc.jsx';
-import Outfits from './Outfits.jsx';
 
 const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outfits, setOutfits }) => {
     const [styles, setStyles] = useState([]);
@@ -43,7 +42,7 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
 
             })
             .catch((err) => {
-                console.log('ErrgettingStyles', err);
+                return;
             });
     }
 
@@ -122,9 +121,7 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
             .then((result) => {
                 alert('added to cart')
             })
-            .catch((err) => {
-                console.log('ErrgettingStyles', err);
-            });
+            .catch(() => {});
     }
 
     const getMeta = () => {
@@ -135,18 +132,6 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
           setStars(((Math.round(calculateAverage(calcTotal(result), result.data) * 4) / 4).toFixed(2)));
         });
       }
-
-    const removeOutfit = (outfitToRemove) => {
-      console.log(outfitToRemove)
-      var array = [...outfits]; // make a separate copy of the array
-      for (var i = 0; i < array.length; i++) {
-        if (array[i].id === outfitToRemove.id) {
-          array.splice(i, 1);
-          setOutfits(array);
-          break;
-        }
-      }
-    }
 
     useEffect(() => {
         if (productID !== undefined) {
@@ -188,18 +173,16 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
                     <Styles style={style} styles={styles} styleClick={styleClick} />
                 </div>
                 <button className='add-to-outfits' onClick={() => {
-                    outfits.indexOf(productID) === -1 ? setOutfits([...outfits, productID]) : console.log('Product is already in outfits');
-                    // if (!props.outfits.some(outfit => outfit.id === props.currentProduct.id)) {
-                    //   props.setOutfits([...props.outfits, props.currentProduct.id]);
-                    // }
+                    if (!outfits.includes(productID)) {
+                        setOutfits([...outfits, productID]);
+                    }
                 }} >Add to Outfits
                 </button>
-                <Cart product={product} outfits={outfits} setOutfits={setOutfits} cartSubmit={cartSubmit} skus={skus} currSku={currSku} size={size} stock={stock} setSize={setSize} setCurrSku={setCurrSku} setStock={setStock} />
+                <Cart skus={skus} currSku={currSku} stock={stock} setSize={setSize} setCurrSku={setCurrSku} setStock={setStock} />
             </div>
         </div>
     )
 
 }
 export default ProductOverview;
-
 

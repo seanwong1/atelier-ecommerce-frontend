@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import Modal from './Modal.jsx';
 import ShadedStar from './ShadedStar.jsx';
@@ -19,7 +18,7 @@ const RelatedProduct = (props) => {
   const [averageRating, setAverageRating] = useState(0);
   const [salePrice, setSalePrice] = useState(null);
   const [stars, setStars] = useState(0);
-  const [isOutfit, setIsOutfit] = useState(props.isOutfit ? true : false);
+  const isOutfit = Boolean(props.isOutfit);
   // const [totalRating, setTotalRating] = useState(0);
 
   const showModal = () => {
@@ -31,7 +30,7 @@ const RelatedProduct = (props) => {
   };
 
   useEffect(() => {
-    var productID = props.outfit ? props.outfit.id : props.relatedProductID
+    const productID = props.outfit ? props.outfit.id : props.relatedProductID;
     getHandler('/product', productID, (response) => {
       setRelatedProduct(response.data);
     });
@@ -44,10 +43,10 @@ const RelatedProduct = (props) => {
         }
       }
     });
-    getHandler('reviewsMeta', productID, (response) => {
+    getHandler('/reviewsMeta', productID, (response) => {
       setAverageRating(calculateAverage(calculateTotal(response), response.data));
     });
-  }, [props.relatedProductID]);
+  }, [props.outfit, props.relatedProductID]);
 
   useEffect(() => {
     setStars(((Math.round(averageRating * 4) / 4).toFixed(2)));
@@ -86,7 +85,7 @@ const RelatedProduct = (props) => {
         <div className='product-name' >
           <b>{relatedProduct.name}</b>
           {isOutfit ?
-            <div className='related-product-action-button' onClick={() => { props.removeOutfit(relatedProduct.id); }}>X</div> :
+            <div className='related-product-action-button' onClick={() => { props.removeOutfit(relatedProduct); }}>X</div> :
             <div className='related-product-action-button' onClick={() => { showModal(); }}>⭐</div>
           }
         </div>
@@ -94,7 +93,7 @@ const RelatedProduct = (props) => {
         <div className='preview-text'>
           <div className='product-category' >Category: {relatedProduct.category}</div>
           <div className='product-price' >Price: {
-            salePrice ? <div><s>relatedProduct.default_price</s><p style="color:red;">salePrice</p></div> : relatedProduct.default_price
+            salePrice ? <div><s>{relatedProduct.default_price}</s><p style={{ color: 'red' }}>{salePrice}</p></div> : relatedProduct.default_price
             }
           </div>
           <div className='product-rating' data-testid='product-rating' >Rating:

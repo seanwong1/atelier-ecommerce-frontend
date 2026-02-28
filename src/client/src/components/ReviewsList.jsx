@@ -10,13 +10,11 @@ const ReviewsList = (props) => {
       <div>
         {props.reviews.map((review) => {
           if (props.filters.length) {
-            console.log(props.filters);
             if (!props.filters.includes(review.rating)) {
               return;
             }
           }
           if (props.keyFilter.length > 2) {
-            console.log(props.keyFilter);
             if (!(review.body.toLowerCase().includes(props.keyFilter) || review.summary.toLowerCase().includes(props.keyFilter))) {
               return;
             }

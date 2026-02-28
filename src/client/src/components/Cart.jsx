@@ -1,55 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Cart = ({ product, outfits, setOutfits, cartSubmit, skus, currSku, size, stock, setSize, setCurrSku, setStock }) => {
-  const [showSize, setShowSize] = useState('none');
+const Cart = ({ skus, currSku, stock, setSize, setCurrSku, setStock }) => {
   const [drop, setDrop] = useState([]);
-  const [star, setStar] = useState('☆');
-  const [qty, setQty] = useState(0);
-  const [showQty, setShowQty] = useState('none');
+  const [qty, setQty] = useState(1);
 
-  const clickButtons = (e) => {
-    console.log(e.target.value)
-    if (e.target.className === 'QTY') {
-      setShowQty('block');
-    } else if (e.target.className === 'qty-item') {
-      setShowQty('none');
-      setQty(e.target.value);
-    } else if (e.target.className === 'Size') {
-      setShowSize('block');
-    } else if (e.target.className === 'size-item') {
-      setShowSize('none');
-      setSize(e.target.value);
-      setCurrSku(e.target.id);
-      setStock(skus[e.target.id].quantity)
-      console.log(skus[e.target.id].quantity);
-    }
-  }
+  const handleSizeChange = (event) => {
+    const nextSku = event.target.value;
+    setCurrSku(nextSku);
+    setSize(skus[nextSku].size);
+    setStock(skus[nextSku].quantity);
+    setQty(1);
+  };
 
   const addToCart = (e) => {
-    let options = {
+    const options = {
       'url': '/cart',
       'params': { 'sku_id': currSku },
       'method': 'post'
-    }
+    };
 
     axios.request(options)
-      .then((result) => {
-        alert('Item in Cart')
-        console.log("WE DID IT BOYS");
+      .then(() => {
+        alert('Item in Cart');
       })
-      .catch((err) => {
-        console.log('ErrorAddingToCart', err);
-      });
+      .catch(() => {});
+
     e.preventDefault();
   };
 
   useEffect(() => {
-    var arr = [];
-    for (var i = 0; i <= stock; i++) {
+    const arr = [];
+    for (let i = 1; i <= Math.min(stock, 15); i++) {
       arr.push(i);
     }
     setDrop(arr);
+    setQty(arr[0] || 0);
   }, [stock]);
 
   if (stock === 0 || stock === null || skus[currSku] === undefined) {
@@ -59,17 +45,17 @@ const Cart = ({ product, outfits, setOutfits, cartSubmit, skus, currSku, size, s
   } else {
     return (
       <form onSubmit={addToCart}>
-        <select className='size-drop' value={showSize} onChange={() => {setShowSize(event.target.value);}}>
+        <select className='size-drop' value={currSku} onChange={handleSizeChange}>
         {Object.keys(skus).map((key) => {
           return (
-            <option id={key} value={skus[key].size} className='size-item'>{skus[key].size}</option>
+            <option key={key} value={key} className='size-item'>{skus[key].size}</option>
           )
         })}
         </select>
-        <select className='qty-drop' value={showQty} onChange={() => {setShowQty(event.target.value);}} >
+        <select className='qty-drop' value={qty} onChange={(event) => {setQty(Number(event.target.value));}} >
           {drop.map((num) => {
             return (
-              <option value={num} className='qty-item'>{num}</option>
+              <option key={num} value={num} className='qty-item'>{num}</option>
             )
           })}
         </select>

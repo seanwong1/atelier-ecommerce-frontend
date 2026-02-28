@@ -18,8 +18,7 @@ const App = () => {
   const [theme, setTheme] = useState(false);
   const ref = useRef(null);
 
-  const seeReviewsClick = (e) => {
-    console.log(ref)
+  const seeReviewsClick = () => {
    ref.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
   }
 
@@ -36,20 +35,20 @@ const App = () => {
   }, [theme]);
 
   const clickHandle = (widget, element) => {
-    let options = {
+    const options = {
       url: '/clickTrack',
-      params: {widget, 'element': element.target.className},
+      params: {
+        widget,
+        element: element?.target?.className || element?.target?.tagName || 'unknown'
+      },
       method: 'post'
-    }
-    axios.request(options).then(() => {
-      console.log('click was tracked');
-    }).catch(() => {
-      console.log('click not tracked');
-    })
+    };
+
+    axios.request(options).catch(() => {});
   }
 
   return (
-    <div onClick={clickHandle}>
+    <div onClick={(event) => { clickHandle('app', event); }}>
       <div className='header' onClick={() => {setTheme(!theme)}} >
         SCAMpD.COM
       </div>
@@ -57,7 +56,7 @@ const App = () => {
 
       <ProductOverview clickTrack={clickHandle} product={product} productID={productID} seeReviewsClick={seeReviewsClick} outfits={outfits} setOutfits={setOutfits} />
       <RelatedProducts clickTrack={clickHandle} setProductID={setProductID} setOutfits={setOutfits} product={product} id={product.id ? product.id : 0} />
-      <Outfits currentProduct={product} setOutfits={setOutfits} outfits={outfits} />
+      <Outfits currentProduct={product} setProductID={setProductID} setOutfits={setOutfits} outfits={outfits} />
       <QA clickTrack={clickHandle} id={product.id ? product.id : 0} product_name={product.name}/>
       <Reviews ref={ref} clickTrack={clickHandle} id={product.id ? product.id : 0} name={product.name} setAv={setAverage}/>
     </div>

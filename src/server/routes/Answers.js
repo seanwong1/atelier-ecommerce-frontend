@@ -6,9 +6,11 @@ const sharp = require('sharp');
 
 //post answer
 router.post('/add', async (req, res) => {
-  let photos = req.body.photos;
-  let sharpImages = await Promise.all(
-    photos.map(async (image) => {
+  const photos = req.body.photos || [];
+
+  try {
+    const sharpImages = await Promise.all(
+      photos.map(async (image) => {
       let imageBuffer = Buffer.from(image, 'base64');
 
       const resized = await sharp(imageBuffer)
@@ -17,64 +19,64 @@ router.post('/add', async (req, res) => {
         .toBuffer();
 
         return resized.toString('base64');
-    })
-  );
+      })
+    );
 
-  let options = {
-    'url': api.QUESTIONS + `/${req.body.question_id}/answers`,
-    // 'params': req.body.question_id,
-    'method': 'post',
-    'headers': {
-      'Authorization': api.TOKEN
-    },
-    'data': {
-      'body': req.body.answer,
-      'name': req.body.nickname,
-      'email': req.body.email,
-      'photos': sharpImages
-    }
-  }
+    const options = {
+      'url': api.QUESTIONS + `/${req.body.question_id}/answers`,
+      'method': 'post',
+      'headers': {
+        'Authorization': api.TOKEN
+      },
+      'data': {
+        'body': req.body.answer,
+        'name': req.body.nickname,
+        'email': req.body.email,
+        'photos': sharpImages
+      }
+    };
 
-  try {
-    console.log('OPTIONS_____________________________________,',options)
-    let result = await axios.request(options);
-    console.log(result);
+    await axios.request(options);
     res.send('Working');
-  } catch(err) {
-    res.status(404).send(err)
+  } catch (err) {
+    res.status(404).send(err);
   }
 });
 
 //increase helpfulness of answer
-app.put('/helpful', async (req, res) => {
-  console.log(req.body.answer_id);
-  let options = {
+router.put('/helpful', async (req, res) => {
+  const options = {
     'url': api.ANSWER + `/${req.body.answer_id}/helpful`,
     'method': 'put',
     'headers': {
       'Authorization': api.TOKEN
     }
+  };
+
+  try {
+    await axios.request(options);
+    res.status(201).send('working');
+  } catch (err) {
+    res.sendStatus(404);
   }
-
-  await axios.request(options);
-  res.status(201).send('working');
-
 });
 
 //report an answer
 router.put('/report', async (req, res) => {
-  console.log(req.body.answer_id);
-  let options = {
+  const options = {
     'url': api.ANSWER + `/${req.body.answer_id}/report`,
     'method': 'put',
     'headers': {
       'Authorization': api.TOKEN
     }
+  };
+
+  try {
+    await axios.request(options);
+    res.status(201).send('working');
+  } catch (err) {
+    res.sendStatus(404);
   }
-
-  await axios.request(options);
-  res.status(201).send('working');
-
 });
 
 module.exports = router

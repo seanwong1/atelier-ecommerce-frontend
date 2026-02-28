@@ -5,7 +5,7 @@ const api = require('../../config.js');
 
 //retrieve list of questions for a product
 router.get('/', async (req, res) => {
-  let options = {
+  const options = {
     'method': 'get',
     'url': api.QUESTIONS,
     'params': {
@@ -16,19 +16,19 @@ router.get('/', async (req, res) => {
     'headers': {
       'Authorization': api.TOKEN
     }
-  }
+  };
 
   try {
-    let questions = await axios.request(options);
-    res.send(questions.data.results)
-  } catch(err) {
-    console.log(err);
+    const questions = await axios.request(options);
+    res.send(questions.data.results);
+  } catch (err) {
+    res.sendStatus(404);
   }
 });
 
 //post question
 router.post('/add', async (req, res) => {
-  let options = {
+  const options = {
     'url': api.QUESTIONS,
     'method': 'post',
     'headers': {
@@ -40,30 +40,32 @@ router.post('/add', async (req, res) => {
       'email': req.body.email,
       'product_id': req.body.product_id
     }
-  }
+  };
 
   try {
-    let result = await axios.request(options);
-    console.log(result);
+    await axios.request(options);
     res.send('Working');
-  } catch (err){
+  } catch (err) {
     res.status(404).send(err);
   }
 });
 
 //increase helpfulness of question
-app.put('/helpful', async (req, res) => {
-  let options = {
+router.put('/helpful', async (req, res) => {
+  const options = {
     'url': api.QUESTIONS + `/${req.body.question_id}/helpful`,
     'method': 'put',
     'headers': {
       'Authorization': api.TOKEN
     }
+  };
+
+  try {
+    await axios.request(options);
+    res.status(201).send('working');
+  } catch (err) {
+    res.sendStatus(404);
   }
-
-  await axios.request(options);
-  res.status(201).send('working');
-
 });
 
 module.exports = router

@@ -34,11 +34,10 @@ router.get('/styles', (req, res, next) => {
 
   axios.request(options)
   .then((styleData) => {
-    console.log(styleData.data);
     res.send(styleData.data.results);
   })
-  .catch((err) => {
-    res.sendStatus(400, err)
+  .catch(() => {
+    res.sendStatus(400);
   });
 });
 
@@ -53,8 +52,7 @@ router.get('/related', (req, res, next) => {
 
   axios.request(options).then((data) => {
     res.send(data.data);
-  }).catch((err) => {
-    console.log(err);
+  }).catch(() => {
     res.sendStatus(404);
   })
 });

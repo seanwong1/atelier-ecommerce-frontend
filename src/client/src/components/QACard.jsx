@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import Answer from './Answer.jsx';
 import axios from 'axios';
 
@@ -14,7 +14,6 @@ const QACard = ({ id, question, helpfulness, isReported, answers, isHelpful, tog
 
   const isHelpfulAnswer = async (e, id) => {
     await axios.put('/answer/helpful', {'answer_id': id});
-    console.log('working');
   };
 
   const isReportedAnswer = async (e, id) => {

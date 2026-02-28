@@ -4,7 +4,6 @@ const axios = require('axios');
 const api = require('../../config.js');
 
 router.post('/clickTrack', (req, res) => {
-  console.log(req.query);
   const options = {
     url: api.INTURL,
     method: 'post',
@@ -23,8 +22,7 @@ router.post('/clickTrack', (req, res) => {
     .then(() => {
       res.sendStatus(201);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       res.sendStatus(404);
     });
 });

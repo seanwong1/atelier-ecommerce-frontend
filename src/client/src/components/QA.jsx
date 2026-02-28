@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { createPortal } from 'react-dom';
 import Modal from './Modal.jsx';
 import axios from 'axios';
@@ -32,8 +32,8 @@ const QA = ({ id, product_name, clickTrack }) => {
       }
       let result = await axios.request(options);
       setQuestions(result.data);
-    } catch(err) {
-      console.log(err);
+    } catch (err) {
+      return;
     }
   };
 
@@ -74,7 +74,6 @@ const QA = ({ id, product_name, clickTrack }) => {
       'photos': photos,
       'question_id': question.question_id
     }
-    console.log(photos);
     if (answerText === '' || nickname === '' || email === '') {
       alert(`You must enter the following: ${missing(body)}`);
       return;
@@ -189,8 +188,7 @@ const QA = ({ id, product_name, clickTrack }) => {
             question_body={question.question}
             id={question.question_id}
             thumbnail={thumbnail}
-            leng
-            th={photos.length}
+            length={photos.length}
             onChangeAnswer={onChangeAnswer}
             onChangeNickname={onChangeNickname}
             onChangeEmail={onChangeEmail}

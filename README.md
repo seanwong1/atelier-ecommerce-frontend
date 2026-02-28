@@ -20,8 +20,8 @@ The Atelier E-Commerce Website is built with React.js and Express.js. It feature
 ## Setup <a id='setup'></a>
 ### Docker
 ```
-$ git clone https://github.com/seanwong1/FEC.git
-$ cd FEC
+$ git clone https://github.com/seanwong1/atelier-ecommerce-frontend.git
+$ cd atelier-ecommerce-frontend
 $ docker-compose up
 # application viewable at http://localhost:3000
 ```
@@ -29,8 +29,8 @@ $ docker-compose up
 ### macOS
 ```
 $ brew install node git
-$ git clone https://github.com/seanwong1/FEC.git
-$ cd FEC
+$ git clone https://github.com/seanwong1/atelier-ecommerce-frontend.git
+$ cd atelier-ecommerce-frontend
 $ npm install
 $ npm run build
 $ npm run server-dev
@@ -40,8 +40,8 @@ $ npm run server-dev
 ### Linux
 ```
 $ sudo apt-get install node git
-$ git clone https://github.com/seanwong1/FEC.git
-$ cd FEC
+$ git clone https://github.com/seanwong1/atelier-ecommerce-frontend.git
+$ cd atelier-ecommerce-frontend
 $ npm install
 $ npm run build
 $ npm run server-dev
