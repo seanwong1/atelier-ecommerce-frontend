@@ -78,7 +78,7 @@ const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
       <div className='reviewPhotos'>
         {review.photos.map((photoUrl, counter) => {
           return (
-            <div key={Math.random()}>
+            <div key={photoUrl.id || photoUrl.url}>
               <img
                 className='reviewThumbnail'
                 src={photoUrl.url}
@@ -87,7 +87,6 @@ const ReviewTile = ({ review, addHelpful, helpfulness, reportFunc }) => {
               />
               <Modal show={modalStatus === counter} handleClose={closePhoto} reviewModal={'reviewModal'}>
                 <img
-                  key={Math.random()}
                   className='reviewPhotoModal'
                   src={photoUrl.url}
                   alt='Review Photo'

@@ -51,7 +51,7 @@ const Carousel = (props) => {
       <div className='carousel-contents'>
         {display.map((relatedProductID) => {
           return (
-            <RelatedProduct originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProductID={props.setProductID} isOutfit={props.isOutfit ? true : false} removeOutfit={props.removeOutfit} />
+            <RelatedProduct key={relatedProductID} originalProduct={props.originalProduct} relatedProductID={relatedProductID} setProductID={props.setProductID} isOutfit={props.isOutfit ? true : false} removeOutfit={props.removeOutfit} />
           )
         })}
       </div>

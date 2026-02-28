@@ -71,7 +71,7 @@ const RelatedProduct = (props) => {
           <tbody>
             {featureSet.map((featureObj) => {
               return (
-                <tr>
+                <tr key={featureObj.feature}>
                   <td>{featureObj.originalValue ? featureObj.originalValue : null}</td>
                   <td>{featureObj.feature}</td>
                   <td>{featureObj.relatedValue ? featureObj.relatedValue : null}</td>

@@ -4,5 +4,6 @@
 config.js
 node_modules/
 coverage/
+node_modules/.cache/
 
 bundle.js

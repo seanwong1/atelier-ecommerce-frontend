@@ -80,7 +80,7 @@ const ReviewsOver = ({data, total, average, filterFunc}) => {
 
                   if (descripts[cName].length === 2) {
                     return (
-                      <div key={Math.random()}>
+                      <div key={`${cName}-${index}`}>
                         <div className='flexrow'>
                           <div style={{margin: '0 4px 5px 0'}} className='descriptorBox1'>
 
@@ -97,7 +97,7 @@ const ReviewsOver = ({data, total, average, filterFunc}) => {
                     );
                   } else {
                     return (
-                      <div key={Math.random()}>
+                      <div key={`${cName}-${index}`}>
                         <div style={{margin: '0 0 5px 0'}}>
                           <div className='descriptorBox'>
 

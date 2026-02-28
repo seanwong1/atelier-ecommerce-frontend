@@ -16,14 +16,15 @@ const charText = {
 }
 
 const Thumbnails = ({ photos }) => {
+  const photoEntries = Object.entries(photos).filter(([photoNum]) => photoNum !== 'urls');
 
   return (
-    <div key={Math.random()}>
-      {Object.keys(photos).map(photoNum => {
-        if (photos[photoNum].loaded) {
-          return (<img className='reviewThumbnail' key={photos[photoNum].photo.lastModified} src={buildPath(photos[photoNum].photo.name)}  />)
-        } else if (photos[photoNum].photo) {
-          return (<div key={Math.random()}>Loading ...</div>)
+    <div>
+      {photoEntries.map(([photoNum, photoState]) => {
+        if (photoState.loaded) {
+          return (<img className='reviewThumbnail' key={photoState.photo.lastModified || photoNum} src={buildPath(photoState.photo.name)}  />)
+        } else if (photoState.photo) {
+          return (<div key={photoNum}>Loading ...</div>)
         }
       })}
     </div>
@@ -227,14 +228,14 @@ const ReviewsNew = (props) => {
         </label>
         {Object.keys(data.chars).map((char) => {
           return (
-            <label key={Math.random()} className='flexcolumn'>
+            <label key={char} className='flexcolumn'>
               <div>
                 {char + '*'}
               </div>
               <div className='flexrow charButtonsRow'>
                 {charText[char].map((desc, counter) => {
                   return (
-                    <div key={Math.random()} className='flexcolumn'>
+                    <div key={`${char}-${counter}`} className='flexcolumn'>
                       <input
                           className='charButtons' checked={counter === checked[char]} type="radio"
                           onClick={() => {

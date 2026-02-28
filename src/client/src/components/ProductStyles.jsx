@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const Styles = ({style, styles, styleClick}) => {
 
@@ -6,7 +6,7 @@ const Styles = ({style, styles, styleClick}) => {
 
     const styleRender = () => {
         return styles.map((style) => {
-            return (<img key={Math.random()*10000} onClick={styleClick} id={style.style_id} className='style_thumb' src={style.photos[0].thumbnail_url} alt={'no image'}></img>)
+            return (<img key={style.style_id} onClick={styleClick} id={style.style_id} className='style_thumb' src={style.photos[0].thumbnail_url} alt={'no image'}></img>)
         })
     }
 

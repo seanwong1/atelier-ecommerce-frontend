@@ -48,16 +48,6 @@ $ npm run client-dev
 
 If port `3000` is already in use, run `PORT=3001 npm run client-dev` and open that URL instead.
 
-## GitHub Pages <a id='github-pages'></a>
-This repo can deploy a static demo build to GitHub Pages through GitHub Actions.
-
-The Pages workflow enables `DEMO_MODE`, which swaps the live API calls for in-memory placeholder products, related items, questions, answers, reviews, cart actions, and uploads. The frontend can therefore render on its own without the original backend.
-
-1. In GitHub, enable Pages and set the source to `GitHub Actions`.
-2. Push to `main` to trigger the deploy workflow.
-
-If you ever want to reconnect a real API later, build with `DEMO_MODE=false` and set `API_BASE_URL` to the backend origin.
-
 ## Project Structure <a id='project-structure'></a>
 - **src/client** - React front-end source and build files
 - **src/server** - Express server and API routes
