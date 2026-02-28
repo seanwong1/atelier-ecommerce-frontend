@@ -48,6 +48,10 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
 
     //will return sale info if item is on sale
     const onSale = () => {
+        if (!style.original_price) {
+            return null;
+        }
+
         if (style.sale_price !== null) {
             return (
                 <p>was: ${style.original_price} is: ${style.sale_price}</p>
@@ -185,4 +189,3 @@ const ProductOverview = ({ product, productID, clickTrack, seeReviewsClick, outf
 
 }
 export default ProductOverview;
-

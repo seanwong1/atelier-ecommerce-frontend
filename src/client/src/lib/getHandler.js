@@ -1,6 +1,10 @@
 import axios from 'axios';
 
 const getHandler = async (url, id, callback) => {
+  if (id === undefined || id === null) {
+    return;
+  }
+
   let options = {
     'url': url,
     'params': {'product_id': id},
@@ -10,9 +14,7 @@ const getHandler = async (url, id, callback) => {
   try {
     const response = await axios.request(options);
     callback(response);
-  } catch (err) {
-    console.log('get' + url + 'Err', err);
-  }
+  } catch (err) {}
 };
 
 export default getHandler;

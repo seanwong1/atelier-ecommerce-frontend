@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest --detectOpenHandles --coverage",
     "server-dev": "npx nodemon src/server/index.js",
-    "client-dev": "webpack --mode development --watch",
-    "build": "webpack --mode development"
+    "client-dev": "node scripts/client-dev.js",
+    "build": "webpack --mode production"
   },
   "dependencies": {
     "@babel/core": "^7.12.3",
@@ -35,14 +35,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RPP2210-FEC-SCAMP/FEC.git"
+    "url": "git+https://github.com/seanwong1/atelier-ecommerce-frontend.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/RPP2210-FEC-SCAMP/FEC/issues"
+    "url": "https://github.com/seanwong1/atelier-ecommerce-frontend/issues"
   },
-  "homepage": "https://github.com/RPP2210-FEC-SCAMP/FEC#readme",
+  "homepage": "https://seanwong1.github.io/atelier-ecommerce-frontend/",
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.5",
@@ -51,6 +51,9 @@
   },
   "jest": {
     "verbose": true,
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "\\.(png|jpe?g|gif)$": "<rootDir>/tests/__mocks__/fileMock.js"
+    }
   }
 }

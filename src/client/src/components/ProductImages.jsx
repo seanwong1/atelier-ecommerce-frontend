@@ -28,7 +28,7 @@ const ProductImages = ({images, image,  imageChange}) => {
             <div className="imgThumbs">{thumbnails()}</div>
             <div className='image-box'>
                 {/* <button className='prev-image' onClick={imageChange}>Back</button> */}
-                <img style={{ transform: `scale(${showZoom})` }} onClick={zoomImage} className='currImg' src={image.url}></img>
+                {image?.url ? <img style={{ transform: `scale(${showZoom})` }} onClick={zoomImage} className='currImg' src={image.url}></img> : null}
                 {/* <button className='next-image' onClick={imageChange}>Next</button> */}
             </div>
 

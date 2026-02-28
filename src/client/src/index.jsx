@@ -8,7 +8,16 @@ import Reviews from './components/Reviews.jsx';
 import RelatedProducts from './components/RelatedProducts.jsx';
 import Outfits from './components/Outfits.jsx';
 
+import { installDemoApi, isDemoMode } from './lib/demoApi.js';
 import getHandler from './lib/getHandler.js';
+
+const apiBaseUrl = (process.env.API_BASE_URL || '').replace(/\/$/, '');
+
+installDemoApi(axios);
+
+if (!isDemoMode && apiBaseUrl) {
+  axios.defaults.baseURL = apiBaseUrl;
+}
 
 const App = () => {
   const [product, setProduct] = useState({});
@@ -50,7 +59,7 @@ const App = () => {
   return (
     <div onClick={(event) => { clickHandle('app', event); }}>
       <div className='header' onClick={() => {setTheme(!theme)}} >
-        SCAMpD.COM
+        {isDemoMode ? 'SCAMpD.COM DEMO' : 'SCAMpD.COM'}
       </div>
       {/* {JSON.stringify(product)} */}
 
